@@ -1,0 +1,43 @@
+{
+  "inputs": [
+    {
+      "type": "promptString",
+      "id": "zeroheight-token",
+      "description": "Zeroheight Access Token",
+      "password": true
+    },
+    {
+      "type": "promptString",
+      "id": "zeroheight-client",
+      "description": "Zeroheight Client ID",
+      "password": true
+    }
+  ],
+  "mcpServers": {
+    "lokalise_project_management": {
+      "type": "http",
+      "url": "https://mcp.lokalise.com/mcp/project-management",
+      "headers": {
+        "apikey": "${LOKALISE_API_KEY}",
+        "accept": "application/json, text/event-stream"
+      }
+    },
+    "lokalise_software_development": {
+      "type": "http",
+      "url": "https://mcp.lokalise.com/mcp/software-development",
+      "headers": {
+        "apikey": "${LOKALISE_API_KEY}",
+        "accept": "application/json, text/event-stream"
+      }
+    },
+    "zeroheight": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@zeroheight/mcp-server@latest"],
+      "env": {
+        "ZEROHEIGHT_ACCESS_TOKEN": "${input:zeroheight-token}",
+        "ZEROHEIGHT_CLIENT_ID": "${input:zeroheight-client}"
+      }
+    }
+  }
+}
