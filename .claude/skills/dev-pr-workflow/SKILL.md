@@ -15,9 +15,6 @@ metadata:
     - branch-protection
   triggers:
     - on-demand
-  uses:
-    - dev-code-review
-    - dev-jira-integration
 ---
 
 # PR Workflow Management
@@ -127,7 +124,7 @@ gh pr view <PR_NUMBER> --repo owner/repo
 2. Address all CodeRabbit comments including nitpicks
 3. CodeRabbit approves automatically after addressing feedback
 
-See the [code-review](.claude/skills/code-review/SKILL.md) skill for detailed patterns on addressing review feedback.
+For detailed patterns on addressing review feedback, see the related skills section below.
 
 ## References
 
@@ -151,11 +148,10 @@ See the [code-review](.claude/skills/code-review/SKILL.md) skill for detailed pa
 
 ## Related Skills
 
-| Skill | Purpose |
-|-------|---------|
-| [code-review](.claude/skills/code-review/SKILL.md) | PR review feedback, commit semantics, thread replies |
-| [jira-integration](.claude/skills/jira-integration/SKILL.md) | Ticket creation and Jira key integration |
-| [stacked-prs](.claude/skills/stacked-prs/SKILL.md) | Stacked PR management and merge workflows |
+The following related skills are referenced in the metadata but not yet available in this repository:
+- **code-review** - PR review feedback, commit semantics, thread replies
+- **jira-integration** - Ticket creation and Jira key integration
+- **stacked-prs** - Stacked PR management and merge workflows
 <!-- AUTO-GENERATED FILE - DO NOT EDIT DIRECTLY -->
 <!-- Source: https://github.com/bitsoex/ai-code-instructions/blob/main/global/skills/pr-workflow/SKILL.md -->
 <!-- To modify, edit the source file and run the distribution workflow -->
