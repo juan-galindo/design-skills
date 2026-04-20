@@ -1,0 +1,76 @@
+{
+  "components": {
+    "mobile": {
+      "name": "MDS Mobile Core Components",
+      "fileKey": "ZyaL4CUJXUYEG10h1FJsTZ",
+      "url": "https://www.figma.com/design/ZyaL4CUJXUYEG10h1FJsTZ/-New-DS--Mobile-Core-Components?m=auto&node-id=0-1&t=7Iij7Sv78VdoXsyG-1",
+      "index": "index/mobile-components.md"
+    },
+    "web": {
+      "name": "MDS Web Core Components",
+      "fileKey": "fwbiE8VlLXBS3mAUNWUQIt",
+      "url": "https://www.figma.com/design/fwbiE8VlLXBS3mAUNWUQIt/-New-DS--Web-Core-Components",
+      "index": "index/web-components.md"
+    }
+  },
+  "tokens": {
+    "name": "MDS Design Tokens",
+    "fileKey": "W04HDig9ekFYng2jvkWhv2",
+    "url": "https://www.figma.com/design/W04HDig9ekFYng2jvkWhv2/-New-DS--Design-Tokens",
+    "index": "index/tokens.md",
+    "pages": {
+      "base": "0:1",
+      "semantic": "1:2",
+      "component": "1:3"
+    }
+  },
+  "assets": {
+    "_note": "Shared between Mobile and Web — one fileKey per asset type serves both platforms.",
+    "icons": {
+      "name": "Icons",
+      "fileKey": "szRm5eBzvefLEGc7r6gqvG",
+      "url": "https://www.figma.com/design/szRm5eBzvefLEGc7r6gqvG/New-Icons",
+      "index": "index/assets/icons.md",
+      "sharedBy": ["mobile", "web"]
+    },
+    "flags": {
+      "name": "Country Flags",
+      "fileKey": "eKubIC7oSM4ncN8MTMsNj4",
+      "url": "https://www.figma.com/design/eKubIC7oSM4ncN8MTMsNj4/Country-Flags--V2.0-",
+      "index": "index/assets/flags.md",
+      "sharedBy": ["mobile", "web"]
+    },
+    "currencies": {
+      "name": "Crypto Currencies V1.12.0",
+      "fileKey": "EA2PVKbxm1Xw7OyZoQIc1O",
+      "url": "https://www.figma.com/design/EA2PVKbxm1Xw7OyZoQIc1O/Currencies--V1.12.0-",
+      "nodeId": "3412:2438",
+      "index": "index/assets/currencies.md",
+      "sharedBy": ["mobile", "web"]
+    },
+    "fiat": {
+      "name": "Fiat Currencies V1.12.0",
+      "fileKey": "EA2PVKbxm1Xw7OyZoQIc1O",
+      "url": "https://www.figma.com/design/EA2PVKbxm1Xw7OyZoQIc1O/Currencies--V1.12.0-",
+      "nodeId": "3412:2478",
+      "index": "index/assets/fiat.md",
+      "sharedBy": ["mobile", "web"]
+    },
+    "stocks": {
+      "name": "Stocks (in Currencies file)",
+      "fileKey": "EA2PVKbxm1Xw7OyZoQIc1O",
+      "url": "https://www.figma.com/design/EA2PVKbxm1Xw7OyZoQIc1O/Currencies--V1.12.0-",
+      "pageId": "7593:8253",
+      "index": "index/assets/stocks.md",
+      "sharedBy": ["mobile", "web"]
+    },
+    "illustrations": {
+      "name": "Illustrations",
+      "fileKey": "1sU62oEvpm7TdepgwMy2Yb",
+      "url": "https://www.figma.com/design/1sU62oEvpm7TdepgwMy2Yb/Illustrations--1.0-",
+      "sectionId": "2299:202",
+      "index": "index/assets/illustrations.md",
+      "sharedBy": ["mobile", "web"]
+    }
+  }
+}
