@@ -29,8 +29,8 @@ If the user hasn't provided a Figma URL, ask:
 
 **If option 2 or 3:**
 - Read the matching index file:
-  - Web → `index/web-components.md`
-  - Mobile → `index/mobile-components.md`
+  - Web → `specs/index/web-components.md`
+  - Mobile → `specs/index/mobile-components.md`
 - Extract every component entry (name + pageId, including nodeId if available) from the index.
 - Present a numbered list and wait for the user to select one.
 - Resolve `fileKey` from `figma.config.json` and the selected `pageId` (using `nodeId` only if provided), then proceed to Step 1.

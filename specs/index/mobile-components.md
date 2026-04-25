@@ -4,8 +4,6 @@
 **File key:** `ZyaL4CUJXUYEG10h1FJsTZ`
 **Figma:** https://www.figma.com/design/ZyaL4CUJXUYEG10h1FJsTZ/branch/ZyaL4CUJXUYEG10h1FJsTZ/-New-DS--Mobile-Core-Components
 
-**Refresh after:** 14 days (re-run `/scan` if today's date exceeds 2026-04-22)
-
 > **Shared assets:** Icons, Flags, Currencies, Stocks, and Illustrations are shared with Web — see `index/assets/`.
 > To get design context for any component: `get_design_context(fileKey, pageId)`
 > For components with no nodes listed, call `get_metadata(fileKey, pageId)` first to discover nodes.

@@ -1,6 +1,11 @@
 ---
 name: design-visual-qa
-compatibility: Claude.ai and Claude Code
+author: juan.galindo@bitso.com
+compatibility: Designed for Claude.ai and Claude Code
+metadata:
+  category: design-system
+  tags:
+    - qa
 description: >
   Run a Visual QA audit comparing implemented screens against Figma designs,
   producing a structured table report per screen focused on spacing, padding,
@@ -17,7 +22,6 @@ description: >
 
 A skill for auditing built screens against Figma designs and producing a structured, per-screen fix list focused on padding, spacing, font styles, and horizontal insets.
 
-> **Compatibility**: Claude.ai and Claude Code.
 > The audit logic and output format are identical on both surfaces.
 > Platform differences are called out inline in Steps 1 and 4.
 
@@ -70,12 +74,10 @@ Focus exclusively on:
 - **Horizontal padding** — do elements have the correct left/right inset from the screen edge?
 - **Inline spacing** — is the `gap` between inline siblings correct? Check icon-to-label, badge-to-text, prefix-to-input, and any row with horizontally stacked elements. Use `spacing/inline/*` tokens as reference.
 - **Card internal spacing** — is the `gap` between stacked elements inside cards correct? Check title-to-subtitle, value-to-caption, header-to-body, and any vertically stacked content within a card or list item. Use `spacing/stack/*` tokens as reference.
-- **Component height** — does it match `min-h` or fixed height spec?
 - **Font family** — is PP Bitso Sans used for `action/base` (buttons, TextButtons)?
 - **Font weight** — bold (700) vs medium (500) vs regular (400)
 - **Font size** — correct size token (`size-300 = 14px`, `size-400 = 16px`, etc.)
 - **Borders/dividers** — are `hasBorder=true` section headers rendering their 1px top divider?
-- **Auto-height vs fixed height** — panels and cards that should expand to content
 
 Do NOT report on:
 - Copy / content / localization differences (unless asked)
@@ -115,43 +117,28 @@ Format each screen as:
 
 If the user asks to export the report:
 
-**In Claude.ai**: save the full report as `visualqa.md` in `/mnt/user-data/outputs/` and use `present_files` to share it.
+**File naming convention**: `visualqa-{feature-name}-{YYYY-MM-DD}.md`
+- `{feature-name}`: kebab-case name derived from the screen or feature being audited (e.g. `checkout-summary`, `home-dashboard`, `onboarding-step-1`)
+- `{YYYY-MM-DD}`: today's date (e.g. `2026-04-24`)
+- Example: `visualqa-checkout-summary-2026-04-24.md`
 
-**In Claude Code**: save the report as `visualqa.md` in the current working directory using the Write tool, then print the absolute path, e.g.:
-> Report saved to: /path/to/visualqa.md
+If the feature name is not clear from context, ask the user for it before saving.
+
+**In Claude.ai**: save the full report as `visualqa-{feature-name}-{YYYY-MM-DD}.md` in `/mnt/user-data/outputs/` and use `present_files` to share it.
+
+**In Claude Code**: save the report as `visualqa-{feature-name}-{YYYY-MM-DD}.md` in the current working directory using the Write tool, then print the absolute path, e.g.:
+> Report saved to: /path/to/visualqa-checkout-summary-2026-04-24.md
 
 ---
 
 ## Key Design Tokens (Bitso MDS)
 
-Use these as reference when Figma token names appear in the context:
+Load only the token files you need — do not load the full set unless checking all three domains:
 
-| Token | Value |
-|---|---|
-| `spacing/padding/2xs` | 4px |
-| `spacing/padding/xs` | 8px |
-| `spacing/padding/sm` | 12px |
-| `spacing/padding/base` | 16px |
-| `spacing/padding/lg` | 24px |
-| `spacing/stack/xs` | 4px |
-| `spacing/inline/xs` | 8px |
-| `spacing/inline/base` | 16px |
-| `typography/size/200` | 12px |
-| `typography/size/300` | 14px |
-| `typography/size/400` | 16px |
-| `typography/lineheight/150` | 16px |
-| `typography/lineheight/300` | 20px |
-| `typography/lineheight/400` | 24px |
-| `typography/weight/regular` | 400 |
-| `typography/weight/medium` | 500 |
-| `typography/weight/bold` | 700 |
-| `typography/font-family/primary` | PP Bitso Sans |
-| `typography/font-family/secondary` | Geist |
-| `action/base` | PP Bitso Sans, Bold 700, 16px, lh 24px |
-| `list-item/spacing/padding` | 16px |
-| `card/border/radius` | 16px |
-| `border/width/100` | 1px |
-| `border/width/200` | 2px |
+- **Colors** → `specs/tokens/color-tokens.md`
+- **Spacing / radius** → `specs/tokens/spacing-tokens.md`
+- **Typography / text styles** → `specs/tokens/typography-tokens.md` ← load this for every QA run (button fonts, text sizes)
+- **Full index** → `specs/tokens/token-reference.md` (links to all files above)
 
 ---
 
@@ -159,13 +146,6 @@ Use these as reference when Figma token names appear in the context:
 
 These issues appear frequently across Bitso implementations — always verify them:
 
-1. **Section header top border** — `sectionHeader` with `hasBorder=true` must render a 1px divider. It is often missing in implementation.
-2. **List item `py`** — spec is `py-12px`. Implementations often use `py-16px`.
-3. **ReadOnlyHorizontal `py`** — dev annotation specifies `py-12px`. Implementations often use `py-16px`.
-4. **ReadOnlyList `my`** — dev annotation adds `my-4px`. Implementations often omit this.
-5. **Button font family** — Primary buttons and TextButtons use `action/base` → PP Bitso Sans Bold 700 16px. Always flag for verification.
-6. **TextButton font weight** — Often renders as `regular (400)` instead of `bold (700)`.
-7. **InfoPanel fixed height** — `MDSInfoPanel` must be auto-height. Fixed heights cause text to clip.
-8. **Date/selection card `py`** — spec is `py-12px`. Implementations often use `py-16px`, making cards taller than `min-h-72px`.
-9. **Horizontal insets** — All content wrappers use `px-16px` from screen edge. Verify for every screen.
-10. **Progress stepper width** — Must be `w-331px` centered in `w-375px` frame, not full-width.
+1. **Button font family** — Primary buttons and TextButtons use `action/base` → PP Bitso Sans Bold 700 16px. Always flag for verification.
+2. **TextButton font weight** — Often renders as `regular (400)` instead of `bold (700)`.
+3. **Horizontal insets** — All content wrappers use `px-16px` from screen edge. Verify for every screen.

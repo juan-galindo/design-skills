@@ -22,8 +22,8 @@ Before designing variants, clarify:
 - **Component type**: What UI element? (button, input, card, icon, etc.)
 - **Variant dimensions**: What axes of variation? (size, state, style, theme, etc.)
 - **States needed**: Default, hover, focus, active, disabled, loading, error, success?
-- **Design tokens**: Reference semantic tokens from `index/tokens.md` (Semantic collection). Use Component tokens first if available, fall back to Semantic — never use Base tokens directly.
-- **Text styles**: All text layers must use a named text style from the `## Text Styles` section of `index/tokens.md`. Do not invent arbitrary font sizes, weights, or line heights.
+- **Design tokens**: Reference semantic tokens from `specs/tokens/token-reference.md` (Semantic collection). Use Component tokens first if available, fall back to Semantic — never use Base tokens directly.
+- **Text styles**: All text layers must use a named text style from the `## Text Styles` section of `specs/tokens/token-reference.md`. Do not invent arbitrary font sizes, weights, or line heights.
 - **Existing components**: Extending an existing component or creating from scratch?
 - **Naming conventions**: Does the project have established naming patterns?
 - **Target Figma URL**: The file where the ComponentSet should be created.
@@ -203,7 +203,7 @@ return { createdNodeIds: [set.id], name: set.name, variantCount: components.leng
 
 ## Quality Checks
 
-- [ ] All text layers use a named style from `index/tokens.md ## Text Styles` — no arbitrary sizes
+- [ ] All text layers use a named style from `specs/tokens/token-reference.md ## Text Styles` — no arbitrary sizes
 - [ ] No duplicate variant combinations
 - [ ] All states represented for each type/size combination
 - [ ] Naming is consistent and follows MDS conventions
