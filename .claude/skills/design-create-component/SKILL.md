@@ -51,7 +51,7 @@ Use the token quick-reference at the bottom of this skill for spacing, radius, a
 - Text layers: always assign a text style from the MDS text style list below
 - Colors: always bind a color variable — never use raw hex
 
-### MDS Text Styles (from `index/tokens.md`)
+### MDS Text Styles (from `specs/tokens/token-reference.md`)
 
 All sizes in px. `letterSpacing: 0` and `textCase: ORIGINAL` unless noted.
 
@@ -217,7 +217,7 @@ After creating the component:
 
 ## Token quick-reference
 
-For the full token list, always read `index/tokens.md` (single source of truth). The values below cover the handful of tokens used in nearly every component — kept here to avoid a file read for simple cases.
+For the full token list, always read `specs/tokens/token-reference.md` (single source of truth). The values below cover the handful of tokens used in nearly every component — kept here to avoid a file read for simple cases.
 
 | Token | Light | Dark | Use |
 |-------|-------|------|-----|
@@ -239,4 +239,4 @@ For the full token list, always read `index/tokens.md` (single source of truth).
 | `spacing/stack/base` | 16px | `spacing/inline/base` → 16px |
 | `border/radius/base` | 8px | `border/radius/lg` → 12px · `border/radius/xl` → 16px · `border/radius/full` → 1000px |
 
-For anything not in this table — status colors, buy/sell, input tokens, opacity, full spacing scale — read `index/tokens.md`.
+For anything not in this table — status colors, buy/sell, input tokens, opacity, full spacing scale — read `specs/tokens/token-reference.md`.

@@ -87,6 +87,7 @@ These content skills include comprehensive guidelines and frameworks:
 |-------|-------------|-------|
 | `/design-figma-naming` | Audit and fix layer naming conventions in Figma files according to design system guidelines. | Esmeralda Carreño |
 | `/design-handoff` | Audit a Figma file against the Design Handoff Checklist before a handoff meeting with PM and Engineering. | Esmeralda Carreño |
+| `/design-visual-qa` | Run a Visual QA audit comparing implemented screens against Figma designs, producing a structured table report per screen focused on spacing, padding, font styles, and horizontal insets. | Juan Galindo |
 
 ### Design System
 

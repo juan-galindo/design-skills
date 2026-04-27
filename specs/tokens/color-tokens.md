@@ -1,27 +1,21 @@
-# MDS Design Tokens Index
+---
+id: color-tokens
+name: Color Tokens
+category: token
+platform: mobile
+tags: [color, tokens, semantic, component, dark-mode]
+status: ready
+---
 
-**Library:** MDS Design Tokens
-**File key:** `W04HDig9ekFYng2jvkWhv2`
-**Figma:** https://www.figma.com/design/W04HDig9ekFYng2jvkWhv2/-New-DS--Design-Tokens
+**Figma file key:** `W04HDig9ekFYng2jvkWhv2`
 
-
-## Token Hierarchy
-
-Always use the lowest tier that applies:
-
-1. **Component** — use first; supports Light/Dark Bitso modes
-2. **Semantic** — use when no component token exists
-3. **Base** — never use directly in components; primitives only
-
-To get live resolved values, use Figma plugin discovery calls:
-`figma.getLocalPaintStylesAsync()`, `figma.getLocalTextStylesAsync()`,
-`figma.variables.getLocalVariablesAsync()`, and `figma.variables.getLocalCollectionsAsync()`.
+Use the lowest tier that applies: **Component → Semantic → Base**
 
 ---
 
-## Collection: Base
-**pageId:** `0:1` | **Modes:** Bitso
-**Description:** Primitive tokens. Do not use directly in components.
+## Collection: Base — color primitives
+
+Do not use directly in components.
 
 ### color/gray
 
@@ -90,47 +84,7 @@ To get live resolved values, use Figma plugin discovery calls:
 | `color/neon/300` | `#cff330` |
 | `color/neon/400` | `#b2ce36` |
 
-### spacing
-
-| Token | Value |
-|-------|-------|
-| `spacing/025` | 2px |
-| `spacing/050` | 4px |
-| `spacing/100` | 8px |
-| `spacing/150` | 12px |
-| `spacing/200` | 16px |
-| `spacing/300` | 24px |
-| `spacing/400` | 32px |
-| `spacing/500` | 40px |
-| `spacing/600` | 48px |
-| `spacing/700` | 56px |
-| `spacing/800` | 64px |
-| `spacing/1000` | 80px |
-| `spacing/1200` | 96px |
-| `spacing/1400` | 112px |
-
-### border/width
-
-| Token | Value |
-|-------|-------|
-| `border/width/100` | 1px |
-| `border/width/200` | 2px |
-
-### border/radius
-
-| Token | Value |
-|-------|-------|
-| `border/radius/0` | 0px |
-| `border/radius/100` | 2px |
-| `border/radius/200` | 4px |
-| `border/radius/300` | 6px |
-| `border/radius/400` | 8px |
-| `border/radius/500` | 12px |
-| `border/radius/600` | 16px |
-| `border/radius/700` | 24px |
-| `border/radius/800` | 1000px (full) |
-
-### opacity
+### opacity (base)
 
 | Token | Value |
 |-------|-------|
@@ -139,23 +93,11 @@ To get live resolved values, use Figma plugin discovery calls:
 | `opacity/200` | 50% |
 | `opacity/300` | 80% |
 
-### Other base tokens
-
-| Group | Tokens |
-|-------|--------|
-| typography/size | `100` `200` `300` `400` `500` `600` `700` `800` `900` `1000` `1100` `1200` `1300` `1400` |
-| typography/weight | `regular` `medium` `bold` |
-| typography/lineHeight | `100` `150` `200` `300` `400` `500` `600` `700` `800` `900` `1000` `1100` `1200` `1300` |
-| typography/letterSpacing | `0` `100` `200` `300` `400` |
-| typography/paragraphSpacing | `0` `100` `200` `300` `400` |
-| typography/font-family | `primary` → **PP Bitso Sans** · `secondary` → **Geist** |
-| size | `100` `200` `300` `400` `500` `600` `700` `800` `900` `1200` `2100` `2800` `3500` |
-
 ---
 
-## Collection: Semantic
-**pageId:** `1:2` | **Modes:** Bitso
-**Description:** Alias tokens with semantic meaning. Use in component design and code when no Component token exists.
+## Collection: Semantic — aliased color meaning
+
+Use when no Component token exists.
 
 ### color/brand → blue
 
@@ -241,53 +183,7 @@ To get live resolved values, use Figma plugin discovery calls:
 | `color/non-interactive/stronger` | `color/gray/800` | `#2a3546` |
 | `color/non-interactive/strongest` | `color/gray/950` | `#090c11` |
 
-### spacing/stack
-
-| Token | Alias | Value |
-|-------|-------|-------|
-| `spacing/stack/2xs` | `spacing/025` | 2px |
-| `spacing/stack/xs` | `spacing/050` | 4px |
-| `spacing/stack/sm` | `spacing/100` | 8px |
-| `spacing/stack/base` | `spacing/200` | 16px |
-| `spacing/stack/lg` | `spacing/300` | 24px |
-| `spacing/stack/xl` | `spacing/400` | 32px |
-| `spacing/stack/2xl` | `spacing/500` | 40px |
-| `spacing/stack/3xl` | `spacing/600` | 48px |
-| `spacing/stack/4xl` | `spacing/1000` | 80px |
-
-### spacing/padding
-
-| Token | Alias | Value |
-|-------|-------|-------|
-| `spacing/padding/3xs` | `spacing/025` | 2px |
-| `spacing/padding/2xs` | `spacing/050` | 4px |
-| `spacing/padding/xs` | `spacing/100` | 8px |
-| `spacing/padding/sm` | `spacing/150` | 12px |
-| `spacing/padding/base` | `spacing/200` | 16px |
-| `spacing/padding/lg` | `spacing/300` | 24px |
-| `spacing/padding/xl` | `spacing/400` | 32px |
-| `spacing/padding/2xl` | `spacing/500` | 40px |
-
-### spacing/inline
-
-| Token | Alias | Value |
-|-------|-------|-------|
-| `spacing/inline/2xs` | `spacing/050` | 4px |
-| `spacing/inline/xs` | `spacing/100` | 8px |
-| `spacing/inline/sm` | `spacing/150` | 12px |
-| `spacing/inline/base` | `spacing/200` | 16px |
-| `spacing/inline/lg` | `spacing/300` | 24px |
-| `spacing/inline/xl` | `spacing/400` | 32px |
-| `spacing/inline/2xl` | `spacing/500` | 40px |
-| `spacing/inline/3xl` | `spacing/600` | 48px |
-
-### spacing/margin
-
-| Token | Alias | Value |
-|-------|-------|-------|
-| `spacing/margin/base` | `spacing/200` | 16px |
-
-### opacity
+### opacity (semantic)
 
 | Token | Alias | Value |
 |-------|-------|-------|
@@ -296,25 +192,11 @@ To get live resolved values, use Figma plugin discovery calls:
 | `opacity/medium` | `opacity/200` | 50% |
 | `opacity/high` | `opacity/300` | 80% |
 
-### border/radius
-
-| Token | Alias | Value |
-|-------|-------|-------|
-| `border/radius/none` | `border/radius/0` | 0px |
-| `border/radius/2xs` | `border/radius/100` | 2px |
-| `border/radius/xs` | `border/radius/200` | 4px |
-| `border/radius/sm` | `border/radius/300` | 6px |
-| `border/radius/base` | `border/radius/400` | 8px |
-| `border/radius/lg` | `border/radius/500` | 12px |
-| `border/radius/xl` | `border/radius/600` | 16px |
-| `border/radius/2xl` | `border/radius/700` | 24px |
-| `border/radius/full` | `border/radius/800` | 1000px |
-
 ---
 
-## Collection: Component
-**pageId:** `1:3` | **Modes:** Light Bitso / Dark Bitso
-**Description:** Component-level tokens. Always prefer these for implementation. Light/dark mode is handled automatically.
+## Collection: Component — always prefer these
+
+Light Bitso / Dark Bitso modes. Light/Dark handled automatically.
 
 ### color/primary
 
@@ -457,22 +339,6 @@ To get live resolved values, use Figma plugin discovery calls:
 | `color/link/default` | `#5463ff` | `#899cff` |
 | `color/link/visited` | `#192067` | `#dfe6ff` |
 
-### input
-
-| Token | Light Bitso | Dark Bitso |
-|-------|-------------|------------|
-| `input/border/radius` | 12px | 12px |
-| `input/border/radius-round` | 1000px | 1000px |
-| `input/border/width-default` | 1px | 1px |
-| `input/border/width-focus` | 2px | 4px |
-| `input/spacing/between-stack` | 24px | 24px |
-| `input/spacing/between-inline` | 8px | 8px |
-| `input/color/background/default` | `#ffffff` | `#090c11` |
-| `input/color/background/disabled` | `#f7f8fb` | `#151c28` |
-| `input/color/text/default` | `#090c11` | `#ffffff` |
-| `input/color/text/placeholder` | `#506077` | `#c6cfdc` |
-| `input/color/text/disabled` | `#627893 / 50%` | `#2a3546` |
-
 ### inline-notification/color
 
 | Token | Light Bitso | Dark Bitso |
@@ -488,78 +354,17 @@ To get live resolved values, use Figma plugin discovery calls:
 | `list-item/background-color/default` | `#ffffff` | `#090c11` |
 | `list-item/background-color/disabled` | `#ffffff` | `#090c11` |
 
----
+### input/color
 
-## Text Styles
+| Token | Light Bitso | Dark Bitso |
+|-------|-------------|------------|
+| `input/color/background/default` | `#ffffff` | `#090c11` |
+| `input/color/background/disabled` | `#f7f8fb` | `#151c28` |
+| `input/color/text/default` | `#090c11` | `#ffffff` |
+| `input/color/text/placeholder` | `#506077` | `#c6cfdc` |
+| `input/color/text/disabled` | `#627893 / 50%` | `#2a3546` |
 
-**Source:** `figma.getLocalTextStylesAsync()` on file `W04HDig9ekFYng2jvkWhv2`
+## Related specs
 
-
-All sizes in px. `letterSpacing: 0` and `textCase: ORIGINAL` unless noted.
-
-### Display — PP Bitso Sans / Medium
-
-| Style | Size | Line Height |
-|-------|------|-------------|
-| `display/extraLarge` | 96 | 96 |
-| `display/large` | 64 | 68 |
-| `display/base` | 56 | 56 |
-| `display/small` | 48 | 52 |
-
-### Title — PP Bitso Sans / Medium
-
-| Style | Size | Line Height |
-|-------|------|-------------|
-| `title/large` | 40 | 44 |
-| `title/medium` | 32 | 40 |
-| `title/base` | 28 | 32 |
-
-### Heading — PP Bitso Sans / Medium
-
-| Style | Size | Line Height |
-|-------|------|-------------|
-| `heading/base` | 24 | 28 |
-
-### Subheading — PP Bitso Sans / Medium
-
-| Style | Size | Line Height |
-|-------|------|-------------|
-| `subheading/base` | 20 | 24 |
-| `subheading/small` | 16 | 20 |
-| `subheading/extra-small` | 14 | 18 |
-
-### Body — Geist
-
-| Style | Weight | Size | Line Height | Paragraph Spacing |
-|-------|--------|------|-------------|-------------------|
-| `body/large` | Regular | 18 | 24 | 28 |
-| `body/large-medium` | Medium | 18 | 24 | 28 |
-| `body/large-bold` | Bold | 18 | 24 | 28 |
-| `body/base` | Regular | 16 | 20 | 16 |
-| `body/base-medium` | Medium | 16 | 20 | 16 |
-| `body/base-bold` | Bold | 16 | 20 | 16 |
-| `body/small` | Regular | 14 | 20 | 14 |
-| `body/small-medium` | Medium | 14 | 20 | 14 |
-| `body/small-bold` | Bold | 14 | 20 | 14 |
-
-### Tiny — Geist
-
-| Style | Weight | Size | Line Height | Paragraph Spacing |
-|-------|--------|------|-------------|-------------------|
-| `tiny/base` | Regular | 12 | 16 | 14 |
-| `tiny/base-medium` | Medium | 12 | 16 | 14 |
-| `tiny/base-bold` | Bold | 12 | 16 | 14 |
-
-### Action — PP Bitso Sans / Bold
-
-| Style | Size | Line Height |
-|-------|------|-------------|
-| `action/base` | 16 | 24 |
-| `action/small` | 14 | 18 |
-
-### Eyebrow — Geist / Bold / UPPERCASE
-
-| Style | Size | Line Height | Letter Spacing |
-|-------|------|-------------|----------------|
-| `eyebrow/base` | 14 | 20 | 1.5px |
-| `eyebrow/small` | 12 | 14 | 0.7px |
+- [`token-reference.md`](token-reference.md) — full token index
+- [`color.md`](../foundations/color.md)
