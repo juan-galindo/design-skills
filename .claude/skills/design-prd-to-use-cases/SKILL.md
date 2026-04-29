@@ -155,7 +155,7 @@ Check for an existing page first: use `mcp__claude_ai_Atlassian__searchConfluenc
   - Title: `[PRD Title] – Use Cases & MLP`
   - Body structured in this order:
     1. **AI disclaimer** at the very top (info panel or italic text):
-       _"The content of this document was automatically produced by the Design PRD to Use Cases Agent as part of an AI-assisted design process. It is intended as a starting point for design exploration; not as a final, validated deliverable."_
+       _"The content of this document was automatically produced by the Design PRD to Use Cases Skill as part of an AI-assisted design process. It is intended as a starting point for design exploration; not as a final, validated deliverable."_
     2. A **Source PRD** line with a link to the original PRD.
     3. Full output from Steps 1–4 (domain, JTBDs, use cases, MLP prioritization).
 
