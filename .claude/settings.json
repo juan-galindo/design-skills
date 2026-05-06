@@ -18,9 +18,14 @@
       "mcp__claude_ai_Figma__send_code_connect_mappings",
       "mcp__claude_ai_Figma__get_context_for_code_connect",
       "mcp__claude_ai_Figma__add_code_connect_map",
-      "mcp__claude_ai_Figma__whoami"
+      "mcp__claude_ai_Figma__whoami",
+      "mcp__47c6faaa-2fb2-487c-ae6f-5c19f14c0476__getConfluencePage"
     ]
   },
+  "enabledMcpjsonServers": [
+    "zeroheight"
+  ],
+  "enableAllProjectMcpServers": true,
   "hooks": {
     "PreToolUse": [
       {

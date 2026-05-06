@@ -5,7 +5,7 @@ category: pattern
 platform: mobile
 tags: [list, arrow, dot, bullet]
 status: ready
-figma: https://www.figma.com/design/b4KgXK0kIpQzWryP5PTHCp/-New--Mobile-Patterns?node-id=2255-3032
+figma node: "2255:3032"
 ---
 
 ## What it is
