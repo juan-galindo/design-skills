@@ -5,6 +5,7 @@ category: token | component | pattern
 platform: mobile
 tags: []
 status: draft | ready
+figma node:
 ---
 
 ## What it is
@@ -20,6 +21,11 @@ Short description of the component or pattern.
 
 - Counter-indication 1
 - Counter-indication 2
+
+## Content guidelines
+
+- Guideline 1
+- Guideline 2
 
 ## Examples
 
