@@ -343,10 +343,13 @@ lang_iso: es_MX
 data: <base64 of the JSON file contents>
 replace_modified: true
 distinguish_by_file: false
+mark_verified: false
 tags: ["{feature}", "{initiativeTag}"]
 ```
 
 `lang_iso` is always `es_MX` — see `references/lokalise-projects.md` for why we keep it constant even for projects whose base language is `en`.
+
+`mark_verified: false` — keys are uploaded as unverified. They are source material from Figma and should be reviewed before marking as verified in Lokalise.
 
 **Confirm.** The upload returns a `process_id`. Poll with `mcp__lokalise_pm__get_process_status` until status is `finished`, then report:
 
