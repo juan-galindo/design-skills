@@ -4,6 +4,23 @@ Source: Bitso Contribution Guidelines (zeroheight) + Way of Working Figma file
 
 ---
 
+## Casing — when to use which
+
+Two casing systems coexist. Choose by **where the layer lives**, not by what kind of layer it is.
+
+| Where | Casing | Examples |
+|---|---|---|
+| Flows, screens, sections, wrappers, top-level frames | **PascalCase** | `1000 - MXN Withdrawal - Home`, `ContentWrapper`, `BalanceCard` |
+| Layers **inside** an MDS/WDS component | **camelCase** + standard vocabulary | `label`, `iconLeading`, `pressable`, `container` |
+| Slot layers (any context) | **camelCase** + `Slot` suffix | `leadingSlot`, `trailingSlot`, `contentSlot` |
+| Component variant property names | **camelCase** | `size`, `state`, `iconPosition` |
+| Component variant values | **camelCase** or **lowercase** (consistent per property) | `default`, `hover`, `small`, `medium` |
+
+> Rule of thumb: PascalCase = "this is a place" (a screen, a wrapper, a flow).
+> camelCase = "this is a part of a component" (a label inside a button, a slot, a variant value).
+
+---
+
 ## The 3 Layer Types
 
 ### 1. Wrapper Layers (Frames & Groups)
@@ -93,6 +110,66 @@ CharCount        ← not "14 / 25"
 - Auto-named: ~~`image 40`~~ → `[Subject]Image`
 - Lowercase: ~~`accent background`~~ → `AccentBackground`
 - OS screenshot names: ~~`Captura de pantalla 2026-03-03...`~~ → `ReferenceScreenshot`
+
+---
+
+### 4. Component-Internal Layers (inside MDS/WDS components)
+
+> Layers that live **inside** an MDS/WDS component switch from PascalCase
+> (used everywhere else) to **camelCase** with a **standard vocabulary** so the
+> same role reads the same way across every component in the system.
+
+**Format:** `camelCase`, drawn from the standard vocabulary below.
+
+**Standard vocabulary:**
+
+| Name | Use for |
+|---|---|
+| `label`         | The primary text rendered by the component |
+| `helperText`    | Secondary text (hints, error messages) |
+| `iconLeading`   | Icon that sits before the label |
+| `iconTrailing`  | Icon that sits after the label |
+| `pressable`     | The touch/click target (the element that responds to interaction) |
+| `container`     | The outer surface / background of the component |
+| `row`           | A horizontal group of children inside the component |
+| `mdsButton`     | A nested MDS component instance referenced by role |
+
+**Examples (inside an `MDSButton`):**
+```
+container
+  pressable
+    row
+      iconLeading
+      label
+      iconTrailing
+```
+
+**Never (inside a component):**
+- PascalCase: ~~`Label`~~ → `label`
+- Wrapper suffix: ~~`LabelWrapper`~~ → `label` (the wrapper convention is for screens, not components)
+- Generic: ~~`Frame 12`~~ → use the standard vocabulary
+- Synonyms: ~~`leftIcon`~~ → `iconLeading`; ~~`rightIcon`~~ → `iconTrailing`; ~~`text`~~ → `label`
+
+### 5. Slot Layers
+
+> Slots are the explicit "plug-in points" where a component accepts arbitrary
+> content from a consumer (an icon, a custom label, a child component).
+
+**Format:** `camelCase` + `Slot` suffix
+
+**Examples:**
+```
+leadingSlot
+trailingSlot
+contentSlot
+headerSlot
+footerSlot
+```
+
+**Never:**
+- Missing suffix: ~~`leading`~~ → `leadingSlot` (a slot must declare itself)
+- PascalCase: ~~`LeadingSlot`~~ → `leadingSlot`
+- Mixed: ~~`leading_slot`~~, ~~`leading-slot`~~ → `leadingSlot`
 
 ---
 
