@@ -119,3 +119,39 @@ Always rename to describe the content of that specific frame.
 | `fixedBottom` / `BottomNavWrapper` | `FixedBottomWrapper` |
 | `topItems` / `topItens` | `TopItemsWrapper` |
 | `SnackBar` (frame) | `SnackbarWrapper` |
+
+---
+
+## Component-internal layers (PascalCase → camelCase + standard vocab)
+
+These rules apply **only to layers inside an MDS/WDS component**. Outside of
+components (in flows, screens, wrappers), keep PascalCase.
+
+| Before | After | Rule |
+|---|---|---|
+| `Label` | `label` | camelCase, standard vocab |
+| `LabelText` | `label` | Drop redundant suffix, use vocab |
+| `Text` | `label` | Figma default → name by role |
+| `HelperText` | `helperText` | camelCase |
+| `LeftIcon` / `IconLeft` | `iconLeading` | Use canonical vocab |
+| `RightIcon` / `IconRight` | `iconTrailing` | Use canonical vocab |
+| `LeadingIcon` | `iconLeading` | Standardize order: noun + position |
+| `TrailingIcon` | `iconTrailing` | Standardize order: noun + position |
+| `Pressable` / `Touchable` / `ClickArea` | `pressable` | One canonical name for the hit target |
+| `Container` / `Wrapper` (inside a component) | `container` | Inside a component, use `container`, not `Wrapper` |
+| `Row` / `HStack` | `row` | camelCase |
+| `MDSButton` (instance ref inside another component) | `mdsButton` | Components nested **by role** are camelCased |
+| `ButtonWrapper` (inside `MDSCard`) | `mdsButton` | Inside a component, refer to nested MDS components by camelCase role |
+
+---
+
+## Slot layers (declare the plug-in point)
+
+| Before | After | Rule |
+|---|---|---|
+| `Leading` | `leadingSlot` | Add `Slot` suffix, camelCase |
+| `Trailing` | `trailingSlot` | Add `Slot` suffix, camelCase |
+| `Content` (an exposed slot) | `contentSlot` | Add `Slot` suffix |
+| `LeadingSlot` | `leadingSlot` | camelCase, not PascalCase |
+| `leading_slot` / `leading-slot` | `leadingSlot` | No separators |
+| `IconSlot` (inside button) | `leadingSlot` or `trailingSlot` | Name by **position**, not by what plugs in |

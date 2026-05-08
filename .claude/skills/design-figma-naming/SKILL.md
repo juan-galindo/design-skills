@@ -91,7 +91,91 @@ Full rules → `references/layer-rules.md` | Common renames → `references/comm
 | Wrapper (Frame/Group) | `PascalCase` + `Wrapper` suffix |
 | Text layer | Name = what it *represents* (not its value) |
 | Media layer | Characteristic + type suffix (`CEPImage`, `AccentBackground`) |
-| Never | Emojis · UUIDs · spaces · camelCase · generic names (`Frame 123`) |
+| Component-internal layer | `camelCase`, standard vocabulary (`label`, `iconLeading`, `iconTrailing`, `pressable`, `container`, `row`, `mdsButton`) |
+| Slot layer | `camelCase` + `Slot` suffix (e.g. `leadingSlot`, `trailingSlot`, `contentSlot`) |
+| Never | Emojis · UUIDs · spaces · generic names (`Frame 123`) · camelCase **outside** of components |
+
+> **Casing rule of thumb:** flows, screens, sections and wrappers use **PascalCase**.
+> Layers **inside** MDS/WDS components use **camelCase**. See `references/layer-rules.md`.
+
+### Page naming — `Category/MDSComponentName`
+
+Library page tabs follow this structure so components are grouped predictably.
+
+```
+Foundation/Color
+Form/Input
+Form/Checkbox
+Navigation/AppBar
+_deprecated/Toggle           ← legacy component, kept for back-compat
+_wip/Stepper                 ← work in progress, not yet released
+```
+
+**Rules:**
+- **Category** is **singular** + **PascalCase** (`Form`, not `Forms`; `Navigation`, not `navigation`).
+- One slash separates category from component: `Category/ComponentName`.
+- **Prefixes:**
+  - `_deprecated/` → component is on its way out; do **not** use for new work.
+  - `_wip/` → component is being designed/built; do **not** publish to consumers.
+- **Version suffixes** belong on the component, never the category:
+  - ✅ `Form/InputV2`
+  - ❌ `Form V2/Input`
+
+### Component naming — `MDS{Name}` / `WDS{Name}`
+
+Every component in the library is prefixed with the platform token:
+
+| Prefix | Library |
+|---|---|
+| `MDS` | Mobile Design System |
+| `WDS` | Web Design System |
+
+**Rules:**
+- Prefix is **mandatory** — no unprefixed component names ship.
+- **PascalCase**, **no spaces**, no separators between prefix and name:
+  - ✅ `MDSButton`, `MDSInputText`, `WDSAppBar`
+  - ❌ `MDS Button`, `mds-button`, `Mds_Button`, `Button` (no prefix)
+- **Variant property names** → `camelCase` (`size`, `state`, `iconPosition`, `hasIcon`).
+- **Variant values** → `camelCase` or `lowercase`. Pick one per property and stay consistent.
+  - ✅ `size = small | medium | large`
+  - ✅ `state = default | hover | pressed | disabled`
+  - ✅ `iconPosition = leading | trailing | none`
+  - ❌ `Size = Small | Medium | Large` (PascalCase values)
+  - ❌ `state = Default | hover | PRESSED` (mixed casing)
+
+### Properties panel
+
+Variant properties are how a component is configured in the panel. Two rules:
+
+1. **States are variant values, never booleans.**
+   - ✅ `state = default | hover | pressed | disabled | focus`
+   - ❌ `isHover = true/false`, `isPressed = true/false`, `isDisabled = true/false`
+   - Booleans are reserved for **toggles** that are genuinely independent (`hasIcon`, `showLabel`).
+
+2. **Property order in the panel:**
+   ```
+   structural  →  size, density, layout, orientation
+   content     →  label, helperText, placeholder, hasIcon
+   slots       →  leadingSlot, trailingSlot, contentSlot
+   state       →  state (default | hover | pressed | disabled | focus)
+   ```
+   This ordering makes the panel scannable: shape first, what's in it second, where extras plug in third, current state last.
+
+### Annotations — bracketed tags
+
+Annotations are inline tags added to layer or component names to communicate
+intent that isn't visible from the design alone. Use the brackets exactly as shown.
+
+| Tag | Use for | Example |
+|---|---|---|
+| `[token]`     | Layer is bound to a specific design token | `Background [token]` |
+| `[role]`      | Semantic role of the layer in the flow / a11y role | `Header [role]` |
+| `[prop]`      | Layer is driven by a component property | `Label [prop]` |
+| `[condition]` | Layer only renders under a condition | `ErrorMessage [condition]` |
+| `[a11y]`      | Accessibility-related layer (focus ring, screen-reader-only text) | `FocusRing [a11y]` |
+
+> Annotations are **suffixes**: keep the layer name first, tag last, single space between them.
+> Multiple tags allowed: `Label [prop] [a11y]`.
 
 ---
 
@@ -198,6 +282,19 @@ Bottom sheet / overlay?        → NO sequence number, PascalCase name only
 | Sub-flow in parent flow prefix | Give sub-flow its own thousands prefix |
 | Sub-flow using parent section name | Use sub-section label name |
 | Bottom sheet with sequence number | Remove number, PascalCase only |
+| Page tab not in `Category/Component` form | Restructure to `Form/Input`, `Navigation/AppBar`, etc. |
+| Plural category (`Forms/`, `Buttons/`) | Singular PascalCase (`Form/`, `Button/`) |
+| Deprecated/WIP component on a normal page | Move under `_deprecated/` or `_wip/` |
+| Version suffix on the category (`Form V2/Input`) | Move suffix to component (`Form/InputV2`) |
+| Component without `MDS`/`WDS` prefix | Add the platform prefix (`MDSButton`, `WDSAppBar`) |
+| Space or separator inside component name | Remove (`MDS Button` → `MDSButton`) |
+| Variant property in PascalCase | camelCase (`Size` → `size`) |
+| Mixed-casing variant values | One casing per property (`camelCase` or `lowercase`) |
+| State exposed as boolean (`isHover`) | Convert to `state` variant value |
+| Layer inside an MDS/WDS component in PascalCase | camelCase using standard vocab (`label`, `iconLeading`, …) |
+| Slot layer missing `Slot` suffix | Add it (`leading` → `leadingSlot`) |
+| Property panel order ≠ structural → content → slots → state | Reorder to match the convention |
+| Annotation without brackets or wrong tag | Use `[token]`, `[role]`, `[prop]`, `[condition]`, `[a11y]` |
 
 ---
 
