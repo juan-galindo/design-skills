@@ -3,25 +3,10 @@
     "allow": [
       "Bash(git *)",
       "Read(.claude/skills/**)",
-      "mcp__claude_ai_Figma__get_screenshot",
-      "mcp__claude_ai_Figma__create_design_system_rules",
-      "mcp__claude_ai_Figma__get_design_context",
-      "mcp__claude_ai_Figma__get_metadata",
-      "mcp__claude_ai_Figma__get_figjam",
-      "mcp__claude_ai_Figma__generate_diagram",
-      "mcp__claude_ai_Figma__get_variable_defs",
-      "mcp__claude_ai_Figma__use_figma",
-      "mcp__claude_ai_Figma__search_design_system",
-      "mcp__claude_ai_Figma__create_new_file",
-      "mcp__claude_ai_Figma__get_code_connect_map",
-      "mcp__claude_ai_Figma__get_code_connect_suggestions",
-      "mcp__claude_ai_Figma__send_code_connect_mappings",
-      "mcp__claude_ai_Figma__get_context_for_code_connect",
-      "mcp__claude_ai_Figma__add_code_connect_map",
-      "mcp__claude_ai_Figma__whoami",
-      "mcp__47c6faaa-2fb2-487c-ae6f-5c19f14c0476__getConfluencePage",
-      "mcp__lokalise_pm__*",
-      "mcp__lokalise_sd__*"
+      "mcp__atlassian__*",
+      "mcp__claude_ai_Figma__*",
+      "mcp__lokalise_project_management__*",
+      "mcp__lokalise_software_development__*"
     ]
   },
   "enabledMcpjsonServers": [

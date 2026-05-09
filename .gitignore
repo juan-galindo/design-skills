@@ -22,3 +22,5 @@ Thumbs.db
 
 # Local config
 mcp.json
+.mcp.json
+.env
