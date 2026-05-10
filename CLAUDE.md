@@ -14,8 +14,7 @@ All UX pattern specs live in `specs/`. Load them as reference context before mak
 
 | Folder | Contains |
 |--------|---------|
-| `specs/index/` | Component catalogs — Figma pageIds for web and mobile MDS libraries |
-| `specs/foundations/` | Visual primitives (color, spacing, motion, typography…) |
+| `specs/figma-catalog/` | Figma lookup tables — fileKeys and nodeIds for MDS libraries and assets |
 | `specs/tokens/` | Token reference — authoritative token list |
 | `specs/components/` | All MDS components (atoms, molecules, organisms merged) |
 | `specs/patterns/` | Layout and composition rules |
@@ -48,9 +47,9 @@ Token hierarchy (use the lowest tier that applies):
 
 | Library | File |
 |---------|------|
-| Mobile MDS | `specs/index/mobile-components.md` |
-| Web MDS (Figma reference only) | `specs/index/web-components.md` |
-| Assets (icons, flags, currencies) | `.claude/index/assets/` |
+| Mobile MDS | `specs/figma-catalog/mobile-components.md` |
+| Web MDS (Figma reference only) | `specs/figma-catalog/web-components.md` |
+| Assets (icons, flags, currencies) | `specs/figma-catalog/assets/` |
 | Content (UX Writing) | `specs/content/index.md` |
 
 ### Content index (UX Writing)

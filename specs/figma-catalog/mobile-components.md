@@ -4,7 +4,7 @@
 **File key:** `ZyaL4CUJXUYEG10h1FJsTZ`
 **Figma:** https://www.figma.com/design/ZyaL4CUJXUYEG10h1FJsTZ/branch/ZyaL4CUJXUYEG10h1FJsTZ/-New-DS--Mobile-Core-Components
 
-> **Shared assets:** Icons, Flags, Currencies, Stocks, and Illustrations are shared with Web — see `index/assets/`.
+> **Shared assets:** Icons, Flags, Currencies, Stocks, and Illustrations are shared with Web — see `specs/figma-catalog/assets/`.
 > To get design context for any component: `get_design_context(fileKey, pageId)`
 > For components with no nodes listed, call `get_metadata(fileKey, pageId)` first to discover nodes.
 > `Spectral` frames are documentation/showcase — prefer COMPONENT or COMPONENT_SET nodes.

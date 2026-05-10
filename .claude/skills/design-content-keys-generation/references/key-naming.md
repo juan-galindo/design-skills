@@ -19,7 +19,7 @@ All segments are camelCase. Dots separate segments; no other punctuation.
 
 ## Component abbreviation table
 
-The closest MDS ancestor is matched (case-insensitive, ignoring anything after a `/` and any `MDS`/`mds` prefix) against this table. First hit wins. The list mirrors the MDS Mobile Core Components library — keep it in sync with `specs/index/mobile-components.md`.
+The closest MDS ancestor is matched (case-insensitive, ignoring anything after a `/` and any `MDS`/`mds` prefix) against this table. First hit wins. The list mirrors the MDS Mobile Core Components library — keep it in sync with `specs/figma-catalog/mobile-components.md`.
 
 | Figma component name (any variant) | Abbreviation |
 |---|---|
