@@ -1,7 +1,6 @@
 # Content Index
 
-Source of truth for all Bitso UX writing guidelines. All files are local — no external MCP calls needed at runtime.
-
+Source of truth for all Bitso UX writing guidelines.
 ---
 
 ## How to Consume
