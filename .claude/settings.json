@@ -5,8 +5,8 @@
       "Read(.claude/skills/**)",
       "mcp__atlassian__*",
       "mcp__claude_ai_Figma__*",
-      "mcp__lokalise_project_management__*",
-      "mcp__lokalise_software_development__*"
+      "mcp__lokalise_pm__*",
+      "mcp__lokalise_sd__*"
     ]
   },
   "enabledMcpjsonServers": [

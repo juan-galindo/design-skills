@@ -51,6 +51,17 @@ Token hierarchy (use the lowest tier that applies):
 | Mobile MDS | `specs/index/mobile-components.md` |
 | Web MDS (Figma reference only) | `specs/index/web-components.md` |
 | Assets (icons, flags, currencies) | `.claude/index/assets/` |
+| Content (UX Writing) | `specs/content/index.md` |
+
+### Content index (UX Writing)
+
+Always read `specs/content/index.md` to find the right file for any content guideline.
+All content is local — no external MCP calls needed.
+
+```markdown
+## Step N — Load content references
+Read `specs/content/index.md`, then Read the files listed under the relevant tier.
+```
 
 ---
 
