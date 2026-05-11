@@ -73,13 +73,13 @@ Output a single flat table ordered depth-first (top to bottom, parent before chi
 
 | Node type | Label |
 |-----------|-------|
-| FRAME | `Frame` |
-| GROUP | `Group` |
-| TEXT | `Text` |
-| RECTANGLE | `Rectangle` |
-| ELLIPSE | `Ellipse` |
-| LINE / VECTOR | `Vector` |
-| IMAGE | `Image` |
+| FRAME | `frame` |
+| GROUP | `group` |
+| TEXT | `text` |
+| RECTANGLE | `rectangle` |
+| ELLIPSE | `ellipse` |
+| LINE / VECTOR | `vector` |
+| IMAGE | `image` |
 | INSTANCE | `Component Instance` |
 | COMPONENT | `◆ Component` |
 | COMPONENT_SET | `◆◆ Component Set` |
@@ -146,74 +146,71 @@ Then propose variant property *value* renames (e.g. `default` → `Default`). Wa
 
 **⚠️ CRITICAL: Never rename component instances or main components.**
 
-All names must be in **PascalCase**.
+All layer names must be in **camelCase**. Never leave Figma auto-generated names (`Frame 42`, `Group 7`, `Rectangle 3`).
 
-### Frames
+### Standard Layer Vocabulary
 
-| Contents | Name |
-|----------|------|
-| Icons + label text (full content area) | `ContentWrapper` |
-| Only icons | `IconWrapper` |
-| Only label text | `LabelWrapper` |
-| Left/prefix icon only | `PrefixIconWrapper` |
-| Right/suffix icon only | `SuffixIconWrapper` |
-| Left/prefix with mixed content | `LeadingContentWrapper` |
-| Right/suffix with mixed content | `TrailingContentWrapper` |
-| Header row | `HeaderWrapper` |
-| Description text | `DescriptionWrapper` |
-| Tags or badges | `TagsWrapper` |
-| No clear semantic purpose | `Wrapper` |
+Use this shared vocabulary across all components. **Most common** is the default when in doubt.
 
-### Groups → `ContentWrapper`
+| Layer Role | Accepted names |
+|------------|---------------
+| Text content | `label`|
+| Leading icon | `iconLeading` |
+| Trailing icon | `iconTrailing` |
+| Standalone icon | `icon` |
+| Image | `image`|
+| Badge / indicator | `badge`, `indicator` |
+| Root container | Component name in camelCase |
+| Layout wrappers | `row`, `column`, `wrapper` |
+| Interactive area | `pressable`, `touchArea` |
+
+### Slot Layers
+
+Any layer intended to be swapped by a different component instance must have a `slot` suffix:
+`iconSlot`, `badgeSlot`, `illustrationSlot`
 
 ### Shapes (Rectangles & Ellipses)
-- Full background fill → `Background`
-- Divider → `Divider`
-- Status → `Status`
-- Line → `Line`
-
-### Frame borders / separator lines → `Border`
-
-### Vectors & Icons → `Vector`
-
-### Images → `Image`
-
-### Text layers
-
-| Role | Name |
-|------|------|
-| Secondary label or section title | `Title` |
-| Supporting text below a header or title | `Description` |
-| Body copy, longer readable text, below a title | `Paragraph` |
-| Input placeholder text | `Placeholder` |
+- Full background fill → `background`
+- Divider / separator line → `divider`
+- Status indicator → `status`
 
 ---
 
 ## Component Property Names
 
-### Variant properties — lowercase single words
-| Property | Name |
-|----------|------|
-| Interaction/activity state | `state` |
-| Size | `size` |
-| Color / theme | `color` |
+All property names must be **camelCase**. Property values must be **camelCase or lowercase** matching the actual React prop values — never PascalCase or designer-centric labels.
 
-### Text properties — lowercase single words or short phrases
+### Variant properties
+
+| Property | Name | Example values |
+|----------|------|----------------|
+| Interaction / activity state | `state` | `default`, `hover`, `pressed`, `disabled`, `loading` |
+| Visual style | `variant` | `primary`, `secondary`, `ghost`, `danger` |
+| Size | `size` | `sm`, `md`, `lg` |
+| Feedback | `feedback` | `none`, `error`, `success`, `warning` |
+| Color / theme | `color` | `default`, `onDark` |
+
+### Text properties — camelCase matching code prop names
 | Content | Name |
 |---------|------|
 | Primary heading | `header` |
 | Supporting text | `description` |
 | Short label | `label` |
-| Button/action label | `call to action` |
+| Button/action label | `callToAction` |
 
-### Boolean properties — camelCase with `has` prefix
-`hasIcon`, `hasMedia`, `hasTags`, `hasAction`, `hasDescription`, `hasHeader`, `hasTitle`
+### States must be variant values — not boolean toggles
 
-For sequences: `hasIcon1` → `has1stIcon`, `hasLabel2` → `has2ndLabel`
+| ✅ Use | ❌ Avoid |
+|--------|---------|
+| `state` → `default, disabled, loading` | `isDisabled` → `true/false` |
+| `variant` → `primary, danger` | `isDanger` → `true/false` |
+| `size` → `sm, lg` | `isLarge` → `true/false` |
 
-### Property values — PascalCase with spaces
-`default` → `Default` · `sm` → `Small` · `on dark` → `On Dark` · `extra-large` → `Extra Large`
-`true`/`false` booleans stay as-is.
+### Property order in the panel
+1. `variant` / `size` — structural
+2. `state` — disabled, loading, selected, error, etc.
+3. Text content properties (`label`, `title`, etc.)
+4. Slot controls (`iconLeading`, `iconTrailing`, instance swaps)
 
 ---
 
@@ -221,4 +218,4 @@ For sequences: `hasIcon1` → `has1stIcon`, `hasLabel2` → `has2ndLabel`
 
 - Component instances (purple icon in Figma)
 - Main components
-- Any layer starting with `MDS`
+- Any layer starting with `MDS` or `WDS`
