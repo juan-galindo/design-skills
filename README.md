@@ -57,24 +57,6 @@ When you invoke a skill, the AI loads the skill's instructions automatically and
 | `/design-content-review` | Review any content — UI copy, documentation, emails, or a Figma design — against Bitso's tone of voice, FEEL framework, glossary, and UX writing principles. Supports es_MX, es_AR, es_CO, pt_BR, and en_US. | Emilia Alegre |
 | `/design-content-keys-generation` | Generate structured Lokalise content keys from Figma text nodes (page, section, or frame), rename layers automatically, and export a JSON file for upload to Lokalise. Auto-detects scan target from the URL. | Juan Galindo |
 
-**Reference Materials:**
-
-These content skills include comprehensive guidelines and frameworks:
-
-**Available in `/design-content-write`:**
-- Bitso Tone of Voice — Brand voice principles and personality guidelines
-- FEEL Framework — Emotional, functional, and accessible writing principles
-- Glossary — Approved financial and product terminology
-- UX Writing Principles — Best practices for UI microcopy and user guidance
-- CTA Guidelines — Call-to-action button copy standards
-- Transactional Emails — Email templates and communication patterns
-- System Thinking — Contextual approach to writing within product systems
-- Evaluation Criteria — Quality metrics for assessing copy effectiveness
-
-**Available in `/design-content-review`:**
-- Compliance (Mexico) — Mexican financial regulations and copywriting requirements
-- All references from `/design-content-write` (above)
-
 **Example prompts:**
 ```
 /design-content-write — Write an empty state for the Crypto portfolio screen when the user has no assets
@@ -111,26 +93,39 @@ These content skills include comprehensive guidelines and frameworks:
 
 ---
 
-## Engineering and cross-functional skills
+## Tooling skills
 
-These are not design-specific but may be useful when collaborating with your squad:
-
-| Skill | What it does |
-|-------|-------------|
-| `/dev-pr-workflow` | Open, update, and manage pull requests via GitHub CLI |
+| Skill | What it does | Owner |
+|-------|-------------|-------|
+| `/skill-creator` | Create new skills, modify and improve existing ones, run evals, and benchmark skill performance. | Juan Galindo |
+| `/dev-pr-workflow` | Open, update, and manage pull requests via GitHub CLI | Juan Galindo |
 
 ---
 
 ## Project structure
 
 ```
-.claude/
-└── skills/
-    └── <skill-name>/
-        ├── SKILL.md          # Skill definition — instructions, trigger conditions, workflow
-        ├── references/       # Context files loaded by the skill (guidelines, templates, frameworks)
-        ├── scripts/          # Optional automation scripts (TypeScript or Python)
-        └── assets/           # Optional templates, examples, or static resources
+design-skills/
+├── .claude/
+│   ├── figma.config.json     # Figma file keys and node IDs
+│   ├── settings.json         # Claude Code permissions and hooks
+│   └── skills/
+│       └── <skill-name>/
+│           ├── SKILL.md      # Skill definition — instructions, trigger conditions, workflow
+│           ├── scripts/      # Optional automation scripts (TypeScript or Python)
+│           └── assets/       # Optional templates, examples, or static resources
+├── docs/
+│   ├── content/              # Exported content artifacts (e.g. Lokalise project keys)
+│   └── workflows/            # Contribution guides for skills, content, and org plugin
+├── specs/
+│   ├── _template.md          # Blank spec template — copy to start a new spec
+│   ├── components/           # MDS component specs (atoms, molecules, organisms)
+│   ├── content/              # UX writing guidelines, localization rules, content types
+│   ├── figma-catalog/        # Figma file keys and node IDs for MDS libraries and assets
+│   ├── patterns/             # Layout and composition rules
+│   └── tokens/               # Token reference — authoritative token list
+├── CLAUDE.md                 # Agent instructions for this repo
+└── README.md
 ```
 
 Skill naming follows a `<category>-<purpose>` convention:
@@ -139,15 +134,12 @@ Skill naming follows a `<category>-<purpose>` convention:
 
 ---
 
-## Contributing a new design skill
+## Contributing
 
-1. **Create a feature branch** using the naming convention `feat/skill-name`
-2. **Scaffold your skill** with the skill creator:
-   ```
-   /skill-creator
-   ```
-3. **Follow naming conventions** — see `.claude/design-skills-naming.md` for design skills, and the existing `dev-*` skills for engineering patterns
-4. **Run evals** before opening a PR — the `/skill-creator` skill includes an evaluation workflow to measure trigger accuracy and output quality
-5. **Open a PR** — all skills require human code review before merging
+| Task | Guide |
+|---|---|
+| Add or edit a UX writing guideline | [`docs/workflows/contribution-content-guideline.md`](docs/workflows/contribution-content-guideline.md) |
+| Add or edit a skill | [`docs/workflows/contribution-design-skill.md`](docs/workflows/contribution-design-skill.md) |
+| Port a skill to the Bitso org bundle | [`docs/workflows/contribution-org-skills-plugin.md`](docs/workflows/contribution-org-skills-plugin.md) |
 
-> New and modified skills require a human code review before merging. AI-authored PRs require 2 human approvals.
+All PRs in bitsoex requires at least CodeRabbit validation and one human approval to merge.
