@@ -7,8 +7,8 @@
 1. **Describe the action, not just the screen** — The button label must tell the user exactly what will happen when they tap it. Avoid labels that name the concept without describing the outcome.
 
 2. **Connect title to CTA** — If a user only reads the screen title and the button, they should understand what the screen is about and what to do. These two elements must work as a pair.
-   - Good: Title "Confirma tu compra" → CTA "Comprar BTC"
-   - Bad: Title "Confirma tu compra" → CTA "Continuar"
+- Good: Title "Confirma tu compra" → CTA "Comprar BTC"
+- Bad: Title "Confirma tu compra" → CTA "Continuar"
 
 3. **2–3 words max** — Keep labels as short as possible. If you need more words, the action is probably too complex or the screen title is doing too little work.
 
@@ -20,11 +20,11 @@
 
 | Locale | Form | Rule | Example |
 |---|---|---|---|
-| es_MX | Infinitive | Use infinitive for buttons inside the product. Do NOT use imperative. | "Comprar", "Enviar", "Continuar" ✓ / "Compra", "Envía" ✗ |
-| es_AR | Infinitive | Same rule. Vos imperative ("Comprá") is not used in buttons. | "Comprar", "Enviar" ✓ / "Comprá", "Enviá" ✗ |
-| es_CO | Infinitive | Same rule as es_MX. | "Comprar", "Enviar" ✓ |
-| pt_BR | Infinitive | Use infinitive, not imperative. | "Comprar", "Enviar", "Continuar" ✓ / "Compre", "Envie" ✗ |
-| en_US | Verb (base form) | Use the base form of the verb — no "to". Active, imperative mood is correct for English. | "Buy", "Send", "Continue" ✓ |
+| es_MX | Infinitive | Use infinitive for buttons inside the product. Do NOT use imperative. | "Comprar", "Enviar", "Continuar" / "Compra", "Envía" |
+| es_AR | Infinitive | Same rule. Vos imperative ("Comprá") is not used in buttons. | "Comprar", "Enviar" / "Comprá", "Enviá" |
+| es_CO | Infinitive | Same rule as es_MX. | "Comprar", "Enviar" |
+| pt_BR | Infinitive | Use infinitive, not imperative. | "Comprar", "Enviar", "Continuar" / "Compre", "Envie" |
+| en_US | Verb (base form) | Use the base form of the verb — no "to". Active, imperative mood is correct for English. | "Buy", "Send", "Continue" |
 
 ---
 
@@ -46,8 +46,8 @@
 ## Capitalization
 
 - **Capitalize the first word only.** Do not title-case every word.
-  - ✓ "Comprar BTC"
-  - ✗ "Comprar Btc" / "COMPRAR BTC"
+- "Comprar BTC"
+- "Comprar Btc" / "COMPRAR BTC"
 - **Product names are always capitalized** regardless of position: "Abrir Bitso Card", "Ir a Bitso Alpha"
 - **Acronyms keep their case**: "Agregar 2FA", "Ver en DeFi"
 
@@ -65,14 +65,14 @@
 
 | Pattern | Severity | Why | Suggested Fix |
 |---|---|---|---|
-| Generic label: "OK", "Sí", "No", "Submit" | 🔴 Blocking | Tells user nothing about what will happen | Rewrite with a verb that describes the outcome |
-| CTA disconnected from title | 🟡 Recommended | User must read the full screen to understand the flow | Align title and CTA so they form a meaningful pair |
-| Imperative verb in es/pt buttons ("Compra", "Comprá", "Envie") | 🟡 Recommended | Breaks grammar convention for Bitso buttons | Switch to infinitive |
-| More than 3 words | 🟡 Recommended | Labels should be scannable at a glance | Trim or rewrite; offload detail to title or body |
-| "Ver" as a standalone CTA | 🟡 Recommended | Accessibility issue | Replace with "Mostrar [noun]" or a descriptive action |
-| "Modificar" instead of "Cambiar" | 🟢 Polish | Inconsistent with approved vocabulary | Replace with "Cambiar" / "Change" |
-| "Siguiente" instead of "Continuar" | 🟢 Polish | Inconsistent with approved vocabulary | Replace with "Continuar" / "Continue" |
-| Title-case label ("Comprar Cripto") | 🟢 Polish | Only first word should be capitalized | "Comprar cripto" |
+| Generic label: "OK", "Sí", "No", "Submit" | Blocking | Tells user nothing about what will happen | Rewrite with a verb that describes the outcome |
+| CTA disconnected from title | Recommended | User must read the full screen to understand the flow | Align title and CTA so they form a meaningful pair |
+| Imperative verb in es/pt buttons ("Compra", "Comprá", "Envie") | Recommended | Breaks grammar convention for Bitso buttons | Switch to infinitive |
+| More than 3 words | Recommended | Labels should be scannable at a glance | Trim or rewrite; offload detail to title or body |
+| "Ver" as a standalone CTA | Recommended | Accessibility issue | Replace with "Mostrar [noun]" or a descriptive action |
+| "Modificar" instead of "Cambiar" | Polish | Inconsistent with approved vocabulary | Replace with "Cambiar" / "Change" |
+| "Siguiente" instead of "Continuar" | Polish | Inconsistent with approved vocabulary | Replace with "Continuar" / "Continue" |
+| Title-case label ("Comprar Cripto") | Polish | Only first word should be capitalized | "Comprar cripto" |
 
 ---
 

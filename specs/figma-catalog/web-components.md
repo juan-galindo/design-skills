@@ -6,7 +6,7 @@
 
 **Refresh after:** 14 days (re-run `/scan` if today's date exceeds 2026-04-28)
 
-> **Shared assets:** Icons, Flags, Currencies, Stocks, and Illustrations are shared with Mobile — see `index/assets/`.
+> **Shared assets:** Icons, Flags, Currencies, Stocks, and Illustrations are shared with Mobile — see `specs/figma-catalog/assets/`.
 > To get design context for any component: use the Figma MCP `get_design_context` tool with `(fileKey, pageId)`
 > `wip` components are in progress — confirm with the designer before using in production.
 > For components with no nodes listed, call the Figma MCP `get_metadata` tool with `(fileKey, pageId)` first to discover nodes.

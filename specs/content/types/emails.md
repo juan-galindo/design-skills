@@ -1,4 +1,4 @@
-# Transactional Emails & Push Notifications — Content Guidelines
+# Transactional Emails — Content Guidelines
 
 Source: transactionalEmailPushNotifications.pdf (Bitso, March 2026)
 
@@ -6,15 +6,13 @@ Source: transactionalEmailPushNotifications.pdf (Bitso, March 2026)
 
 ## Purpose
 
-Transactional emails and push notifications must be **clear, concise, and user-friendly**,
-reflecting Bitso's tone and voice. They build trust and reduce support contacts.
+Transactional emails must be **clear, concise, and user-friendly**, reflecting Bitso's tone and voice. They build trust and reduce support contacts.
 
-A **transactional email** is triggered by a user's specific action (deposit, purchase, withdrawal).
-It confirms or provides essential information. The user expects it.
+A **transactional email** is triggered by a user's specific action (deposit, purchase, withdrawal). It confirms or provides essential information. The user expects it.
 
 ---
 
-## Goals (NNG framework)
+## Goals (NNG Framework)
 
 Every transactional email must achieve all three:
 
@@ -26,7 +24,7 @@ Every transactional email must achieve all three:
 
 ## The FEEL Framework
 
-Apply to every part of an email or notification:
+Apply to every part of an email:
 
 | Dimension | What it means |
 |---|---|
@@ -108,8 +106,6 @@ Purpose: phishing warning + trust-building.
 
 ## FEEL Checklist for Transactional Emails
 
-Use this when reviewing an email draft:
-
 **Functional**
 - [ ] Subject line clearly states the event outcome
 - [ ] Title confirms event + includes user's name
@@ -132,20 +128,3 @@ Use this when reviewing an email draft:
 - [ ] Failed state normalizes contacting support when needed
 - [ ] Footer reinforces phishing awareness
 - [ ] User can complete their task without contacting support
-
----
-
-## Push Notifications
-
-A push notification informs the user of an event or update — it may or may not be user-initiated.
-
-**Characteristics**:
-- Designed for **timeliness** — appear within the app (in addition to or instead of email)
-- Broader use cases: price alerts, security alerts, new feature announcements, reminders
-
-**Key review criteria for push notifications**:
-- **Ultra-brief**: subject + 1–2 lines max
-- **Timely**: message is relevant at the moment it's received
-- **Clear action or outcome**: user understands what happened and what (if anything) to do
-- Apply the same FEEL framework at a compressed scale
-- Apply all glossary and tone-of-voice rules (no forbidden terms, correct locale terms)

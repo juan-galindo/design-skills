@@ -1,6 +1,8 @@
-# Cumplimiento regulatorio — Fintech, Crypto e Inversiones México (es_MX)
+# Cumplimiento Regulatorio — Fintech, Crypto e Inversiones México (es_MX)
 
-## Marco regulatorio relevante
+---
+
+## Marco Regulatorio Relevante
 
 | Entidad / Ley | Aplica a |
 |---|---|
@@ -14,13 +16,13 @@
 
 ---
 
-## Términos PROHIBIDOS en copy de producto
+## Términos PROHIBIDOS en Copy de Producto
 
 Usar cualquiera de estos términos puede generar riesgo regulatorio, multas o acciones de CONDUSEF/CNBV.
 
-### Rendimientos y ganancias
+### Rendimientos y Ganancias
 
-| ❌ Prohibido / riesgo alto | ✅ Alternativa segura |
+| Prohibido / riesgo alto | Alternativa segura |
 |---|---|
 | "Gana X% seguro" | "Rendimiento histórico de X%" + disclaimer |
 | "Rendimiento garantizado" | "Rendimiento estimado" / "Tasa referencial" |
@@ -30,9 +32,9 @@ Usar cualquiera de estos términos puede generar riesgo regulatorio, multas o ac
 | "Sin riesgo" | "Ver perfil de riesgo del instrumento" |
 | "100% rentable" | — (no usar nunca) |
 
-### Inversiones y crypto
+### Inversiones y Crypto
 
-| ❌ Prohibido / riesgo alto | ✅ Alternativa segura |
+| Prohibido / riesgo alto | Alternativa segura |
 |---|---|
 | "Invierte sin riesgo" | "Conoce los riesgos antes de invertir" |
 | "Este token siempre sube" | "Los activos digitales son altamente volátiles" |
@@ -41,18 +43,18 @@ Usar cualquiera de estos términos puede generar riesgo regulatorio, multas o ac
 | "Multiplica tu dinero" | — (no usar nunca) |
 | "Oportunidad de inversión única" | — (no usar nunca) |
 
-### Asesoría financiera
+### Asesoría Financiera
 
-| ❌ Prohibido / riesgo alto | ✅ Alternativa segura |
+| Prohibido / riesgo alto | Alternativa segura |
 |---|---|
 | "Te recomendamos comprar X" | "Consulta con un asesor financiero" |
 | "Ahora es buen momento para invertir en..." | — (no opinar sobre timing de mercado) |
 | "Este activo va a subir" | — (no hacer predicciones de precios) |
 | "Diversifica comprando X, Y, Z" | "Considera diversificar — consulta a un asesor" |
 
-### Seguridad de fondos
+### Seguridad de Fondos
 
-| ❌ Prohibido / riesgo alto | ✅ Alternativa segura |
+| Prohibido / riesgo alto | Alternativa segura |
 |---|---|
 | "Tu dinero está 100% seguro" | "Fondos custodiados por [nombre de custodio]" |
 | "Nunca perderás tu inversión" | — (no usar nunca) |
@@ -61,7 +63,7 @@ Usar cualquiera de estos términos puede generar riesgo regulatorio, multas o ac
 
 ---
 
-## Disclaimers requeridos por contexto
+## Disclaimers Requeridos por Contexto
 
 ### Pantallas de inversión / portafolio
 Incluir visible o con enlace:
@@ -75,24 +77,24 @@ Mostrar antes o durante la compra:
 Siempre acompañar cifras con:
 > "Rendimiento histórico / estimado. No garantizado. Sujeto a condiciones de mercado."
 
-### SPEI — tiempos de acreditación
+### SPEI — Tiempos de acreditación
 - "En minutos" → solo si el SLA real lo soporta
 - "Mismo día hábil" → para transferencias interbancarias estándar
 - "1–2 días hábiles" → para transferencias interbancarias fuera de horario
 - **Nunca**: "instantáneo" salvo que sea SPEI en tiempo real con confirmación técnica
 
-### Crédito / préstamos
+### Crédito / Préstamos
 - Siempre mostrar CAT (Costo Anual Total) prominente.
 - Nunca ocultar comisiones en texto pequeño del UI.
 - Incluir enlace a tabla de comisiones en pantallas de contratación.
 
 ---
 
-## Terminología correcta en español mexicano (fintech/crypto)
+## Terminología Correcta en Español Mexicano (Fintech/Crypto)
 
-### Términos preferidos en es_MX
+### Términos Preferidos en es_MX
 
-| Inglés / incorrecto | ✅ es_MX correcto |
+| Inglés / incorrecto | es_MX correcto |
 |---|---|
 | Wallet | Cartera / billetera (ambos válidos — elegir uno y ser consistente) |
 | Portfolio / portafolio | Portafolio (anglicismo aceptado en fintech mx) |
@@ -112,7 +114,7 @@ Siempre acompañar cifras con:
 | Withdraw | Retirar |
 | Trade | Intercambiar / operar (según contexto) |
 
-### Montos y formatos numéricos (es_MX)
+### Montos y Formatos Numéricos (es_MX)
 - Peso mexicano: **$1,500.00 MXN** o **$1,500 MXN** o **MX$1,500**
 - Separador de miles: coma → **$1,500**
 - Separador decimal: punto → **$1,500.50**
@@ -120,7 +122,7 @@ Siempre acompañar cifras con:
 - Porcentajes: **12.5%** (sin espacio entre número y signo)
 - Fechas: **14 de marzo de 2025** (texto) o **14/03/2025** (numérico corto)
 
-### Gramática es_MX para fintech
+### Gramática es_MX para Fintech
 
 | Regla | Ejemplo |
 |---|---|
@@ -132,30 +134,30 @@ Siempre acompañar cifras con:
 
 ---
 
-## Patrones de copy de alto riesgo a evitar
+## Patrones de Copy de Alto Riesgo a Evitar
 
 ### FOMO (Fear of Missing Out)
 Generar urgencia artificial para que el usuario invierta es una práctica regulatoriamente riesgosa y daña la confianza.
 
-❌ "¡Solo quedan 3 horas para esta oportunidad!"
-❌ "Otros usuarios están ganando mientras tú no inviertes"
-✅ Presentar información objetiva sin presión de tiempo artificial
+"¡Solo quedan 3 horas para esta oportunidad!"
+"Otros usuarios están ganando mientras tú no inviertes"
+Presentar información objetiva sin presión de tiempo artificial
 
-### Testimoniales de rendimiento sin disclaimer
-❌ "María ganó $50,000 con nuestra app"
-✅ Si se usan testimoniales, siempre acompañar: "Resultados individuales. El rendimiento pasado no garantiza resultados futuros."
+### Testimoniales de Rendimiento sin Disclaimer
+"María ganó $50,000 con nuestra app"
+Si se usan testimoniales, siempre acompañar: "Resultados individuales. El rendimiento pasado no garantiza resultados futuros."
 
-### Comparaciones engañosas
-❌ "Mejor que un banco tradicional — gana 10x más"
-✅ "Conoce cómo se comparan nuestras tasas — ver condiciones"
+### Comparaciones Engañosas
+"Mejor que un banco tradicional — gana 10x más"
+"Conoce cómo se comparan nuestras tasas — ver condiciones"
 
-### Promesas de recuperación
-❌ "Si pierdes, te devolvemos tu inversión"
-✅ Solo incluir si hay un producto de garantía real con términos y condiciones
+### Promesas de Recuperación
+"Si pierdes, te devolvemos tu inversión"
+Solo incluir si hay un producto de garantía real con términos y condiciones
 
 ---
 
-## Checklist pre-publicación para copy en fintech/crypto mx
+## Checklist Pre-Publicación para Copy en Fintech/Crypto MX
 
 - [ ] ¿Alguna frase promete rendimientos garantizados o sin riesgo?
 - [ ] ¿Se menciona "seguro", "garantizado" o "protegido" sin especificar el instrumento y límites?

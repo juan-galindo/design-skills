@@ -10,7 +10,7 @@
 > Use `get_design_context(fileKey, nodeId)` to fetch any icon.
 > Naming pattern: `CryptoIcon/<ticker>`
 > Some older entries have a double prefix `CryptoIcon/CryptoIcon/` — use the nodeId to be safe.
-> For fiat currencies (ARS, BRL, COP, EUR, MXN, USD) see `index/assets/fiat.md`.
+> For fiat currencies (ARS, BRL, COP, EUR, MXN, USD) see `specs/figma-catalog/assets/fiat.md`.
 
 ---
 

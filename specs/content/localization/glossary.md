@@ -1,22 +1,21 @@
-# Bitso Product Glossary — Content Review Reference
+# Bitso Product Glossary
 
 This glossary defines approved terminology for Bitso product content across
-es_MX, es_AR, and pt_BR. Use it when reviewing any Bitso UI copy, documentation,
+es_MX, es_AR, es_CO, pt_BR, and en_US. Use it when reviewing any Bitso UI copy, documentation,
 or user-facing content.
 
 ---
 
 ## Critical: Forbidden / Restricted Terms
 
-These terms are marked `forbidden: yes` or have regulatory restrictions.
-Flag any instance of these in the content being reviewed.
+These terms have regulatory restrictions. Flag any instance in content being reviewed.
 
 | English term | Why restricted | Approved alternatives |
 |---|---|---|
 | **Interest** | Regulatory — cannot imply banking | es: recompensas, bonificaciones, beneficios / pt: acumular cripto, ter ganhos acumulados em cripto |
 | **Invest / Investment** | Legal restriction — avoid in all Bitso copy | es: hacer crecer activos, destinar dinero a / pt: aportar fundos, comprar criptoativos |
 | **Savings** | Regulatory — crypto is volatile | es: acumular cripto, guardar cripto / pt: guardar cripto, manter cripto na carteira |
-| **Profitability** | Regulatory | es: —  / pt: lucratividade, ganhos em cripto |
+| **Profitability** | Regulatory | es: — / pt: lucratividade, ganhos em cripto |
 | **Return** (financial) | Regulatory | es: retorno, rendimiento / pt: retorno, rendimento |
 | **Rewards** (fiat-based) | Must specify: always distinguish crypto vs. fiat rewards | es: recompensas en cripto / pt: recompensas em cripto |
 | **View** (verb in UI) | Accessibility — use "mostrar" | es/pt: mostrar |
@@ -131,6 +130,8 @@ These must appear exactly as listed. Do not localize.
 - **Token**: MASC
 - **User (usuario)**: avoid gendered forms; prefer "personas que usan…", "quienes usan…", "comunidad"
 
+---
+
 ## Locale Voice & Register Notes
 
 | Locale | Pronoun / Register | Key tone note |
@@ -147,7 +148,7 @@ These must appear exactly as listed. Do not localize.
 
 ## Terminology Guidance by Context
 
-### Bitso+ / Earn features
+### Bitso+ / Earn Features
 - Use "hacer que tus criptos rindan" or "hacer tus criptos rendir" (pt: "fazer suas criptos renderem")
 - Avoid: interest, savings, returns, earnings
 
@@ -171,12 +172,7 @@ These must appear exactly as listed. Do not localize.
 
 ---
 
-## Content Glossary — Brand Voice Terms
-
-This section defines preferred terminology for brand voice consistency (from contentGlosary.pdf).
-These terms override generic translations when found in Bitso product copy.
-
-### Core Action Verbs
+## Core Action Verbs
 
 | Concept | es (all) | pt_BR | en | Notes |
 |---|---|---|---|---|
@@ -185,7 +181,9 @@ These terms override generic translations when found in Bitso product copy.
 | Convert | convertir | converter | convert | Exchange one crypto for another — **not the same as sell**, clarify this distinction |
 | Login | iniciar sesión | iniciar sessão | sign in / log in | |
 
-### Financial Concepts
+---
+
+## Financial Concepts
 
 | Concept | es (MX/AR/CO) | pt_BR | en | Notes |
 |---|---|---|---|---|
@@ -203,7 +201,9 @@ These terms override generic translations when found in Bitso product copy.
 
 > **Forbidden balance terms in Spanish**: Do NOT use "balance combinado" or standalone "balance" — use "saldo" variants instead.
 
-### Fiat / Local Currency
+---
+
+## Fiat / Local Currency
 
 **Rule**: Never use the word "fiat" in user-facing copy. Use the local currency name instead.
 
@@ -217,29 +217,115 @@ These terms override generic translations when found in Bitso product copy.
 
 Example: "convert your pesos to Bitcoin" — NOT "convert your fiat to Bitcoin"
 
-### Crypto Terminology
+---
+
+## Crypto Terminology
 
 | Concept | es (all) | pt_BR | en |
 |---|---|---|---|
 | Crypto (short) | cripto | cripto | crypto |
 | Cryptocurrency | criptomoneda | criptomoeda | cryptocurrency |
 
-### Account
+---
 
-| Concept | es (all) | pt_BR | en |
-|---|---|---|---|
-| Account | cuenta | conta | account |
-| Bitso account | cuenta de Bitso / cuenta en Bitso | conta da Bitso / conta na Bitso | Bitso account |
+## Business / Enterprise Terms
 
-Definition: A user profile that enables the person to hold a balance within Bitso.
+| Concept | es (MX/AR/CO) | pt_BR | en | Notes |
+|---|---|---|---|---|
+| Rail access | Acceso a rieles de pago | — | Rail access | |
+| Startup accelerator | Aceleradora de empresas | Acelerador de startups | Startup accelerator | |
+| Deep liquidity | Alta liquidez | — | Deep liquidity | |
+| Deposits and withdrawals | Depósitos y retiros | Depósitos e saques | Pay-ins and payouts | |
+| Real-time trading book | Libro de operaciones en tiempo real | — | Real-time trading book | |
+| Trading book | Libro de trading | Trading book | Trading book | |
+| OTC desk | Mesa OTC | Mesa OTC | OTC desk | |
+| Stablecoin orchestration | Orquestación de stablecoins | Orquestação de Stablecoin | Stablecoin Orchestration | |
+| Securities lending | Préstamo de valores | Aluguel de ativos | Securities lending | "Securities" covers both stocks and ETFs |
 
-### ETF
+---
+
+## ETF
 
 Use the English acronym **ETF / ETFs** across all languages and locales. Do not translate.
 Rationale: Industry standard term; several competitors use it this way to reduce cognitive load.
 
 ---
 
-## Source
-Bitso Product Glossary — productGlosary_pdf.pdf (provided March 2026)
-Bitso Content Glossary — contentGlosary.pdf (provided March 2026)
+## CDS — UI Term Decisions
+
+Approved decisions for specific interface labels. These include rationale so reviewers understand the "why" behind non-obvious choices.
+
+### Activar / Desactivar
+
+| Locale | Term |
+|---|---|
+| es (all) | Activar / Desactivar |
+| pt_BR | Ativar / Desativar |
+| en_US | **Turn on / Turn off** |
+
+> **Why "Turn on/off" instead of "Enable/Disable"?** "Turn on/off" is clearer, avoids conflating with disability terminology, and matches how people interact with physical devices.
+
+### Actividad (CDS)
+
+| Locale | Term |
+|---|---|
+| es (all) | Actividad |
+| pt_BR | — |
+| en_US | Activity |
+
+> **Why "Actividad" instead of "Últimos movimientos"?** Users can view their complete history in this section, not just recent movements. "Activity" stays consistent whether users are looking at the overview or the full list, avoiding confusing label changes.
+
+### Aviso legal
+
+| Locale | Term |
+|---|---|
+| es (all) | Aviso legal |
+| pt_BR | Aviso legal |
+| en_US | Disclaimer |
+
+> Avoid "Descargo de responsabilidad" — unified to "Aviso legal" across all Spanish locales.
+
+### Conocer más (CTA)
+
+| Locale | Term |
+|---|---|
+| es (all) | Conocer más |
+| pt_BR | Saber mais |
+| en_US | Learn more |
+
+> **Why "Conocer" instead of "Saber más"?** "Conocer" implies a closer, more exploratory experience. "Saber más" is more literal and feels slightly more technical.
+
+### Transacciones
+
+| Locale | Term |
+|---|---|
+| es (all) | Transacciones |
+| pt_BR | Transações |
+| en_US | Transactions |
+
+> **Why "Transacciones" instead of "Operaciones"?** "Transactions" is the standard term in banking and crypto, immediately recognizable to users. "Operations" sounds more technical and corporate.
+
+### Estados Unidos
+
+| Locale | Abbreviation |
+|---|---|
+| es_MX | EUA |
+| es_AR | EE.UU. |
+| es_CO | EUA |
+| pt_BR | EUA |
+| en_US | U.S. |
+
+---
+
+## Submit a New Term
+
+Use the [Bitso glossary submission form](https://docs.google.com/spreadsheets/d/1m51Jk3oRGeriO2X3wrKT14ux_V0MF2WGUKocyHXqMzQ/edit?usp=sharing) to submit new terms.
+
+- **Product/Features tab**: Submit names of product features, services, or concepts that need standardized translations.
+- **UI terms tab**: Submit interface elements, actions, and component labels.
+
+---
+
+## Sources
+- Bitso Product Glossary — productGlosary_pdf.pdf (provided March 2026)
+- Bitso Content Glossary — contentGlosary.pdf (provided March 2026)

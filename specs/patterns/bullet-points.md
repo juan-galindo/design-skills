@@ -82,7 +82,6 @@ All items must follow the same grammatical pattern (e.g., all start with a verb,
 
 ## Related specs
 
-- [`specs/components/list-item.md`](../components/list-item.md)
 - [`specs/components/bottom-sheet.md`](../components/bottom-sheet.md)
 - [`specs/tokens/spacing-tokens.md`](../tokens/spacing-tokens.md)
 - [`specs/tokens/typography-tokens.md`](../tokens/typography-tokens.md)
