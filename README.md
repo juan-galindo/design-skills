@@ -56,12 +56,14 @@ When you invoke a skill, the AI loads the skill's instructions automatically and
 | `/design-content-write` | Write or improve UX copy: titles, CTAs, error messages, empty states, onboarding flows, tooltips, push notifications, and transactional emails. Specialized for Mexican Spanish (es_MX) fintech. | Emilia Alegre |
 | `/design-content-review` | Review any content — UI copy, documentation, emails, or a Figma design — against Bitso's tone of voice, FEEL framework, glossary, and UX writing principles. Supports es_MX, es_AR, es_CO, pt_BR, and en_US. | Emilia Alegre |
 | `/design-content-keys-generation` | Generate structured Lokalise content keys from Figma text nodes (page, section, or frame), rename layers automatically, and export a JSON file for upload to Lokalise. Auto-detects scan target from the URL. | Juan Galindo |
+| `/design-content-translation-review` | Connect to a Lokalise project, fetch automatically translated strings for a target locale, and review them against Bitso's content guidelines (glossary, locale rules, voice & tone, UX writing principles). Outputs a prioritized issues table. | Marina Bitso |
 
 **Example prompts:**
 ```
 /design-content-write — Write an empty state for the Crypto portfolio screen when the user has no assets
 /design-content-review — Review the copy on this onboarding flow [paste text or share Figma link]
 /design-content-keys-generation — Generate Lokalise keys for the Warrants feature: https://figma.com/design/abc123/...?node-id=123:456
+/design-content-translation-review — Review auto-translated strings for pt_BR in the Onboarding Lokalise project
 ```
 
 ---
