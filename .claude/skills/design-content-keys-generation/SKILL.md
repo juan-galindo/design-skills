@@ -1,11 +1,11 @@
 ---
 name: design-content-keys-generation
-author: juan.galindo@bitso.com
 compatibility: >
   Requires the Figma MCP server (`mcp__claude_ai_Figma__use_figma`) for reading
   and renaming text nodes, and the Lokalise project-management MCP server
   (`mcp__lokalise_pm__*`) for the optional auto-upload step.
 metadata:
+  author: juan.galindo@bitso.com
   category: content
   tags: [lokalise, figma, content, keys, localization, i18n]
 description: >
@@ -284,21 +284,32 @@ Read `scripts/rename-nodes.js`. Replace the `RENAMES_PLACEHOLDER` token with `JS
 
 ## Step 6 — Write the JSON file
 
-Build the key→value map and save it.
+Build the key map and save it.
 
 ```bash
 mkdir -p docs/content/project-keys
 ```
 
-Write `docs/content/project-keys/{feature}-es_MX.json` with one entry per `keyMap` row:
+Write `docs/content/project-keys/{feature}-es_MX.json` using Lokalise's **structured JSON** format — each key is an object with `value` and a `platforms` array set to all four platforms. This way the keys land in Lokalise already marked as supported on iOS, Android, Web and Other; no manual UI cleanup needed afterwards.
 
 ```json
 {
-  "warrants.successful.header.title": "¡Listo! Compraste {asset}",
-  "warrants.successful.header.body": "Agregaste {quantity} {asset} a tu portafolio, equivalente a {amount} {currency}.",
-  "warrants.successful.ctas.label": "Hacer otra operación"
+  "warrants.successful.header.title": {
+    "value": "¡Listo! Compraste {asset}",
+    "platforms": ["ios", "android", "web", "other"]
+  },
+  "warrants.successful.header.body": {
+    "value": "Agregaste {quantity} {asset} a tu portafolio, equivalente a {amount} {currency}.",
+    "platforms": ["ios", "android", "web", "other"]
+  },
+  "warrants.successful.ctas.label": {
+    "value": "Hacer otra operación",
+    "platforms": ["ios", "android", "web", "other"]
+  }
 }
 ```
+
+Always emit `platforms: ["ios", "android", "web", "other"]` for every key — the design system is cross-platform, so content keys default to supporting all four.
 
 The file is saved before asking about upload because manual upload (Option A in Step 7) needs it on disk regardless of MCP availability — and a saved file is also the auditable artifact when something goes wrong with Lokalise.
 
@@ -344,7 +355,7 @@ data: <base64 of the JSON file contents>
 replace_modified: true
 distinguish_by_file: false
 mark_verified: false
-tags: ["{feature}", "{initiativeTag}"]
+tags: ["{initiativeTag}", "Claude"]
 ```
 
 `lang_iso` is always `es_MX` — see `references/lokalise-projects.md` for why we keep it constant even for projects whose base language is `en`.

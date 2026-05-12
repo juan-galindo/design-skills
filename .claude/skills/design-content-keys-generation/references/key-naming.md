@@ -3,7 +3,7 @@
 The skill generates keys of the form:
 
 ```
-{feature}.{screenSlug}.{component}.{elementType}
+{flow}.{screenSlug}.{component}.{elementType}
 ```
 
 All segments are camelCase. Dots separate segments; no other punctuation.
@@ -12,7 +12,7 @@ All segments are camelCase. Dots separate segments; no other punctuation.
 
 | Segment | Source | Notes |
 |---|---|---|
-| `feature` | Figma `SECTION` name on the Experience page (fallback: `{initiativeTag}`) | camelCase, strip leading numbers and special chars |
+| `flow` | Figma `SECTION` name on the Experience page (fallback: `{initiativeTag}`) | camelCase, strip leading numbers and special chars |
 | `screenSlug` | Figma `FRAME` name | strip leading number/separator (`1300 - Confirmation` → `confirmation`) |
 | `component` | Closest MDS ancestor in the layer tree, mapped via the abbreviation table below | Falls back to `wrapper` if no MDS ancestor exists |
 | `elementType` | The text layer's own name, mapped via the element-type table below | |
@@ -115,7 +115,7 @@ The text layer's own name is lowercased and matched against these prefixes. Firs
 
 Two kinds:
 
-**Same key generated twice.** If `feature.screenSlug.component.elementType` would match more than one node, every occurrence gets a numeric suffix attached *directly* to the element type — `title1`, `title2`. Single occurrences stay un-suffixed. The number attaches with no period:
+**Same key generated twice.** If `flow.screenSlug.component.elementType` would match more than one node, every occurrence gets a numeric suffix attached *directly* to the element type — `title1`, `title2`. Single occurrences stay un-suffixed. The number attaches with no period:
 
 ```
 ❌ warrants.successful.header.title.1
