@@ -161,7 +161,7 @@ Use this shared vocabulary across all components. **Most common** is the default
 | Image | `image`|
 | Badge / indicator | `badge`, `indicator` |
 | Root container | Component name in camelCase |
-| Layout wrappers | `row`, `column`, `wrapper` |
+| Layout wrappers | `row`, `column`, `container` |
 | Interactive area | `pressable`, `touchArea` |
 
 ### Slot Layers
