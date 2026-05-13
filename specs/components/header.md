@@ -80,6 +80,7 @@ Examples: "Two-factor authentication", "Recovery options", "Email alerts"
 - Always nested under a section header.
 - Do not skip levels — never place directly under a main header.
 - Can repeat for lists of similar items.
+- When used as an item list — multiple sub-section headers stacked to represent a set of related items — apply **4 dp stacking spacing** between each sub-section header. No additional spacing tokens are needed; use `stacking-spacing-xs` (4 dp).
 
 ## Hierarchy and structure
 
@@ -94,6 +95,7 @@ Examples: "Two-factor authentication", "Recovery options", "Email alerts"
 - Keep enough space above headers to signal a new group.
 - Avoid stacking multiple headers with no content between them.
 - Each header level must have a clear visual distinction (size, weight, spacing) and a clear content purpose.
+- **Sub-section header item list:** when sub-section headers are stacked as a list of items, use `stacking-spacing-xs` (4 dp) between them.
 
 ## Content guidelines
 
