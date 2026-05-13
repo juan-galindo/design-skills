@@ -1,29 +1,32 @@
 ---
 name: design-content-keys-generation
-author: juan.galindo@bitso.com
 compatibility: >
   Requires the Figma MCP server (`mcp__claude_ai_Figma__use_figma`) for reading
   and renaming text nodes, and the Lokalise project-management MCP server
   (`mcp__lokalise_pm__*`) for the optional auto-upload step.
 metadata:
+  author: juan.galindo@bitso.com
   category: content
   tags: [lokalise, figma, content, keys, localization, i18n]
 description: >
   Generates structured Lokalise content keys for every visible text node in a
   Figma target (page, section, or frame), renames the layers in Figma to those
-  keys, exports a JSON file, and optionally uploads it to a Lokalise project.
-  The skill auto-detects the target from the URL: file URL alone → "Experience"
-  page; file URL + node-id → detects if section or frame. Use this skill
-  whenever the user wants to "assign content keys", "sync to Lokalise",
-  "generate key names", or shares a Figma URL together with any Lokalise /
-  content-key intent — even when they don't explicitly say "Lokalise".
+  keys, writes a structured JSON file, and optionally uploads it to a Lokalise
+  project. Use this skill whenever the user wants to "assign content keys",
+  "generate key names", "rename layers as content keys", "sync to Lokalise",
+  "subir keys a Lokalise", "asignar keys de contenido", "generar nombres para
+  Lokalise", "renombrar capas con keys", or "sincronizar con Lokalise" — even
+  when they don't explicitly say "Lokalise" but share a Figma URL together
+  with any content-key intent. For general Figma layer-name cleanup against
+  MDS naming conventions (not Lokalise content keys), use `design-figma-naming`
+  instead.
 ---
 
 # design-content-keys-generation
 
-This skill turns a Figma text layers into a clean Lokalise key set in three moves: read the target (page, section, or frame), rename each text layer in place to a structured key, and write a `{feature}-es_MX.json` file. From there the user can upload manually or, with `lokalise_pm` available, the skill can ship the file to Lokalise itself. The skill auto-detects the target from the Figma URL you receive — no configuration needed.
+This skill turns a Figma text layers into a clean Lokalise key set in three moves: read the target (page, section, or frame), rename each text layer in place to a structured key, and write a `{flow}-es_MX.json` file. From there the user can upload manually or, with `lokalise_pm` available, the skill can ship the file to Lokalise itself. The skill auto-detects the target from the Figma URL you receive — no configuration needed.
 
-The keys follow the pattern `{feature}.{screenSlug}.{component}.{elementType}`. The full naming rules — abbreviation table, element-type derivation, collision handling — live in `references/key-naming.md`. Read that file before running Step 3.
+The keys follow the pattern `{flow}.{screenSlug}.{component}.{elementType}`. The full naming rules — abbreviation table, element-type derivation, collision handling — live in `references/key-naming.md`. Read that file before running Step 3.
 
 ## Bundled resources
 
@@ -39,7 +42,7 @@ The keys follow the pattern `{feature}.{screenSlug}.{component}.{elementType}`. 
 Ask the user (or extract from earlier turns):
 
 1. **Figma file URL** — `https://figma.com/design/:fileKey/:fileName?...` (with or without `node-id`). Extract `{fileKey}` from the path and optional `nodeId` from query params. For branch URLs (`/design/:fileKey/branch/:branchKey/...`), use `branchKey` as the file key — that's where the in-progress designs actually live.
-2. **Initiative tag** — a short label (`warrants`, `rewards`) used both as the fallback for `feature` and as a Lokalise tag at upload time.
+2. **Initiative tag** — a short label (`warrants`, `rewards`) used both as the fallback for `flow` and as a Lokalise tag at upload time.
 
 If either is missing, ask once and stop. Don't guess — a wrong tag pollutes the Lokalise project.
 
@@ -82,7 +85,7 @@ Initiative tag: warrants
      ]
    }
    ```
-4. In Step 3, each frame uses its own `sectionName` for the feature segment
+4. In Step 3, each frame uses its own `sectionName` for the flow segment
 
 **Output:** `warrants-es_MX.json`, `rewards-es_MX.json`, `holdings-es_MX.json` (one per section)
 
@@ -120,7 +123,7 @@ Initiative tag: warrants
      ]
    }
    ```
-5. In Step 3, all frames use `sectionName: 'Approval Flow'` for the feature segment (becomes `approvalFlow`)
+5. In Step 3, all frames use `sectionName: 'Approval Flow'` for the flow segment (becomes `approvalFlow`)
 
 **Output:** `approvalFlow-es_MX.json` (all screens in one file)
 
@@ -157,7 +160,7 @@ Initiative tag: warrants
      ]
    }
    ```
-5. In Step 3, because `sectionName` is `null`, the feature falls back to `initiativeTag` (`warrants`)
+5. In Step 3, because `sectionName` is `null`, the flow falls back to `initiativeTag` (`warrants`)
 
 **Output:** `warrants-es_MX.json`
 
@@ -201,13 +204,13 @@ The script detects the target type and returns:
 
 If scanning a frame, `frameCount` is 1 and `sectionName` will be `null` (use `{initiativeTag}` as fallback in Step 3). If scanning a section with no explicit section node (target is "Experience" page), `sectionName` is the section container name, else `null`.
 
-**Error handling:** If the target cannot be found or determined, the script returns `{ error: 'message', availablePages: [...] }` — tell the user which pages exist and ask to clarify.
+**Error handling:** If the target cannot be found or determined, the script returns `{ error: 'message', availablePages: [...] }`. The most common case is that the file has no `Experience` page — show the user the `availablePages` list and ask which page to scan. Pass that page's node-id back through Step 2 as `targetNodeId` so the script targets it directly instead of looking for `Experience`.
 
 ## Step 3 — Build the key map
 
 Read `references/key-naming.md`. Then, for each text node in the payload, derive the four key segments:
 
-1. **`feature`**: `frame.sectionName` if present and non-null, else `{initiativeTag}`. CamelCase, strip leading numbers and special chars. (Note: when scanning a single frame or section without an explicit section parent, `sectionName` is `null`; use the initiative tag instead.)
+1. **`flow`**: `frame.sectionName` if present and non-null, else `{initiativeTag}`. CamelCase, strip leading numbers and special chars. (Note: when scanning a single frame or section without an explicit section parent, `sectionName` is `null`; use the initiative tag instead.)
 2. **`screenSlug`**: `frame.frameName` with leading number stripped (`1300 - Confirmation` → `confirmation`). CamelCase.
 3. **`component`**: walk the `ancestorChain` from closest to outermost. The first ancestor whose name (lowercased, segment before `/` if any) appears in the abbreviation table wins. Unknown `MDS …` ancestors get a camelCased fallback and are flagged. No MDS ancestor → `wrapper`.
 4. **`elementType`**: lowercase the text layer's own name and match against the element-type table. Special case: if the closest MDS ancestor is `MDS Button`, force `label`.
@@ -217,19 +220,19 @@ Read `references/key-naming.md`. Then, for each text node in the payload, derive
 
 Same frame, different scenarios:
 
-| Frame | `sectionName` | Feature | Key (from "Heading" layer) |
+| Frame | `sectionName` | Flow | Key (from "Heading" layer) |
 |---|---|---|---|
 | Scenario A: Whole page, frame in "Warrants" section | `"Warrants"` | `warrants` | `warrants.confirmation.header.title` |
 | Scenario B: "Approval Flow" section scanned | `"Approval Flow"` | `approvalFlow` | `approvalFlow.confirmation.header.title` |
 | Scenario C: Single frame, no parent section | `null` | `warrants` (from tag) | `warrants.confirmation.header.title` |
 
-The frame and component layers are always the same; only the feature segment changes based on where the frame lives in the tree.
+The frame and component layers are always the same; only the flow segment changes based on where the frame lives in the tree.
 
-**Two collision passes.** First pass: count how many nodes map to each `feature.screenSlug.component.elementType`. Second pass: assign keys. When the count is 1, use the base. When greater than 1, every occurrence gets a numeric suffix attached directly to the element type — `title1`, `title2`. The first occurrence is `title1`, not `title`. Numbering both sides is what makes diffs reviewable later.
+**Two collision passes.** First pass: count how many nodes map to each `flow.screenSlug.component.elementType`. Second pass: assign keys. When the count is 1, use the base. When greater than 1, every occurrence gets a numeric suffix attached directly to the element type — `title1`, `title2`. The first occurrence is `title1`, not `title`. Numbering both sides is what makes diffs reviewable later.
 
-**Component duplicates on the same screen.** Before the suffix pass, detect cases where two distinct MDS instances of the same component appear on the same `(feature, screenSlug)`. Replace the `component` segment with `{component}{Descriptor}` for every node in those groups, where `Descriptor` is the camelCased name of the closest non-MDS ancestor (`CTAWrapper` → `wrapperCta`). This preserves designer intent in the key name and avoids noisy `btn1` / `btn2` keys.
+**Component duplicates on the same screen.** Before the suffix pass, detect cases where two distinct MDS instances of the same component appear on the same `(flow, screenSlug)`. Replace the `component` segment with `{component}{Descriptor}` for every node in those groups, where `Descriptor` is the camelCased name of the closest non-MDS ancestor (`CTAWrapper` → `wrapperCta`). This preserves designer intent in the key name and avoids noisy `btn1` / `btn2` keys.
 
-The output is a `keyMap` array of `{ id, key, value, layerName, ancestorChain }` plus an `unmatchedIcu` warnings list.
+The output is a `keyMap` array of `{ id, key, value, layerName, ancestorChain }`, plus a `warnings` list collecting unknown MDS components, layers without a known element-type, and any duplicate-component descriptor decisions. These warnings drive the report block in Step 4.
 
 ## Step 4 — Show the proposal and ask for confirmation
 
@@ -273,32 +276,51 @@ Then ask:
 > **¿Confirmas estos nombres de keys?**
 >
 > - **Sí** — procedo a renombrar las capas en Figma y a guardar el JSON.
-> - **Editar** — dime qué cambiar (por ejemplo: "el `feature` debería ser `warrants2`", "agrega `[%s]` → `{symbol}` para 'Tu saldo es [%s]'", "no incluyas el frame X").
+> - **Editar** — dime qué cambiar (por ejemplo: "el `flow` debería ser `warrants2`", "agrega `[%s]` → `{symbol}` para 'Tu saldo es [%s]'", "no incluyas el frame X").
 > - **Cancelar** — descarto la propuesta y no toco Figma.
 
-If the user asks for edits, apply them to the in-memory `keyMap` (or rerun Step 3 with the new inputs — e.g., a new ICU table row, a renamed initiative tag) and present the updated table again. Only proceed to Step 5 after an unambiguous "sí" / "ok" / "confirmo".
+If the user asks for edits, apply them to the in-memory `keyMap` (or rerun Step 3 with the new inputs — e.g., a renamed initiative tag, a flow override, or an excluded frame) and present the updated table again. Only proceed to Step 5 after an unambiguous "sí" / "ok" / "confirmo".
 
 ## Step 5 — Rename the text nodes in Figma
 
-Read `scripts/rename-nodes.js`. Replace the `RENAMES_PLACEHOLDER` token with `JSON.stringify(keyMap.map(k => ({ id: k.id, key: k.key })))`, then call `mcp__claude_ai_Figma__use_figma` with the substituted script. The script returns `{ renamed, missing, errors }` — surface non-empty `missing` and `errors` to the user; they signal node IDs that disappeared between scan and rename (designer edits mid-flight).
+1. Use the Read tool to load the contents of `scripts/rename-nodes.js` into memory.
+2. Build the renames payload: `JSON.stringify(keyMap.map(k => ({ id: k.id, key: k.key })))`.
+3. Substitute the `RENAMES_PLACEHOLDER` token in the script with that JSON literal (plain string replace).
+4. Call `mcp__claude_ai_Figma__use_figma` with the substituted script as `code` and the same `fileKey` from Step 1.
+
+The script returns `{ renamed, missing, errors }`. Surface any non-empty `missing` and `errors` to the user — they signal node IDs that disappeared between scan and rename (typically a designer editing the file mid-flight). Do not retry blindly; show the failed IDs and let the designer reconcile.
 
 ## Step 6 — Write the JSON file
 
-Build the key→value map and save it.
+Build the key map and save it.
 
 ```bash
 mkdir -p docs/content/project-keys
 ```
 
-Write `docs/content/project-keys/{feature}-es_MX.json` with one entry per `keyMap` row:
+Write `docs/content/project-keys/{flow}-es_MX.json` using Lokalise's **structured JSON** format — each key is an object with `value`, a `platforms` array set to all four platforms, and `is_reviewed: false`. This way the keys land in Lokalise already marked as supported on iOS, Android, Web and Other, and explicitly *not* yet reviewed; no manual UI cleanup needed afterwards.
 
 ```json
 {
-  "warrants.successful.header.title": "¡Listo! Compraste {asset}",
-  "warrants.successful.header.body": "Agregaste {quantity} {asset} a tu portafolio, equivalente a {amount} {currency}.",
-  "warrants.successful.ctas.label": "Hacer otra operación"
+  "warrants.successful.header.title": {
+    "value": "¡Listo! Compraste {asset}",
+    "platforms": ["ios", "android", "web", "other"],
+    "is_reviewed": false
+  },
+  "warrants.successful.header.body": {
+    "value": "Agregaste {quantity} {asset} a tu portafolio, equivalente a {amount} {currency}.",
+    "platforms": ["ios", "android", "web", "other"],
+    "is_reviewed": false
+  },
+  "warrants.successful.ctas.label": {
+    "value": "Hacer otra operación",
+    "platforms": ["ios", "android", "web", "other"],
+    "is_reviewed": false
+  }
 }
 ```
+
+Always emit `platforms: ["ios", "android", "web", "other"]` and `is_reviewed: false` for every key. The design system is cross-platform, so content keys default to supporting all four; and the JSON is source material taken directly from Figma, so it should land in Lokalise unverified — a content designer reviews and marks it verified later. Encoding this per-key in the JSON is how we express the intent, since the `upload_file` MCP doesn't expose a `mark_verified` parameter.
 
 The file is saved before asking about upload because manual upload (Option A in Step 7) needs it on disk regardless of MCP availability — and a saved file is also the auditable artifact when something goes wrong with Lokalise.
 
@@ -309,7 +331,7 @@ Report the run:
 ```
 ✅ Keys generated: X
 ✅ Figma nodes renamed: X
-✅ File saved: docs/content/project-keys/{feature}-es_MX.json
+✅ File saved: docs/content/project-keys/{flow}-es_MX.json
 
 ⚠️  Unknown MDS components (extend references/key-naming.md):
   - MDS NewThing → newThing
@@ -324,37 +346,64 @@ Then ask:
 >
 > **A** — Termina aquí. Sube el archivo manualmente en
 > [app.lokalise.com](https://app.lokalise.com) → tu proyecto → Upload →
-> selecciona `{feature}-es_MX.json` con idioma `es_MX`.
+> selecciona `{flow}-es_MX.json` con idioma `es_MX`.
 >
 > **B** — Subir automáticamente vía MCP al proyecto Lokalise.
 
 ## Step 8 — Lokalise upload (only if user chose B)
 
-**MCP availability check.** Verify `mcp__lokalise_pm__upload_file` is loaded in the session. If it isn't, tell the user the MCP isn't connected, repeat the manual-upload instructions from Option A, and stop. Do **not** try `lokalise_sd` — it's read-only and cannot upload.
+Lokalise uses a **two-stage upload**: first reserve an upload URL from their File Storage Service (FSS) and PUT the file bytes to it, then tell Lokalise to ingest that staged file into the project. Treat each substep below as its own tool call — don't try to collapse them.
 
-**Pick the project.** Read `references/lokalise-projects.md` and present the numbered list to the user. Wait for their choice before uploading. The IDs change rarely, but verify the list is still current with `mcp__lokalise_pm__list_lokalise_projects` if a previous run reported a project not found.
+**8.1 — MCP availability check.** Verify `mcp__lokalise_pm__get_file_upload_url` and `mcp__lokalise_pm__upload_file` are both loaded in the session. If either is missing, tell the user the MCP isn't connected, repeat the manual-upload instructions from Option A, and stop. Do **not** try `lokalise_sd` — it's read-only and cannot upload.
 
-**Upload.** Call `mcp__lokalise_pm__upload_file` with:
+**8.2 — Pick the project.** Read `references/lokalise-projects.md` and present the numbered list to the user. Wait for their choice before uploading. The IDs change rarely, but verify the list is still current with `mcp__lokalise_pm__list_lokalise_projects` if a previous run reported a project not found.
+
+**8.3 — Reserve an upload URL.** Call `mcp__lokalise_pm__get_file_upload_url` with:
 
 ```
 project_id: <selected>
-filename: {feature}-es_MX.json
-lang_iso: es_MX
-data: <base64 of the JSON file contents>
-replace_modified: true
-distinguish_by_file: false
-mark_verified: false
-tags: ["{feature}", "{initiativeTag}"]
+filename: {flow}-es_MX.json
 ```
 
-`lang_iso` is always `es_MX` — see `references/lokalise-projects.md` for why we keep it constant even for projects whose base language is `en`.
+Filenames must match `^[a-zA-Z0-9._-]+$` — underscores and dots are fine, but anything else (spaces, accents, slashes) will be rejected. The response includes `upload_url` (a pre-signed FSS URL, no auth needed) and `file_id` (the handle you pass to the next step).
 
-`mark_verified: false` — keys are uploaded as unverified. They are source material from Figma and should be reviewed before marking as verified in Lokalise.
+**8.4 — PUT the file bytes to FSS.** Use Bash to upload the JSON file directly to `upload_url`:
 
-**Confirm.** The upload returns a `process_id`. Poll with `mcp__lokalise_pm__get_process_status` until status is `finished`, then report:
+```bash
+curl -X PUT \
+  -H "Content-Type: application/json" \
+  --data-binary @docs/content/project-keys/{flow}-es_MX.json \
+  "<upload_url from 8.3>"
+```
+
+The URL is pre-signed, so no auth headers. `--data-binary` (not `-d`) preserves the JSON byte-for-byte. A successful PUT returns 200 with no body; anything else means the FSS rejected the upload and you should stop and report the curl output.
+
+**8.5 — Trigger the import.** Call `mcp__lokalise_pm__upload_file` with:
+
+```
+project_id: <selected>
+upload_id: <file_id from 8.3>
+lang_iso: es_MX
+replace_modified: true
+distinguish_by_file: false
+detect_icu_plurals: true
+tags: ["{initiativeTag}", "Claude"]
+```
+
+Notes on the parameters:
+- `lang_iso` is always `es_MX` — see `references/lokalise-projects.md` for why we keep it constant even for projects whose base language is `en`.
+- `replace_modified: true` — designers regenerating keys for an updated screen should overwrite the previous values, not append duplicates.
+- `distinguish_by_file: false` — Lokalise should de-duplicate by key name, not by which upload introduced the key, so re-runs from this skill stay clean.
+- `detect_icu_plurals: true` — values containing ICU plural syntax (`{count, plural, ...}`) get parsed as plural forms instead of literal strings.
+- Do not pass `filename`, `data`, or `mark_verified` — they aren't part of the schema and the call will fail.
+
+**8.6 — Confirm.** The import returns a `process_id`. Poll with `mcp__lokalise_pm__get_process_status` until status is `finished`, then report:
 
 ```
 ✅ Upload complete — {X} keys added/updated in project "{project_name}"
    Source language: es_MX
    Pending translation: en, es_AR, es_CO, pt_BR
+   Tags applied: {initiativeTag}, Claude
 ```
+
+If the process ends in `failed` or `cancelled`, surface the `message` field from the status response — the JSON file on disk is still the auditable artifact, and the user can fall back to manual upload (Option A) without re-running the skill.

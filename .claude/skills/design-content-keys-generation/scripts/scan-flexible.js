@@ -98,7 +98,7 @@ function ancestorChain(node, stopAtFrameId) {
   const chain = [];
   let cur = node.parent;
   while (cur && cur.id !== stopAtFrameId && cur.type !== 'PAGE') {
-    chain.push({ name: cur.name ?? '', type: cur.type });
+    chain.push({ id: cur.id, name: cur.name ?? '', type: cur.type });
     cur = cur.parent;
   }
   return chain; // closest ancestor first
@@ -146,7 +146,7 @@ if (targetType === 'frame') {
         id: n.id,
         name: n.name,
         characters: n.characters,
-        ancestorChain: chain.map(a => a.name)
+        ancestorChain: chain.map(a => ({ id: a.id, name: a.name }))
       });
     }
     if ('children' in n) stack.push(...n.children);
@@ -186,7 +186,7 @@ if (targetType === 'frame') {
           id: n.id,
           name: n.name,
           characters: n.characters,
-          ancestorChain: chain.map(a => a.name)
+          ancestorChain: chain.map(a => ({ id: a.id, name: a.name }))
         });
       }
       if ('children' in n) stack.push(...n.children);
@@ -229,7 +229,7 @@ if (targetType === 'frame') {
           id: n.id,
           name: n.name,
           characters: n.characters,
-          ancestorChain: chain.map(a => a.name)
+          ancestorChain: chain.map(a => ({ id: a.id, name: a.name }))
         });
       }
       if ('children' in n) stack.push(...n.children);

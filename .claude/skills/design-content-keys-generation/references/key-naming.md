@@ -3,16 +3,22 @@
 The skill generates keys of the form:
 
 ```
-{feature}.{screenSlug}.{component}.{elementType}
+{flow}.{screenSlug}.{component}.{elementType}
 ```
 
 All segments are camelCase. Dots separate segments; no other punctuation.
+
+There are two structural exceptions that insert a sub-segment between component and element:
+- `ctas` → `primary` | `secondary` | `disclaimer`
+- `readOnly` → `row1` | `row2` | …
+
+Both are documented under [Element-type rules](#element-type-rules).
 
 ## Segment sources
 
 | Segment | Source | Notes |
 |---|---|---|
-| `feature` | Figma `SECTION` name on the Experience page (fallback: `{initiativeTag}`) | camelCase, strip leading numbers and special chars |
+| `flow` | Figma `SECTION` name on the Experience page (fallback: `{initiativeTag}`) | camelCase, strip leading numbers and special chars |
 | `screenSlug` | Figma `FRAME` name | strip leading number/separator (`1300 - Confirmation` → `confirmation`) |
 | `component` | Closest MDS ancestor in the layer tree, mapped via the abbreviation table below | Falls back to `wrapper` if no MDS ancestor exists |
 | `elementType` | The text layer's own name, mapped via the element-type table below | |
@@ -109,13 +115,38 @@ The text layer's own name is lowercased and matched against these prefixes. Firs
 | `con` | `context` |
 | anything else | camelCased layer name (flag in report) |
 
-**Button special case.** When the closest MDS ancestor is `MDS Button`, the text layer is always literally `Label`; force `elementType = label`. So a button inside `MDS BottomCTAs` produces `…ctas.label`, which is the convention engineers expect.
+**Button special case.** When the closest MDS ancestor is `MDS Button`, the text layer is always literally `Label`; force `elementType = label`. The component segment then comes from the next outer MDS ancestor (typically `BottomCTAs` or `FixedCTAs`), not from the button itself — engineers expect `…ctas.…`, not `…primaryBtn.…`.
+
+**CTAs sub-segment (5-segment exception).** Text inside a `BottomCTAs` / `FixedCTAs` component is always one of two roles, and conflating them as `ctas.label1` / `ctas.label2` loses semantic meaning. The skill emits a 5-segment key with a role sub-segment between `ctas` and the element type:
+
+| Position in `ctas` | Sub-segment | Element type | Example key |
+|---|---|---|---|
+| Inside `MDS Button` (first/only button) | `primary` | `label` | `warrantsBuy.confirmation.ctas.primary.label` |
+| Inside `MDS Button` (second button, if any) | `secondary` | `label` | `warrantsBuy.confirmation.ctas.secondary.label` |
+| Inside `AltContentWrapper` | `disclaimer` | `body` | `warrantsBuy.confirmation.ctas.disclaimer.body` |
+| Anywhere else inside `ctas` | camelCased wrapper name | derived from layer | flag in warnings |
+
+If a `ctas` has more than two buttons (rare), the third onward gets a numeric suffix: `secondary2`, `secondary3`. The `disclaimer.body` slot only occurs once per `ctas` instance, so it never needs a suffix.
+
+**ReadOnly sub-segment (5-segment exception).** Text inside `MDS ReadOnlyHorizontal` / `MDS ReadOnlyList` belongs to a row, and each row has up to two roles (label + value). Flattening to `readOnly.label1` / `readOnly.label2` hides which row is which and loses the label/value pairing. The skill emits a 5-segment key with a row sub-segment between `readOnly` and the element type:
+
+| Position in `readOnly` | Sub-segment | Element type | Example key |
+|---|---|---|---|
+| `headerWrapper` text in row 1 | `row1` | `label` | `warrantsBuy.confirmation.readOnly.row1.label` |
+| `descriptionWrapper` text in row 1 (including text inside a nested `MDS Tag`) | `row1` | `value` | `warrantsBuy.confirmation.readOnly.row1.value` |
+| `headerWrapper` text in row 2 | `row2` | `label` | `warrantsBuy.confirmation.readOnly.row2.label` |
+
+Row indices are assigned by encounter order of the parent `MDS ReadOnlyHorizontal` instance within its `MDS ReadOnlyList`. If multiple `MDS ReadOnlyList` exist on the same screen, row indices restart per list — flag in warnings so the designer can confirm grouping.
+
+**Important:** Text inside `MDS Tag` (or any other MDS component) that sits inside a `descriptionWrapper` of a ReadOnly row is **not** emitted as its own `tag.label` key. It is absorbed as the row's `value`. This matches engineering intent: the row is one logical key/value pair, regardless of whether the value is rendered as plain text or a tag.
+
+This and `ctas` are the only 4 → 5 segment exceptions in the schema. Every other component follows `{flow}.{screenSlug}.{component}.{elementType}`.
 
 ## Collisions
 
 Two kinds:
 
-**Same key generated twice.** If `feature.screenSlug.component.elementType` would match more than one node, every occurrence gets a numeric suffix attached *directly* to the element type — `title1`, `title2`. Single occurrences stay un-suffixed. The number attaches with no period:
+**Same key generated twice.** If `flow.screenSlug.component.elementType` would match more than one node, every occurrence gets a numeric suffix attached *directly* to the element type — `title1`, `title2`. Single occurrences stay un-suffixed. The number attaches with no period:
 
 ```
 ❌ warrants.successful.header.title.1
@@ -164,7 +195,7 @@ Text never produces a key when any of these conditions hold. The goal is to keep
 - Skipped: `"200 MXN"`, `"-233M USD"`, `"0.84"`, `"1.31x"`, `"4.77"` (pure numbers or >2 digits)
 - Generated: `"1D"`, `"6M"`, `"Q4"` (≤2 digits + text)
 
-This rule assumes real copy uses `[%s]` placeholders for dynamic values and never bakes literal numbers in. Timeframe labels and similar mixed content with few digits are localizable. If a string really must contain a literal number (e.g. a year, a phone country code), wrap it in `[%s]` in the design and add the mapping to `references/icu-lookup.md`.
+This rule assumes real copy uses `[%s]` placeholders for dynamic values and never bakes literal numbers in. Timeframe labels and similar mixed content with few digits are localizable. If a string really must contain a literal number (e.g. a year, a phone country code), wrap it in `[%s]` in the design and document the chosen placeholder name in the PR description so engineering knows what to bind.
 
 **Decorative glyphs and separators** — any text node whose trimmed content is two characters or fewer and has no Latin letters is treated as decoration:
 
