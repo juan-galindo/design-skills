@@ -104,22 +104,50 @@ Library page tabs follow this structure so components are grouped predictably.
 
 ```
 Foundation/Color
-Form/Input
-Form/Checkbox
-Navigation/AppBar
-_deprecated/Toggle           ← legacy component, kept for back-compat
-_wip/Stepper                 ← work in progress, not yet released
+Input/MDSCurrencyField
+Input/MDSCheckbox
+Navigation/MDSAppBar
+Feedback/MDSProgressStepper
+_deprecated/MDSToggle        ← legacy component, kept for back-compat
+_wip/MDSStepper              ← work in progress, not yet released
 ```
 
 **Rules:**
-- **Category** is **singular** + **PascalCase** (`Form`, not `Forms`; `Navigation`, not `navigation`).
-- One slash separates category from component: `Category/ComponentName`.
+- **Category** is **singular** + **PascalCase** (`Input`, not `Inputs`; `Navigation`, not `navigation`).
+- One slash separates category from component: `Category/MDSComponentName`.
 - **Prefixes:**
   - `_deprecated/` → component is on its way out; do **not** use for new work.
   - `_wip/` → component is being designed/built; do **not** publish to consumers.
 - **Version suffixes** belong on the component, never the category:
-  - ✅ `Form/InputV2`
-  - ❌ `Form V2/Input`
+  - ✅ `Input/MDSInputV2`
+  - ❌ `Input V2/MDSInput`
+
+### Top-level category taxonomy
+
+Use these categories. They follow the singular-PascalCase rule above.
+
+| Category | Holds | Examples |
+|---|---|---|
+| **Action** | Things the user clicks/taps to do something | `MDSButton`, `MDSIconButton`, `MDSFABButton`, `MDSCircularButton`, `MDSCircularButtonGroup`, `MDSChip`, `MDSLink` |
+| **Input** | Captures **one conceptual value** (even if visually composite) | `MDSCurrencyField`, `MDSPasswordField`, `MDSCalculatorAmounts`, `MDSCheckbox`, `MDSRadio`, `MDSSelect`, `MDSSlider`, `MDSDatePicker`, `MDSSwitch` |
+| **Form** | Form-level patterns collecting **multiple independent values** | `MDSFormLayout`, `MDSFormSection`, `MDSFieldset`. Only use when you have true form-container patterns; otherwise omit. |
+| **Navigation** | Move the user between locations | `MDSAppBar`, `MDSBottomNavigation`, `MDSTabs`, `MDSBreadcrumb`, `MDSPagination`, `MDSMenu` |
+| **Feedback** | Communicate system state to the user; reactive to events | `MDSToast`, `MDSSnackbar`, `MDSAlert`, `MDSBanner`, `MDSDialog`, `MDSEmptyState`, `MDSProgressStepper`, `MDSProgressBar`, `MDSSpinner`, `MDSSkeleton`, `MDSPulsingDot` |
+| **Display** | Show data, content, or persistent indicators non-interactively | `MDSAvatar`, `MDSBadge`, `MDSTag`, `MDSTooltip`, `MDSConfirmationHeader`, `MDSBalance`, `MDSAssetBalance` |
+| **Container** | Wrap and organize other content | `MDSCard`, `MDSBottomSheet`, `MDSAccordion`, `MDSDrawer`, `MDSDivider` |
+| **Foundation** | Visual primitives (tokens) | `Foundation/Color`, `Foundation/Spacing`, `Foundation/Typography`, `Foundation/Motion` |
+
+### Adjacent-category decision rules
+
+When two categories could plausibly apply, use these tiebreakers:
+
+| Decision | Rule |
+|---|---|
+| **Input vs Form** | Input captures **one conceptual value** even if composed of multiple sub-controls (e.g. `MDSDatePicker` = year+month+day → one date; `MDSCalculatorAmounts` `type=swap` = from+to currency → one conversion). Form captures **multiple independent values** with submission/validation (e.g. an Address form). |
+| **Feedback vs "Status"** | Bitso uses one bucket: **Feedback**. It's reactive (responds to a user action or system event) and process-oriented. A progress stepper showing the user's flow position is Feedback, even though it could be argued as "status." If you ever need to distinguish entity-state badges/labels, they belong in **Display**, not a separate `Status/` category. |
+| **Action vs Navigation** | Action *does* a thing (submit, like, dismiss). Navigation *changes location* (tab, app bar, breadcrumb). |
+| **Display vs Feedback** | Display shows data passively (badge, tag, avatar, balance). Feedback reacts to events and changes appearance in response (toast, alert, progress). |
+| **Display vs Container** | Display *shows content*. Container *wraps* other components — `MDSCard` holds Display elements inside but is itself a Container. |
 
 ### Component naming — `MDS{Name}` / `WDS{Name}`
 
@@ -284,8 +312,9 @@ Bottom sheet / overlay?        → NO sequence number, PascalCase name only
 | Sub-flow in parent flow prefix | Give sub-flow its own thousands prefix |
 | Sub-flow using parent section name | Use sub-section label name |
 | Bottom sheet with sequence number | Remove number, PascalCase only |
-| Page tab not in `Category/Component` form | Restructure to `Form/Input`, `Navigation/AppBar`, etc. |
-| Plural category (`Forms/`, `Buttons/`) | Singular PascalCase (`Form/`, `Button/`) |
+| Page tab not in `Category/MDSComponentName` form | Restructure to `Input/MDSCurrencyField`, `Navigation/MDSAppBar`, etc. Pick from the taxonomy: Action / Input / Form / Navigation / Feedback / Display / Container / Foundation. |
+| Plural category (`Inputs/`, `Buttons/`) | Singular PascalCase (`Input/`, `Action/`) |
+| Wrong category for the component's role | Use the taxonomy decision rules: composite-single-value ⇒ Input (not Form); reactive process state ⇒ Feedback (not Status — Bitso uses Feedback as the single bucket); persistent attribute display ⇒ Display |
 | Deprecated/WIP component on a normal page | Move under `_deprecated/` or `_wip/` |
 | Version suffix on the category (`Form V2/Input`) | Move suffix to component (`Form/InputV2`) |
 | Component without `MDS`/`WDS` prefix | Add the platform prefix (`MDSButton`, `WDSAppBar`) |
