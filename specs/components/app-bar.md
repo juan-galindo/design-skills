@@ -26,7 +26,7 @@ The App Bar is the primary navigation component on mobile. It always appears as 
 
 ### default
 
-No leading icon. Trailing icon slots are optional. The screen title lives in the content below, not in the bar.
+Shows a leading `arrow_back` icon. Trailing icon slots are optional. The screen title lives in the content below, not in the bar.
 
 Use when the screen has a clear back-stack but no need to show a back button — for example, a root-level tab screen.
 
@@ -38,7 +38,7 @@ Use on any screen the user navigated into and needs to return from. This is the 
 
 ### calculator
 
-Shows a leading back arrow, a centered action title (e.g. "Comprar BTC") with an optional currency icon `hasIconCurrency`, and a trailing MDS Dropdown for **order type selection**.
+Shows a leading `arrow_back` icon, a centered action title (e.g. "Comprar BTC") with an optional currency icon `hasIconCurrency`, and a trailing MDS Dropdown for **order type selection**.
 
 Order type options vary by asset class:
 
@@ -78,7 +78,7 @@ Typical actions per slot:
 | Slot | Position | Common actions |
 |---|---|---|
 | `iconTrailing1` | Right | `close` (dismiss flow), `notifications`, `filter` |
-| `iconTrailing2` | Left | `rewards`, `favorites`, complementary screen action |
+| `iconTrailing2` | Left | `rewards`, `favorites` (`fav`), complementary screen action |
 
 **global variant specifically:** `iconTrailing2` = rewards, `iconTrailing1` = notifications.
 
