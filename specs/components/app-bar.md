@@ -65,7 +65,7 @@ Use when the user has tapped the MDSSearchField on the `global` variant and the 
 
 Shows a leading `arrow_back` icon, a centered progress indicator with a step counter (e.g. "1/4"), and a single optional trailing `close` icon
 
-Use on multi-step flows where the user needs to know how far along they are and must be able to exit.
+Use on multi-step flows with a minimum of 3 steps where the user needs to know how far along they are and must be able to exit.
 
 ---
 
