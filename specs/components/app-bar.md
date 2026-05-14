@@ -3,7 +3,7 @@ id: app-bar
 name: App Bar
 category: component
 platform: mobile
-tags: [navigation, screen, header]
+tags: [navigation]
 status: ready
 figma node: "6701:44162"
 ---
@@ -15,7 +15,8 @@ The App Bar is the primary navigation component on mobile. It always appears as 
 ## When to use
 
 - On every app screen, without exception.
-- As the topmost element — content begins immediately below it.
+- As the topmost element content begins immediately below it.
+- To surface actions that directly support the main task of that screen.
 
 ## When NOT to use
 
@@ -23,41 +24,33 @@ The App Bar is the primary navigation component on mobile. It always appears as 
 
 ## Placement
 
-The App Bar must always be the top element on a screen and must always be present. Content starts directly after it.
+The App Bar must always be the **top element** on every screen and must always be present. No other element may appear above it. Screen content starts directly below it with no gap.
 
-## Title placement
+## Exception — Title in App Bar
 
-### Default — Title on screen
+Only place the title inside the App Bar on the **Calculator screen** (conversion, buy/sell). No other screen qualifies for this exception.
 
-Always prefer placing the title within the screen content, not inside the App Bar.
+On calculator screen:
+- Display the action (e.g. Convertir) inside the App Bar.
+- Optionally include a MDSIcon currency alongside the title when the selected asset needs to be identified at a glance.
 
-This approach:
-- Maintains clear visual hierarchy
-- Allows the title to scroll with the content
-- Gives more flexibility for title styling and size
-- Provides better context within the page layout
+## Actions
 
-### Exception — Title in App Bar
-
-Only place the title inside the App Bar when putting it in the screen content would negatively affect the hierarchy.
-
-Use when:
-- The screen has multiple nested contexts or states
-- The screen has a Tabs component as its first element
-- The content flow would be disrupted by an in-screen title
-
-Examples: Calculator screen (conversion, buy/sell), Activity screen, Límites transaccionales
+The App Bar can display actions that support the main tasks of the current screen. Keep them minimal only expose actions that are directly relevant to the screen's primary goal.
 
 ## Content guidelines
 
+- Use sentence case for AppBar titles.
+- Keep titles short — one to four words when possible.
+- Do not duplicate the title in both the App Bar and the screen content.
+- **Calculator screen exception:** use an infinitive verb. 12 characters maximum including the space.
 
-## Examples
-
-| Pattern | Screens |
-|---------|---------|
-| Title on screen | Seguridad (back arrow only in bar, "Seguridad" as H1 in content); Referral screen (back arrow only in bar, headline in content) |
-| Title in App Bar | "Comprar SOL" with mode chip (Ahora); "Límites transaccionales" with Tabs (Dinero / Cripto) |
+| Mode | Formula | Example |
+|---|---|---|
+| Buy | Comprar [MDSIcon] | Comprar BTC |
+| Sell | Vender [MDSIcon] | Vender ETH |
+| Convert | Convertir | Convertir |
 
 ## Related specs
 
-- [`../patterns/`](../patterns/)
+- [`header.md`](./header.md)

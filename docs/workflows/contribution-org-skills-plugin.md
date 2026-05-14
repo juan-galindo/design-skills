@@ -119,13 +119,3 @@ Can you please review this PR? <GitHub Pull URL>
 ```
 
 Confirm the skill appears in `/help` and auto-triggers correctly in a new Claude Code session.
-
----
-
-## Step 11 — Update the README in this repo
-
-Edit `README.md` and add the skill to the correct category table, noting it is available in the org bundle:
-
-```markdown
-| `/design-<name>` | What it does | Owner |
-```

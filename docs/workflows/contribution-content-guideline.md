@@ -77,7 +77,21 @@ Edit `specs/content/index.md` and add (or update) the row for the new file in th
 
 ---
 
-## Step 5 — Commit and push
+## Step 5 — Update README
+
+If this is a **new content guideline**, no README entry is needed — guidelines are not individually listed.
+
+If this is a **new workflow guide**, add a row to the Contributing table in `README.md`:
+
+```markdown
+| Add or edit a content guideline | [`docs/workflows/contribution-content-guideline.md`](docs/workflows/contribution-content-guideline.md) |
+```
+
+Also update `docs/workflows/contribution-index.md` with the same entry.
+
+---
+
+## Step 6 — Commit and push
 
 ```bash
 git add specs/content/<tier>/<slug>.md specs/content/index.md
@@ -87,7 +101,7 @@ git push -u origin $(git branch --show-current)
 
 ---
 
-## Step 6 — Open a PR
+## Step 7 — Open a PR
 
 ```bash
 gh pr create \
@@ -103,11 +117,10 @@ Assign at least one content designer as reviewer. AI-authored PRs require 2 huma
 
 ---
 
-## Step 7 — Request a review on Slack (optional)
+## Step 8 — Request a review on Slack (optional)
 
 To get faster feedback from the design team, post in `#design_pr_review`:
 
 ```
-Hey guys,
-Can you please review this PR? <GitHub Pull URL>
+Hey guys, can you please review this PR? <GitHub Pull URL>
 ```
