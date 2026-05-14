@@ -61,6 +61,11 @@ Shows a leading `arrow_back` icon and a full-width MDSSearchField in its active/
 
 Use when the user has tapped the MDSSearchField on the `global` variant and the keyboard is open.
 
+When the search field is focused and empty, the screen below displays two suggestion sections:
+
+- **Top 3 popular cryptocurrencies** — each item is a tappable link that navigates to the asset detail. The section includes a "Ver todas" link that navigates to the full crypto list.
+- **Top 3 popular stocks** — each item is a tappable link that navigates to the asset detail. The section includes a "Ver todas" link that navigates to the full stocks list.
+
 ### progressBar
 
 Shows a leading `arrow_back` icon, a centered progress indicator with a step counter (e.g. "1/4"), and a single optional trailing `close` icon
