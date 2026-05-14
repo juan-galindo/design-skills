@@ -274,7 +274,9 @@ Bottom sheet / overlay?        → NO sequence number, PascalCase name only
 | `camelCase` frame name | `PascalCase` |
 | Typos (`criptoCards`, `topItens`, `InfoPannel`) | Fix typo |
 | UUID or auto-generated name | Rename semantically |
-| Emoji | Remove immediately |
+| Emoji anywhere in a layer/component name | Remove immediately — covers all Unicode emoji ranges (☑️, ⚠️, 🎨, 🚀, 🏳️, etc.) |
+| Forbidden space inside an identifier | Remove — applies to wrappers, components, component sets, and component property names (`MDS Button`, `Helper text`, `MDS CurrencyField ` with trailing space). Bracketed annotations (`[Archive]`, `[Reference]`, `[DOC_ONLY]`, `[token]`, `[role]`, `[prop]`, `[condition]`, `[a11y]`) are exempt; section labels and page tabs may contain spaces as defined by their own rules. |
+| Leading or trailing whitespace | Trim — silently breaks pattern matching and exports |
 | `Frame 1234567` or `Group 1` | Rename to describe content |
 | Screen frame missing sequence number | Apply `{sequence} - {flow} - {state}` |
 | Wrong sequence prefix | Re-read section label from canvas |
