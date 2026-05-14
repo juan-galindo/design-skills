@@ -60,17 +60,35 @@ Fix any regressions before continuing.
 
 ---
 
-## Step 3 — Commit and push
+## Step 3 — Update README
+
+Add or update the skill's row in the correct category table in `README.md`:
+
+```markdown
+| `/design-<name>` | What it does (one sentence) | Owner |
+```
+
+Use the table that matches the skill category:
+- **Content Design** — skills for UX writing and copy
+- **Product Design** — skills for Figma, handoff, and QA
+- **Design System** — skills for MDS components and tokens
+- **Tooling** — utility or cross-functional skills
+
+If this is a new category, add a new `###` section with a table before the **Tooling skills** section.
+
+---
+
+## Step 4 — Commit and push
 
 ```bash
-git add .claude/skills/<skill-name>/
+git add .claude/skills/<skill-name>/ README.md
 git commit -m "feat(skill): <short description>"
 git push -u origin $(git branch --show-current)
 ```
 
 ---
 
-## Step 4 — Open a PR
+## Step 5 — Open a PR
 
 ```bash
 gh pr create --draft \
@@ -90,11 +108,10 @@ All skill changes require 2 human approvals before merging.
 
 ---
 
-## Step 5 — Request a review on Slack (optional)
+## Step 6 — Request a review on Slack (optional)
 
 To get faster feedback from the design team, post in `#design_pr_review`:
 
 ```
-Hey guys,
-Can you please review this PR? <GitHub Pull URL>
+Hey guys, can you please review this PR? <GitHub Pull URL>
 ```
