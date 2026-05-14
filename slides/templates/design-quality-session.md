@@ -108,68 +108,68 @@ Fill in each section with your content before creating the deck in Figma Slides.
 
 ---
 
-## Example — AI Working Principle (MAY 2026)
+## Example — Portfolio IA Redesign (DEC 2025)
+
+> Source: [Figma deck](https://www.figma.com/deck/1tSEnD40ZUKh2DkIKqOknx)
 
 ### Slide 1 — Cover
-- Title: `AI WORKING PRINCIPLE`
-- Subtitle: `Design Quality Session`
-- Date: `MAY 2026`
+- Title: `PORTFOLIO IA REDESIGN`
+- Date: `DEC 2025`
 
 ### Slide 2 — Index
 ```
-01. BUILD STRONG FOUNDATIONS
-02. WHAT WE'RE FOCUSING ON
-03. STREAM 1 — DESIGN SYSTEM & CONSISTENCY
-04. STREAM 2 — CONTENT & LOCALIZATION
-05. STREAM 3 — AI WORKFLOWS
+01. PROJECT PHASES
+02. RECAP OF IDENTIFIED PROBLEMS
+03. PROGRESSIVE DISCLOSURE APPROACH
+04. NEW IA
+05. MEASURING SUCCESS
+06. QA
 ```
 
 ### Slide 3 — Section divider
-- `01 / BUILD STRONG FOUNDATIONS`
+- `01 / PROJECT PHASES`
 
-### Slide 4 — Content (pillars)
-- Header: `COMPONENTS · SPACES · INDICES`
-- Body: Tools and models will evolve, but the foundation remains the key part.
+### Slide 4 — Content (statement)
+- Header: `WHERE WE ARE?`
+- Body: Visual diagram showing project phases and current position
 
 ### Slide 5 — Section divider
-- `02 / WHAT WE'RE FOCUSING ON`
+- `02 / RECAP OF IDENTIFIED PROBLEMS`
 
-### Slide 6 — Content (statement)
-- Header: `DIFFERENT WORKING STREAMS`
-- Body: Different working streams aligned with the same goal — increase AI maturity.
+### Slide 6 — Content (pillars)
+- Header: `CURRENT STATE OF THE PORTFOLIO`
+- Body: Key problems identified in the current IA
 
 ### Slide 7 — Section divider
-- `03 / STREAM 1 — DESIGN SYSTEM & CONSISTENCY`
+- `03 / PROGRESSIVE DISCLOSURE`
 
-### Slide 8 — Content (numbered steps)
-- Header: `SET THE FOUNDATIONS — L1 TO L2`
-- Steps:
-  1. **Cleaning** — Tokens · Figma components · Documentation
-  2. **Defining** — Tokens AI pipeline · Component visualization
-  3. **Updating Production** — Production components · Tokens · Specs
-  4. **Sign-off**
+### Slide 8 — Content (statement)
+- Header: `WHY THIS APPROACH?`
+- Body: Rationale and supporting evidence for progressive disclosure
 
-### Slide 9 — Content (call to action)
-- Header: `WHAT WE NEED TO MOVE FORWARD`
-- Body: Allocate time from the full squad to improve production components.
+### Slide 9 — Section divider
+- `04 / NEW IA`
 
-### Slide 10 — Section divider
-- `04 / STREAM 2 — CONTENT & LOCALIZATION`
+### Slide 10 — Content (quote)
+- Quote: "When I review my investments, I want a complete, clear, and trustworthy picture of my total wealth and what's driving its changes, so I can confidently understand my financial position and make informed decisions that align with my goals, and help me build long-term wealth."
+- Caption: `Grounded in our new JTBD`
 
-### Slide 11 — Content (numbered steps)
-- Header: `EXPLORATORY — L1 TO L2`
-- Steps:
-  1. Build a PoC content specs
-  2. Test AI generation of localization keys
+### Slide 11 — Content (statement)
+- Header: `Scalable and user-centered`
+- Body: New IA diagram
 
 ### Slide 12 — Section divider
-- `05 / STREAM 3 — AI WORKFLOWS`
+- `05 / MEASURING SUCCESS`
 
-### Slide 13 — Content (exploratory)
-- Header: `EXPLORATORY AI WORKFLOWS — L3 TO L4`
-- Context: What if we start using Figma with other purposes?
-- Steps:
-  1. Test AI generation of UX workflows
+### Slide 13 — Content (statement)
+- Header: `OUR DEFINITION OF SUCCESS`
+- Body: Success metrics and definition
 
-### Slide 14 — Closing
-- `THANK YOU`
+### Slide 14 — Section divider
+- `06 / Q&A`
+
+### Slide 15 — Content (call to action)
+- Header: `FEEDBACK OR QUESTIONS?`
+
+### Slide 16 — Closing
+- `THANK YOU!`
