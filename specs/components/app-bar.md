@@ -22,6 +22,78 @@ The App Bar is the primary navigation component on mobile. It always appears as 
 
 - Inside bottom sheets or modals — the App Bar is a screen-level component only.
 
+## Variants
+
+### default
+
+Shows a leading `arrow_back` icon. Trailing icon slots are optional. The screen title lives in the content below, not in the bar.
+
+Use when the screen has a clear back-stack but no need to show a back button — for example, a root-level tab screen.
+
+### backButton
+
+Shows a leading `arrow_back` icon. Trailing icon slots are optional. `iconTrailing1` is commonly a `close` icon when the screen needs an explicit dismiss action alongside the back navigation.
+
+Use on any screen the user navigated into and needs to return from. This is the most common variant for sub-screens.
+
+### calculator
+
+Shows a leading `arrow_back` icon, a centered action title (e.g. "Comprar BTC") with an optional currency icon `hasIconCurrency`, and a trailing MDS Dropdown for **order type selection**.
+
+Order type options vary by asset class:
+
+| Asset class | Options |
+|---|---|
+| Crypto, Stablecoins, Fiat | Ahora, Diaria, Semanal, Mensual, Precio deseado |
+| Stocks | Mercado, Límite |
+
+Use only on the Calculator screen (buy, sell, convert). See the Calculator screen exception in the Title placement section.
+
+### global
+
+Shows a permanent leading `menu` icon, a full-width MDSSearchField, and up to two trailing icon slots.
+
+Use only on the main home screen. Do not use on sub-screens.
+
+### globalSearch
+
+Shows a leading `arrow_back` icon and a full-width MDSSearchField in its active/focused state (visible cursor, focus border).
+
+Use when the user has tapped the MDSSearchField on the `global` variant and the keyboard is open.
+
+When the search field is focused and empty, the screen below displays two suggestion sections:
+
+- **Top 3 popular cryptocurrencies** — each item is a tappable link that navigates to the asset detail. The section includes a "Ver todas" link that navigates to the full crypto list.
+- **Top 3 popular stocks** — each item is a tappable link that navigates to the asset detail. The section includes a "Ver todas" link that navigates to the full stocks list.
+
+### progressBar
+
+Shows a leading `arrow_back` icon, a centered progress indicator with a step counter (e.g. "1/4"), and a single optional trailing `close` icon
+
+Use on multi-step flows with a minimum of 3 steps where the user needs to know how far along they are and must be able to exit.
+
+---
+
+## Trailing icon behavior
+
+The trailing container holds up to two icon buttons, stacked right-to-left. Both slots hold **secondary or complementary actions** — never primary actions.
+
+Typical actions per slot:
+
+| Slot | Position | Common actions |
+|---|---|---|
+| `iconTrailing1` | Right | `close` (dismiss flow), `notifications`, `filter` |
+| `iconTrailing2` | Left | `rewards`, `favorites` (`fav`), complementary screen action |
+
+**global variant specifically:** `iconTrailing2` = rewards, `iconTrailing1` = notifications.
+
+**Rules:**
+- Never show `hasIconTrailing2` without `hasIconTrailing1`.
+- The `progressBar` variant supports only one trailing icon (`close`). Do not enable `hasIconTrailing2` on it.
+- Both slots are for secondary actions only — never place a primary CTA in the trailing area.
+
+---
+
 ## Placement
 
 The App Bar must always be the **top element** on every screen and must always be present. No other element may appear above it. Screen content starts directly below it with no gap.
