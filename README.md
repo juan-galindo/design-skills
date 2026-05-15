@@ -161,7 +161,13 @@ design-skills/
 │           ├── scripts/      # Optional automation scripts (TypeScript or Python)
 │           └── assets/       # Optional templates, examples, or static resources
 ├── docs/
-│   ├── content/              # Exported content artifacts (e.g. Lokalise project keys)
+│   ├── CLAUDE.md             # Agent guide for the docs folder
+│   ├── content/              # Produced content artifacts
+│   │   ├── CLAUDE.md         # Agent guide for content artifacts
+│   │   ├── help-center/      # HC articles by locale (es-mx, es-ar, es-co, pt-br, en-us)
+│   │   └── project-keys/     # Lokalise content key exports (machine-generated)
+│   ├── decisions/            # Design decision records and alignment docs
+│   ├── features/             # Feature specifications
 │   └── workflows/            # Contribution guides for skills, content, and org plugin
 ├── specs/
 │   ├── _template.md          # Blank spec template — copy to start a new spec

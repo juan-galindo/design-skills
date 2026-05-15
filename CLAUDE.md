@@ -18,6 +18,7 @@ All UX pattern specs live in `specs/`. Load them as reference context before mak
 | `specs/tokens/` | Token reference — authoritative token list |
 | `specs/components/` | All MDS components (atoms, molecules, organisms merged) |
 | `specs/patterns/` | Layout and composition rules |
+| `specs/content/` | UX writing guidelines, localization rules, content types — entry point: `specs/content/index.md` |
 
 ### Loading specs in a skill step
 
