@@ -45,8 +45,8 @@ Filled communications are stored in folders by type, named with a sequential ID.
 | Project Kickoff | `PK` | `project-kickoff/` |
 | Design Review | `DR` | `design-review/` |
 
-**File naming:** `[PREFIX]-[NNN]_[slug].md`
-Example: `DQS-001_ai-working-principle.md`, `DR-002_portfolio-ia-redesign.md`
+**File naming:** `[PREFIX]-[NNN]-[slug].md`
+Example: `DQS-001-ai-working-principle.md`, `DR-002-portfolio-ia-redesign.md`
 
 IDs are sequential per type. Check the folder to find the next available number before creating a new record.
 
@@ -58,7 +58,7 @@ IDs are sequential per type. Check the folder to find the next available number 
 
 | ID | Title | Date |
 |---|---|---|
-| [DQS-001](design-quality-session/DQS-001_ai-working-principle.md) | AI Working Principle | MAY 2026 |
+| [DQS-001](design-quality-session/DQS-001-ai-working-principle.md) | AI Working Principle | MAY 2026 |
 
 ### Weekly Update
 
