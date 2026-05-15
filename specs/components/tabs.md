@@ -12,13 +12,6 @@ figma node: "19118:118870"
 
 Tabs organize content into multiple related sections, showing one at a time and letting users navigate freely between them. Each tab is a peer to the others at the same hierarchical level — not a step in a sequence.
 
-## Principles
-
-- **Navigational** — users move back and forth between groups of related content.
-- **Related but distinct** — content is related under a larger organizing principle, but each tab shows a different view. Only one tab can be active at a time.
-- **Peers of equal hierarchy** — tabs are siblings, not steps. No tab is "before" or "after" another.
-- **Scalable** — tabs can scroll horizontally to handle overflow and localization.
-
 ## When to use
 
 - To switch between views of related content within the same context.
@@ -40,13 +33,11 @@ Tabs organize content into multiple related sections, showing one at a time and 
 
 ### fill (fixed-width)
 
-Tabs fill the full container width equally. Width = container ÷ number of tabs. Use a maximum of **4 tabs** on mobile. All tabs must fit without scrolling; if any label overflows, switch to `default` (intrinsic-width).
-
-Minimum horizontal padding per tab item: **16dp**.
+All tabs must fit without scrolling; if any label overflows, switch to `default` (intrinsic-width).
 
 ### default (intrinsic-width)
 
-Each tab's width = label length + 16dp padding on each side. Tabs align to the left with natural widths and a `spacing/inline/lg` (24dp) gap between items. When the total width exceeds the viewport, the row scrolls horizontally independently from the content. The last tab snaps to the right edge when reached.
+The last tab snaps to the right edge when reached.
 
 Use when labels need to be longer, when localization may expand text, or when a full-width stretch would look unbalanced.
 
@@ -55,28 +46,6 @@ Use when labels need to be longer, when localization may expand text, or when a 
 ## Minimum count
 
 A tab component requires **at least 2 tabs**. A single tab is not a valid use case.
-
----
-
-## Tab item states
-
-| State | Description |
-|-------|-------------|
-| `focus` | The currently selected tab. Bold label + 2px active indicator. |
-| `default` | An unselected tab. Regular label + 1px divider. |
-| `disabled` | Tab is present but not interactive. |
-
----
-
-## Anatomy
-
-Each tab item contains, in order:
-
-1. **Icon** (optional) — `MDSIcon`, 16×16, shown before the label.
-2. **Label** — text string. Never wraps or truncates.
-3. **Pulsing dot** (optional, off by default) — `MDS PulsingDot`, 8×8, shown after the label to signal new or unread content.
-
-The container has a full-width bottom border. A highlighted underline indicator marks the active tab and animates to the newly selected tab on switch.
 
 ---
 
@@ -92,77 +61,13 @@ The container has a full-width bottom border. A highlighted underline indicator 
 
 ---
 
-## Tokens
-
-### Typography
-
-| Element | Token |
-|---------|-------|
-| Label — Default | `typography/font-family/secondary` + `typography/weight/regular` + `typography/size/300` + `typography/lineheight/300` + `typography/letterspacing/0` |
-| Label — Active | `typography/font-family/secondary` + `typography/weight/medium` + `typography/size/300` + `typography/lineheight/300` + `typography/letterspacing/0` |
-
-### Color
-
-| Element | Token |
-|---------|-------|
-| Label — `default` | `color/onsurface/lowemphasis` |
-| Label — `focus` | `color/ontertiary/default` |
-| Label — `disabled` | `color/ontertiary/disabled` |
-| Indicator — `focus` | `color/tertiary/selected` |
-| Divider — `default` / `disabled` | `color/border/light` |
-
-### Border
-
-| Element | Token |
-|---------|-------|
-| Active indicator width | `border/width/200` (2px) |
-| Default divider width | `border/width/100` (1px) |
-
-### Spacing
-
-| Element | Token |
-|---------|-------|
-| Vertical padding (top + bottom) | `spacing/stack/sm` (8px) |
-| Gap between icon / label / dot | `spacing/inline/2xs` (4px) |
-| Gap between tab items — `variant=default` | `spacing/inline/lg` (24dp) |
-
----
-
 ## Content guidelines
 
 - Use short, scannable labels — 1–2 words maximum.
 - Use sentence case: "All assets", not "All Assets".
-- Labels must be parallel in structure ("Favorites", "Recent", "Popular" — not "Favorites", "Recently viewed", "Most popular").
 - Never truncate or wrap labels — shorten the text or switch to the `default` (intrinsic-width) variant.
 - Always pair icons with a text label — never use an icon alone.
 - Use `hasPulsingDot` only to signal genuinely new or unread content, not as decoration.
-
----
-
-## Accessibility
-
-### VoiceOver (iOS)
-
-| Property | Value |
-|----------|-------|
-| Label | `[Tab label]` |
-| Value | `Selected, [#] of [#]` (active) / `[#] of [#]` (inactive) |
-| Trait | Tab |
-| Hint | n/a |
-
-Example: *"Selected, Today, Tab, 1 of 3."*
-
-### TalkBack (Android)
-
-| Property | Value |
-|----------|-------|
-| ContentDescription | `[Tab label]` |
-| Value / StateDescription | `Selected, [#] of [#]` (active) / `[#] of [#]` (inactive) |
-| Role | Action bar tab |
-| Action | Double-tap to activate (inactive tabs only) |
-
-Example: *"Tab, This week, new items, 2 of 3, Double-tap to activate."*
-Double-tapping a selected tab voices "Selected".
 
 ---
 
