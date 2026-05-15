@@ -8,6 +8,7 @@ This folder stores published and draft help center articles, organized by locale
 help-center/
 ├── es-mx/   🇲🇽  Spanish — Mexico (lead locale, always first)
 ├── es-ar/   🇦🇷  Spanish — Argentina
+├── es-co/   🇨🇴  Spanish — Colombia
 ├── pt-br/   🇧🇷  Portuguese — Brazil
 └── en-us/   🇺🇸  English — United States
 ```
