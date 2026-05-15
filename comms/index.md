@@ -58,7 +58,7 @@ IDs are sequential per type. Check the folder to find the next available number 
 
 | ID | Title | Date |
 |---|---|---|
-| [DQS-001](design-quality-session/DQS-001-ai-working-principle.md) | AI Working Principle | MAY 2026 |
+| [DQS-001](design-quality-session/DQS-001-ai-design-strategy-alignment.md) | AI Design Strategy Alignment | MAY 2026 |
 
 ### Weekly Update
 
