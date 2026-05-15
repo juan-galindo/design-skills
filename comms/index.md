@@ -33,8 +33,53 @@ Lead with the conclusion. Support it with key points. Evidence comes last.
 
 ---
 
-## Filled examples
+## Record ID conventions
 
-| File | Type | Date |
+Filled communications are stored in folders by type, named with a sequential ID.
+
+| Type | Prefix | Folder |
 |---|---|---|
-| [ai-working-principle.md](ai-working-principle.md) | Design Quality Session | MAY 2026 |
+| Design Quality Session | `DQS` | `design-quality-session/` |
+| Weekly Update | `WU` | `weekly-update/` |
+| Leadership Update | `LU` | `leadership-update/` |
+| Project Kickoff | `PK` | `project-kickoff/` |
+| Design Review | `DR` | `design-review/` |
+
+**File naming:** `[PREFIX]-[NNN]_[slug].md`
+Example: `DQS-001_ai-working-principle.md`, `DR-002_portfolio-ia-redesign.md`
+
+IDs are sequential per type. Check the folder to find the next available number before creating a new record.
+
+---
+
+## Filled records
+
+### Design Quality Session
+
+| ID | Title | Date |
+|---|---|---|
+| [DQS-001](design-quality-session/DQS-001_ai-working-principle.md) | AI Working Principle | MAY 2026 |
+
+### Weekly Update
+
+| ID | Title | Date |
+|---|---|---|
+| — | | |
+
+### Leadership Update
+
+| ID | Title | Date |
+|---|---|---|
+| — | | |
+
+### Project Kickoff
+
+| ID | Title | Date |
+|---|---|---|
+| — | | |
+
+### Design Review
+
+| ID | Title | Date |
+|---|---|---|
+| — | | |
