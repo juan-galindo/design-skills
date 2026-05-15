@@ -72,6 +72,4 @@ You can use numbered lists to show steps. Like this:
 
 ## New listings article template
 
-> **Note:** New listing articles are not part of the Content team scope, but a template is provided to guarantee consistency.
-
-Use [this template](https://docs.google.com/document/d/1AbWGhz7tLe6ItAYCrkmetL-r67QFe7w-QfHLQ-OblM8/edit?tab=t.51756ep3ib7n) for articles about new listings.
+See [`templates-new-listings.md`](./templates-new-listings.md) for the full new listings template, guidelines, and example.
