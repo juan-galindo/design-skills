@@ -19,10 +19,10 @@ These articles prioritize clarity, structure, and accessibility while maintainin
 
 | File | What it covers |
 |---|---|
-| `help-center-workflow.md` | Creation and publication workflow |
-| `help-center-content-strategy.md` | Content strategy, pillars, and tone by article type |
-| `help-center-structure.md` | Article structure, baseline, and document format |
-| `help-center-writing-guidelines.md` | Titles, direct references, bold, bullets |
-| `help-center-templates.md` | Google Docs templates for HC and new listings articles |
-| `help-center-prompts.md` | AI prompts for writing and localizing articles |
-| `help-center-checklist.md` | Self-checklist before publishing |
+| `workflow.md` | Creation and publication workflow |
+| `content-strategy.md` | Content strategy, pillars, and tone by article type |
+| `structure.md` | Article structure, baseline, and document format |
+| `writing-guidelines.md` | Titles, direct references, bold, bullets |
+| `templates.md` | Article template, formatting rules, and example |
+| `templates-new-listings.md` | Template and example for new asset listing articles |
+| `checklist.md` | Self-checklist before publishing |
