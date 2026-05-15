@@ -79,8 +79,8 @@ that compounds regardless of which model or tool we use next.
 **Title:** Three streams, one goal: move from L1 to L5 AI maturity
 
 **Body:**
-The team is already workign focused on builing foundations.
-Three aligned streams, from L1 to L5 agentic workflows.
+The team is already focused on building foundations.
+Three aligned streams — from L1 to L5 agentic workflows —
 give us a path to increase AI maturity together.
 
 ---
@@ -119,7 +119,7 @@ Stream 1 makes the Design System machine-readable end to end.
 **Type:** Content — call to action
 **Background:** Dark
 
-**Title:** Allocate squads time to work on components is the critical blocker
+**Title:** Squad time on production components is the only thing blocking Stream 1
 
 **Body:**
 Stream 1 cannot progress without dedicated capacity in roadmaps.
@@ -145,7 +145,7 @@ Every downstream AI workflow, depends on the foundations being clean and complet
 **Title:** A PoC will tell us if AI can generate localization keys reliably at scale
 
 **Body:**
-Content kesy and localization are high-volume, repetitive work a strong AI candidate.
+Content keys and localization are high-volume, repetitive work — a strong AI candidate.
 Stream 2 is exploratory: we define the spec first, then test the pipeline.
 
 **Steps:**
@@ -169,7 +169,7 @@ Stream 2 is exploratory: we define the spec first, then test the pipeline.
 **Type:** Content — exploratory
 **Background:** Light
 
-**Title:** If Figma becomes an oudated tool, AI could help us to generate the UX flows.
+**Title:** AI-generated UX workflows could replace manual prototyping end to end
 
 **Body:**
 What if design went beyond Figma deliverables and became AI-generated functional prototypes?
