@@ -10,10 +10,6 @@ Pick the purpose, then follow the format the template specifies.
 | Purpose | Audience | Format | Cadence | Template |
 |---|---|---|---|---|
 | Design Quality Session | Design team | Slides | Per milestone | [→](templates/design-quality-session.md) |
-| Weekly Update | Design team | Written — Slack / email | Weekly | [→](templates/weekly-update.md) |
-| Leadership Update | Directors / PMs | Written doc or slides | Bi-weekly / on demand | [→](templates/leadership-update.md) |
-| Project Kickoff | Cross-functional | Slides | Per project | [→](templates/project-kickoff.md) |
-| Design Review | Squad | Written doc | Per deliverable | [→](templates/design-review.md) |
 
 ---
 
