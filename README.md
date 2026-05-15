@@ -104,6 +104,37 @@ When you invoke a skill, the AI loads the skill's instructions automatically and
 
 ---
 
+## Spec Library
+
+Reference specs used by skills at runtime. Organized by type inside `specs/`.
+
+### Component specs
+
+| Spec | Description |
+|------|-------------|
+| [`app-bar.md`](specs/components/app-bar.md) | App bar structure and behavior |
+| [`bottom-ctas.md`](specs/components/bottom-ctas.md) | Bottom CTA button patterns |
+| [`bottom-sheet.md`](specs/components/bottom-sheet.md) | Bottom sheet variants and usage |
+| [`header.md`](specs/components/header.md) | Screen header patterns |
+| [`tabs.md`](specs/components/tabs.md) | Tabs variants, behavior, and content guidelines |
+
+### Pattern specs
+
+| Spec | Description |
+|------|-------------|
+| [`bullet-points.md`](specs/patterns/bullet-points.md) | Bullet point layout and composition rules |
+
+### Token specs
+
+| Spec | Description |
+|------|-------------|
+| [`token-reference.md`](specs/tokens/token-reference.md) | Authoritative token list (source of truth) |
+| [`color-tokens.md`](specs/tokens/color-tokens.md) | Color token reference |
+| [`spacing-tokens.md`](specs/tokens/spacing-tokens.md) | Spacing token reference |
+| [`typography-tokens.md`](specs/tokens/typography-tokens.md) | Typography token reference |
+
+---
+
 ## Project structure
 
 ```
