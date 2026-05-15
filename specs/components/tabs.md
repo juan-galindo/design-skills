@@ -14,14 +14,14 @@ Tabs organize content into multiple related sections, showing one at a time and 
 
 ## When to use
 
-- To switch between views of related content within the same context.
 - When a screen has 2–5 distinct, equally important sections.
+- To switch between views of related content within the same context.
 - To replace a section header as the primary navigation when content is structured in parallel groups (see [Header](./header.md)).
 
 ## When NOT to use
 
+- When there is only one section — show the content directly. Tabs require at least 2 items.
 - As filters — use Chips instead.
-- When there is only one section — show the content directly.
 - Stacked — never place one tab row inside another.
 - To indicate progress or group sequential content — use a stepper instead.
 - When users need to compare information across tabs — each tab panel must be self-contained.
@@ -33,27 +33,17 @@ Tabs organize content into multiple related sections, showing one at a time and 
 
 ### fill (fixed-width)
 
-All tabs must fit without scrolling; if any label overflows, switch to `default` (intrinsic-width).
+Use when labels are short and 2–3 tabs fit comfortably at equal width.
 
 ### default (intrinsic-width)
 
-The last tab snaps to the right edge when reached.
-
-Use when labels need to be longer, when localization may expand text, or when a full-width stretch would look unbalanced.
-
----
-
-## Minimum count
-
-A tab component requires **at least 2 tabs**. A single tab is not a valid use case.
+Avoid fill when localization may produce longer strings, use when labels vary in length or there are 5+ tabs. The row scrolls horizontally and the last visible tab snaps to the right edge when reached.
 
 ---
 
 ## Behavior
 
 **Switching tabs:** users can tap an inactive tab or swipe the content area horizontally.
-
-**Indicator animation:** the active indicator slides to the selected tab on switch.
 
 **Rubber-band:** the row rubber-bands at either end to signal there are no more tabs.
 
