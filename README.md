@@ -106,45 +106,7 @@ When you invoke a skill, the AI loads the skill's instructions automatically and
 
 ## Spec Library
 
-Reference specs used by skills at runtime. Organized by type inside `specs/`.
-
-### Component specs
-
-| Spec | Description |
-|------|-------------|
-| [`app-bar.md`](specs/components/app-bar.md) | App bar structure and behavior |
-| [`bottom-ctas.md`](specs/components/bottom-ctas.md) | Bottom CTA button patterns |
-| [`bottom-sheet.md`](specs/components/bottom-sheet.md) | Bottom sheet variants and usage |
-| [`header.md`](specs/components/header.md) | Screen header patterns |
-| [`tabs.md`](specs/components/tabs.md) | Tabs variants, behavior, and content guidelines |
-
-### Content index
-
-All UX writing guidelines live in `specs/content/`. The entry point is [`specs/content/index.md`](specs/content/index.md) — read it first to find the right file for any content task.
-
-| Tier | Folder | What it covers |
-|------|--------|---------------|
-| **Core** | `specs/content/core/` | Voice & tone, FEEL framework, system thinking, review criteria |
-| **Guidelines** | `specs/content/guidelines/` | UX writing principles, CTAs, punctuation, capitalization, accessibility, and more |
-| **Types** | `specs/content/types/` | Emails, push notifications, help center articles, content strategy |
-| **Localization** | `specs/content/localization/` | Per-locale rules (es_MX, es_AR, es_CO, pt_BR, en_US), glossary, MX compliance |
-
-Skills (`design-content-write`, `design-content-review`) load files from this index automatically at runtime.
-
-### Pattern specs
-
-| Spec | Description |
-|------|-------------|
-| [`bullet-points.md`](specs/patterns/bullet-points.md) | Bullet point layout and composition rules |
-
-### Token specs
-
-| Spec | Description |
-|------|-------------|
-| [`token-reference.md`](specs/tokens/token-reference.md) | Authoritative token list (source of truth) |
-| [`color-tokens.md`](specs/tokens/color-tokens.md) | Color token reference |
-| [`spacing-tokens.md`](specs/tokens/spacing-tokens.md) | Spacing token reference |
-| [`typography-tokens.md`](specs/tokens/typography-tokens.md) | Typography token reference |
+Reference specs used by skills at runtime. See [`specs/README.md`](specs/README.md) for the full index.
 
 ---
 
@@ -152,37 +114,14 @@ Skills (`design-content-write`, `design-content-review`) load files from this in
 
 ```
 design-skills/
-├── .claude/
-│   ├── figma.config.json     # Figma file keys and node IDs
-│   ├── settings.json         # Claude Code permissions and hooks
-│   └── skills/
-│       └── <skill-name>/
-│           ├── SKILL.md      # Skill definition — instructions, trigger conditions, workflow
-│           ├── scripts/      # Optional automation scripts (TypeScript or Python)
-│           └── assets/       # Optional templates, examples, or static resources
-├── docs/
-│   ├── CLAUDE.md             # Agent guide for the docs folder
-│   ├── content/              # Produced content artifacts
-│   │   ├── CLAUDE.md         # Agent guide for content artifacts
-│   │   ├── help-center/      # HC articles by locale (es-mx, es-ar, es-co, pt-br, en-us)
-│   │   └── project-keys/     # Lokalise content key exports (machine-generated)
-│   ├── decisions/            # Design decision records and alignment docs
-│   ├── features/             # Feature specifications
-│   └── workflows/            # Contribution guides for skills, content, and org plugin
-├── specs/
-│   ├── _template.md          # Blank spec template — copy to start a new spec
-│   ├── components/           # MDS component specs (atoms, molecules, organisms)
-│   ├── content/              # UX writing guidelines, localization rules, content types
-│   ├── figma-catalog/        # Figma file keys and node IDs for MDS libraries and assets
-│   ├── patterns/             # Layout and composition rules
-│   └── tokens/               # Token reference — authoritative token list
-├── CLAUDE.md                 # Agent instructions for this repo
+├── .claude/skills/   # One folder per skill, each with a SKILL.md
+├── docs/             # Produced artifacts (content, decisions, features, workflows)
+├── specs/            # Reference specs used by skills at runtime
+├── CLAUDE.md         # Agent instructions
 └── README.md
 ```
 
-Skill naming follows a `<category>-<purpose>` convention:
-- `design-*` — design-specific skills (Figma, UX writing, design system)
-- `dev-*` — engineering and cross-functional skills
+Skill naming follows a `<category>-<purpose>` convention: `design-*` for design skills, `dev-*` for engineering and cross-functional.
 
 ---
 
