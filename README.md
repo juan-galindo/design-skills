@@ -118,6 +118,19 @@ Reference specs used by skills at runtime. Organized by type inside `specs/`.
 | [`header.md`](specs/components/header.md) | Screen header patterns |
 | [`tabs.md`](specs/components/tabs.md) | Tabs variants, behavior, and content guidelines |
 
+### Content index
+
+All UX writing guidelines live in `specs/content/`. The entry point is [`specs/content/index.md`](specs/content/index.md) — read it first to find the right file for any content task.
+
+| Tier | Folder | What it covers |
+|------|--------|---------------|
+| **Core** | `specs/content/core/` | Voice & tone, FEEL framework, system thinking, review criteria |
+| **Guidelines** | `specs/content/guidelines/` | UX writing principles, CTAs, punctuation, capitalization, accessibility, and more |
+| **Types** | `specs/content/types/` | Emails, push notifications, help center articles, content strategy |
+| **Localization** | `specs/content/localization/` | Per-locale rules (es_MX, es_AR, es_CO, pt_BR, en_US), glossary, MX compliance |
+
+Skills (`design-content-write`, `design-content-review`) load files from this index automatically at runtime.
+
 ### Pattern specs
 
 | Spec | Description |
