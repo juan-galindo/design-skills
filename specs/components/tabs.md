@@ -5,7 +5,7 @@ category: component
 platform: mobile
 tags: [navigation, content, sections]
 status: ready
-figma node: "19118:118865"
+figma node: "19118:118870"
 ---
 
 ## What it is
@@ -38,15 +38,15 @@ Tabs organize content into multiple related sections, showing one at a time and 
 
 ## Variants
 
-### Default (fixed-width)
+### fill (fixed-width)
 
-Tabs fill the full container width equally. Width = container ÷ number of tabs. Use a maximum of **4 tabs** on mobile. All tabs must fit without scrolling; if any label overflows, switch to Left (intrinsic-width).
+Tabs fill the full container width equally. Width = container ÷ number of tabs. Use a maximum of **4 tabs** on mobile. All tabs must fit without scrolling; if any label overflows, switch to `default` (intrinsic-width).
 
 Minimum horizontal padding per tab item: **16dp**.
 
-### Left (intrinsic-width)
+### default (intrinsic-width)
 
-Each tab's width = label length + 16dp padding on each side. Tabs align to the left with natural widths. When the total width exceeds the viewport, the row scrolls horizontally independently from the content. The last tab snaps to the right edge when reached.
+Each tab's width = label length + 16dp padding on each side. Tabs align to the left with natural widths and a `spacing/inline/lg` (24dp) gap between items. When the total width exceeds the viewport, the row scrolls horizontally independently from the content. The last tab snaps to the right edge when reached.
 
 Use when labels need to be longer, when localization may expand text, or when a full-width stretch would look unbalanced.
 
@@ -62,10 +62,9 @@ A tab component requires **at least 2 tabs**. A single tab is not a valid use ca
 
 | State | Description |
 |-------|-------------|
-| `Active` | The currently selected tab. Bold label + 2px active indicator. |
-| `Default` | An unselected tab. Regular label + 1px divider. |
-| `Pressed` | Visual feedback on tap. |
-| `Disabled` | Tab is present but not interactive. |
+| `focus` | The currently selected tab. Bold label + 2px active indicator. |
+| `default` | An unselected tab. Regular label + 1px divider. |
+| `disabled` | Tab is present but not interactive. |
 
 ---
 
@@ -75,7 +74,7 @@ Each tab item contains, in order:
 
 1. **Icon** (optional) — `MDSIcon`, 16×16, shown before the label.
 2. **Label** — text string. Never wraps or truncates.
-3. **Pulsing dot** (optional) — `MDS PulsingDot`, 8×8, shown after the label to signal new or unread content.
+3. **Pulsing dot** (optional, off by default) — `MDS PulsingDot`, 8×8, shown after the label to signal new or unread content.
 
 The container has a full-width bottom border. A highlighted underline indicator marks the active tab and animates to the newly selected tab on switch.
 
@@ -106,10 +105,11 @@ The container has a full-width bottom border. A highlighted underline indicator 
 
 | Element | Token |
 |---------|-------|
-| Label — Default | `color/onsurface/lowemphasis` |
-| Label — Active | `color/ontertiary/default` |
-| Indicator — Active | `color/tertiary/selected` |
-| Divider — Default | `color/border/light` |
+| Label — `default` | `color/onsurface/lowemphasis` |
+| Label — `focus` | `color/ontertiary/default` |
+| Label — `disabled` | `color/ontertiary/disabled` |
+| Indicator — `focus` | `color/tertiary/selected` |
+| Divider — `default` / `disabled` | `color/border/light` |
 
 ### Border
 
@@ -124,6 +124,7 @@ The container has a full-width bottom border. A highlighted underline indicator 
 |---------|-------|
 | Vertical padding (top + bottom) | `spacing/stack/sm` (8px) |
 | Gap between icon / label / dot | `spacing/inline/2xs` (4px) |
+| Gap between tab items — `variant=default` | `spacing/inline/lg` (24dp) |
 
 ---
 
@@ -132,7 +133,7 @@ The container has a full-width bottom border. A highlighted underline indicator 
 - Use short, scannable labels — 1–2 words maximum.
 - Use sentence case: "All assets", not "All Assets".
 - Labels must be parallel in structure ("Favorites", "Recent", "Popular" — not "Favorites", "Recently viewed", "Most popular").
-- Never truncate or wrap labels — shorten the text or switch to Left (intrinsic-width) variant.
+- Never truncate or wrap labels — shorten the text or switch to the `default` (intrinsic-width) variant.
 - Always pair icons with a text label — never use an icon alone.
 - Use `hasPulsingDot` only to signal genuinely new or unread content, not as decoration.
 
