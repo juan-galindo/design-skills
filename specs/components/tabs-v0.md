@@ -1,91 +1,68 @@
 ---
-id: tabs-simple
-name: Tabs (draft)
+id: tabs
+name: Tabs
 category: component
 platform: mobile
-tier: molecule
 tags: [navigation, content, sections]
-aliases: []
-status: draft
-superseded_by: tabs
+status: ready
 figma node: "19118:118870"
-relationships:
-  composes_with: [app-bar, header]
-  conflicts_with: [bottom-sheet]
-  substitutes: []
-  requires: []
 ---
 
-## Agent summary
+## What it is
 
-- **Draft** — canonical spec: [`tabs.md`](./tabs.md).
-- **MDSTabs** — 2–5 peer sections; tap or swipe to switch; not filters, steppers, or bottom nav.
+Tabs organize content into multiple related sections, showing one at a time and letting users navigate freely between them. Each tab is a peer to the others at the same hierarchical level — not a step in a sequence.
 
-## Overview
+## When to use
 
-Tabs organize related sections on one screen — one panel visible at a time. Each tab is a peer, not a sequential step.
+- When a screen has 2–5 distinct, equally important sections.
+- To switch between views of related content within the same context.
+- To replace a section header as the primary navigation when content is structured in parallel groups (see [Header](./header.md)).
 
-## Structure
+## When NOT to use
 
-| `variant` | When |
-|-----------|------|
-| `fill` | Short labels; 2–3 tabs at equal width |
-| `default` | Longer or variable labels; scrollable row; up to 5 tabs |
+- When there is only one section — show the content directly. Tabs require at least 2 items.
+- As filters — use Chips instead.
+- Stacked — never place one tab row inside another.
+- To indicate progress or group sequential content — use a stepper instead.
+- When users need to compare information across tabs — each tab panel must be self-contained.
+- As primary app navigation — use BottomNavigation instead.
 
-## Usage & behavior
+---
 
-### When to use
+## Variants
 
-- **2–5** distinct, equally important sections on one screen.
-- Primary in-content nav when [Header](./header.md) uses `sectionHeader` first.
+### fill (fixed-width)
 
-### When NOT to use
+Use when labels are short and 2–3 tabs fit comfortably at equal width.
 
-- One section only; inside [bottom-sheet](./bottom-sheet.md); as filters (Chips); stacked tab rows; steppers; cross-tab comparison; Bottom Navigation.
+### default (intrinsic-width)
 
-### Composition
+Avoid fill when localization may produce longer strings, use when labels vary in length or there are 5+ tabs. The row scrolls horizontally and the last visible tab snaps to the right edge when reached.
 
-- MAY pin below [App Bar](./app-bar.md) or scroll with page content.
+---
 
-## Interactions
+## Behavior
 
-| Interaction | Behavior | Notes |
-|-------------|----------|-------|
-| Tap tab | Switch active panel | — |
-| Swipe content | Switch panel horizontally | — |
-| Tab row scroll | `default` variant scrolls; rubber-band at ends | — |
+**Switching tabs:** users can tap an inactive tab or swipe the content area horizontally.
 
-## Accessibility
+**Rubber-band:** the row rubber-bands at either end to signal there are no more tabs.
 
-> **Mobile** — see [`tabs.md`](./tabs.md).
+**Pinning:** tabs can be pinned below the AppBar so content scrolls beneath them, or they can move with the page content and scroll under the header.
 
-| Concern | Requirement |
-|---------|-------------|
-| Role / semantics | Tab bar + selected state (iOS/Android) |
-| Focus & traversal | VoiceOver / TalkBack: tab then panel on switch |
-| Labels & announcements | Icon + text label — MUST NOT icon-only |
-| Touch & gestures | Min touch targets; tap to switch (do not rely on swipe-only) |
+---
 
-## Design intent
+## Content guidelines
 
-N/A — see [`tabs.md`](./tabs.md).
+- Use short, scannable labels — 1–2 words maximum.
+- Use sentence case: "All assets", not "All Assets".
+- Never truncate or wrap labels — shorten the text or switch to the `default` (intrinsic-width) variant.
+- Always pair icons with a text label — never use an icon alone.
+- Use `hasPulsingDot` only to signal genuinely new or unread content, not as decoration.
 
-## Token bindings
-
-N/A — see [`tabs.md`](./tabs.md).
-
-## Text slot rules
-
-| Slot | Max length | Rules |
-|------|------------|-------|
-| `label` | 1–2 words | Sentence case; no truncate/wrap |
-
-## Verification
-
-- [ ] Superseded by [`tabs.md`](./tabs.md) for production use.
+---
 
 ## Related specs
 
-- [`tabs.md`](./tabs.md) · [`header.md`](./header.md) · [`app-bar.md`](./app-bar.md) · [`bottom-sheet.md`](./bottom-sheet.md)
-
----
+- [`header.md`](./header.md)
+- [`bottom-sheet.md`](./bottom-sheet.md)
+- [`app-bar.md`](./app-bar.md)
