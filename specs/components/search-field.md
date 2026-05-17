@@ -192,7 +192,7 @@ One search chrome, three discovery bodies: cross-catalog tease (top 3), full cat
 
 ## Token bindings
 
-> [`../tokens/token-reference.md`](../tokens/token-reference.md) · Figma `7421:46443` ([`MDSSearchField`](https://www.figma.com/design/bDZOPFXzS3um5eLqyPWoe8/-Juan--DS-Workstream?node-id=7421-46443)). Chrome = **`searchbar/background-color/*`** · copy = **`input/color/text/*`** (or **`color/onbackground/accent`** on `variant=accent`) — **MUST NOT** `input/color/background/*` · `color/background/blurred`.
+> [`../tokens/token-reference.md`](../tokens/token-reference.md)
 
 | Token path | Applies when |
 |------------|----------------|
@@ -208,7 +208,7 @@ One search chrome, three discovery bodies: cross-catalog tease (top 3), full cat
 | `input/border/radius-round` · `spacing/padding/xs` · `spacing/padding/2xs` · `spacing/inline/2xs` | shell · 36px height (`small`) |
 | `body/small` · `typography/size/400` (caret only) | field copy · focus caret |
 
-**Parts:** leading **MDSIcon** 16×16 (non-interactive) · trailing **MDS IconButton** 32×32 + `icon-button/spacing/padding` when clearable · **MDS SpinLoader** `primary` `small` + `icon/size/base` when `loading`.
+**Parts:** leading **MDSIcon** `size=small` (16×16, non-interactive) · trailing **MDS IconButton** `size=large` (32×32) + `icon-button/spacing/padding` when clearable · **MDS SpinLoader** `primary` `small` + **MDSIcon** `size=base` (24×24) when `loading`.
 
 **Discovery body (not chrome):** top 3 card — `color/surface/default` · `border/radius/500`. Motion — suffix **A1a** 300ms linear · tab ↔ global search cross-fade **A1b**/**A6** (required; not slide).
 
