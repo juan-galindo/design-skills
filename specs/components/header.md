@@ -91,11 +91,11 @@ Tag copy is set on nested **MDS Tag** instances (not top-level `MDSHeader` text 
 
 | Interaction | Behavior | Notes |
 |-------------|----------|-------|
-| `hasArrow` | Row is tappable — navigates to detail / drill-down | Chevron signals navigation, not a title-button |
-| `hasTrailingContent` · `dropdown` | Opens filter/sort/scope menu | `sectionHeader` only |
-| `hasTrailingContent` · `textButton` | Secondary row action | `sectionHeader` only |
+| `hasArrow` | Row is tappable — navigates to detail / drill-down | `sectionHeader` · `subSection` |
+| `hasTrailingContent` + `dropdown` | Opens filter/sort/scope menu | `sectionHeader` only |
+| `hasTrailingContent` + `textButton` | Secondary row action | `sectionHeader` only |
 | `hasIcon` | Asset detail screens only | Crypto, stablecoin, fiat, stock |
-| Static display | Title + optional description | No interaction when arrow/trailing disabled |
+| Static display | `header` + optional `description` | No interaction when arrow/trailing off |
 
 ## Accessibility
 
@@ -118,9 +118,9 @@ App Bar navigates; **`screenHeader`** names the screen. Section levels structure
 
 | Role | Token path | `variant` |
 |------|------------|-----------|
-| Screen title | `title/base` | `screenHeader` |
-| Screen description | `body/base` | `screenHeader` |
-| Section title | `subheading/base` | `sectionHeader` |
+| Screen title | `title/base` | `screenHeader` · `header` |
+| Screen description | `body/base` | `screenHeader` · `description` |
+| Section title | `subheading/base` | `sectionHeader` · `header` |
 | Section description / trailing label | `body/base` / `tiny/base-bold` | `sectionHeader` |
 | Sub-section title / description | `body/base-medium` / `body/small` | `subSection` |
 | Accent text | on-accent semantic | `screenHeader` + `accent` |
@@ -133,14 +133,17 @@ App Bar navigates; **`screenHeader`** names the screen. Section levels structure
 |------|------------|-------|
 | `header` · `screenHeader` | 1–4 words | Sentence case |
 | `header` · section levels | Short phrase | Sentence case; labels content below |
-| `description` | ~80 chars | Only if needed; MUST NOT repeat `header` |
+| `description` | ~80 chars | Only if `hasDescription`; MUST NOT repeat `header` |
+| MDS Tag labels | Short each | `hasTag1` / `hasTag2` on `screenHeader` — distinct context per tag |
 
 MUST NOT duplicate screen title in App Bar and **`screenHeader`**.
 
 ## Verification
 
 - [ ] Usage & behavior: variant/context; hierarchy; not stacked without content between.
-- [ ] Interactions: arrow/trailing only where specified; `hasIcon` asset-detail only.
+- [ ] All **MDSHeader** props match Figma: `header` · `description` · `hasDescription` · `hasIcon` · `hasTag1` · `hasTag2` · `hasArrow` · `hasTopBorder` · `hasTrailingContent` · `variant` · `background`.
+- [ ] `hasTrailingContent` → nested `trailingContent` `type` is `dropdown` or `textButton` only.
+- [ ] Interactions: arrow/trailing only on `sectionHeader` where specified; `hasIcon` asset-detail only.
 - [ ] Accessibility: heading levels; no duplicate title with App Bar.
 - [ ] Tokens · text slots · library not detached.
 

@@ -9,8 +9,8 @@ aliases: [MDSBottomSheet, bottom sheet]
 status: ready
 figma node: "10994:23790"
 relationships:
-  composes_with: [header, search-field]
-  conflicts_with: [app-bar, tabs]
+  composes_with: [header]
+  conflicts_with: [app-bar, tabs, search-field]
   substitutes: []
   requires: [pattern-bullet-points]
 ---
@@ -19,9 +19,10 @@ relationships:
 
 - **MDSBottomSheet** — modal surface for **one focused task**; parent screen stays visible; **not** a full flow or non-dismissible gate (use a screen instead).
 - **MUST** show a **handle**; dismiss + motion → **Interactions** · focus + AT → **Accessibility**.
-- **MUST NOT** stack sheets; **MUST NOT** put [App Bar](./app-bar.md), [Tabs](./tabs.md), or `screenHeader` inside — use [Header](./header.md) `sectionHeader` / `subSection` only.
+- **MUST NOT** stack sheets; **MUST NOT** put [App Bar](./app-bar.md), [Tabs](./tabs.md), [Search Field](./search-field.md), or `screenHeader` inside — use [Header](./header.md) `sectionHeader` / `subSection` only.
 - **`BottomSheetView`:** scrim `color/overlay/scrim` + blur — see **Interactions** · **Token bindings**.
-- Optional **`hasButtons`** → **MDS BottomCTAs** footer in library.
+- **`hasButtons`** on **`MDSBottomSheet`** — `true` for text / confirm sheets · **`false`** for **`bottomSheetItemList`** (row tap selects).
+- **`bottomSheetListItemSlot`** — nested **`list`** `variant` + optional **`hasInfoPanel`** — see [Structure](#structure) · [Props to avoid](#props-to-avoid).
 - Multi-point copy in sheets → **`bottomSheetTextBullets`** + [`bottomSheetTextBulletsSlot`](#bullet-lists-bottomsheettextbulletsslot) — **dot bullets only** per [Bullet points pattern](../patterns/bullet-points.md) (max 5 items).
 - **Copy:** [`../content/index.md`](../content/index.md) · slot content rules below.
 
@@ -33,7 +34,12 @@ Presents non-immersive content or a short task without leaving the current scree
 
 **`BottomSheetView`** (screen wrapper): full-bleed **scrim** + **`MDSBottomSheet`** (anchored bottom, centered horizontally).
 
-**`MDSBottomSheet`** properties: `hasButtons` · **`slot`** · **handle** · optional **MDS BottomCTAs** · **NativeNavigation**.
+**`MDSBottomSheet`** properties:
+
+| Property | Type | Values / notes |
+|----------|------|----------------|
+| `hasButtons` | boolean | **`true`** — **MDS BottomCTAs** in footer (`bottomSheetTextDefault` · `bottomSheetText` · `bottomSheetTextBullets`) · **`false`** — `bottomSheetItemList` (row tap completes; Figma hides footer CTAs) |
+| `slot` | instance | Scrollable content — [slot components](#slot-components-content) · **handle** + **NativeNavigation** are fixed chrome |
 
 | Layer | Required | Notes |
 |-------|----------|-------|
@@ -45,7 +51,7 @@ Presents non-immersive content or a short task without leaving the current scree
 
 **Layout:** sheet `color/background/default` · top corners `card/border/radius` · anchored bottom. [Header](./header.md) **`sectionHeader`** / **`subSection`** in `slot` only — not `screenHeader`.
 
-Reference: [BottomSheetView with scrim](https://www.figma.com/design/kV7w4lzYz6xDsJkl1Ro6CW/-Juan----MDSBottomSheet?node-id=61344-1775) (`61344:1775`).
+Reference: [BottomSheet [References]](https://www.figma.com/design/kV7w4lzYz6xDsJkl1Ro6CW/-Juan----MDSBottomSheet?node-id=61304-26920) — [BottomSheetView + scrim](https://www.figma.com/design/kV7w4lzYz6xDsJkl1Ro6CW/-Juan----MDSBottomSheet?node-id=61344-1775) (`61344:1775`, child of references).
 
 ### Slot components (content)
 
@@ -53,17 +59,38 @@ Reference: [BottomSheetView with scrim](https://www.figma.com/design/kV7w4lzYz6x
 |----------------|-----|
 | `bottomSheetIconSlot` | Icon-led message |
 | `bottomSheetTextBulletsSlot` | Non-interactive **dot bullet** list — see [Bullet lists](#bullet-lists-bottomsheettextbulletsslot) |
-| `bottomSheetListItemSlot` | Selectable lists — see **list `variant`** |
+| `bottomSheetListItemSlot` | Selectable lists — [properties](#bottomsheetlistitemslot-properties) |
 | Custom | Illustration, inputs, etc. in `slot` |
 
-### List `variant` (`bottomSheetListItemSlot` / `list`)
+### `bottomSheetListItemSlot` properties
 
-| `variant` | When |
-|-----------|------|
-| `default` | Standard list rows |
-| `transactional` | Transaction-style rows |
-| `radio` | Single-select options |
-| `currency` | Currency / asset picker rows |
+Canonical slot: [`bottomSheetListItemSlot`](https://www.figma.com/design/kV7w4lzYz6xDsJkl1Ro6CW/-Juan----MDSBottomSheet?node-id=16796-78595) (`16796:78595`).
+
+| Property | Type | Values / notes |
+|----------|------|----------------|
+| `hasInfoPanel` | boolean | **`false`** (default) — optional **MDSInfoPanel** (warning) stacked above the list · **`true`** only for substantive status / disclaimer copy |
+
+**Nested `list`** (component set `16971:115344` — [variant grid](https://www.figma.com/design/kV7w4lzYz6xDsJkl1Ro6CW/-Juan----MDSBottomSheet?node-id=16971-115344)):
+
+| `variant` | Row component | When |
+|-----------|---------------|------|
+| `default` | Standard list rows | Generic selectable options |
+| `transactional` | Transaction-style rows | Movements, receipts, activity history |
+| `radio` | **MDS RadioListItem** | Single-select among labeled options (no asset chrome) |
+| `currency` | **MDS CurrencyListItem** | Asset / currency picker (ticker, price, change) |
+
+### Props to avoid
+
+| Prop / combination | MUST NOT |
+|--------------------|----------|
+| `hasButtons=true` | On **`bottomSheetItemList`** — selection is row tap; footer CTAs duplicate the task or steal scroll space |
+| `hasButtons=false` | On **`bottomSheetTextDefault`** · **`bottomSheetText`** · **`bottomSheetTextBullets`** when the flow needs explicit primary / secondary actions |
+| `hasInfoPanel=true` | For decoration, marketing, or redundant body copy — warning / info panel only |
+| `list` `variant=currency` | Rows without asset semantics (no ticker / price / change) |
+| `list` `variant=radio` | Multi-select · asset pickers (use `currency`) |
+| `list` `variant=transactional` | Static settings lists · asset pickers |
+| Any `list` `variant` + search | [Search Field](./search-field.md) in `slot` — use parent-screen **global search** instead |
+| Wrong row template | Mixing row types inside one `list` instance — pick one `variant` per sheet |
 
 ### Bullet lists (`bottomSheetTextBulletsSlot`)
 
@@ -90,21 +117,21 @@ Marker, count, spacing, copy, and a11y rules live in the **pattern** — do not 
 
 - Multi-step flows, entire features, or **blocking** tasks the user cannot dismiss — use a **screen**.
 - Stacked bottom sheets.
-- [App Bar](./app-bar.md), **MDSTabs** (any variant), or **`screenHeader`** inside the sheet.
+- [App Bar](./app-bar.md), **MDSTabs** (any variant), **`screenHeader`**, or **[Search Field](./search-field.md)** / search bar inside the sheet.
+- Long lists that need search → **`bottomSheetItemList`** with scroll only, or dismiss and open **global search** on the parent screen — **MUST NOT** embed a search field in the sheet.
 
 If the user **cannot** dismiss, **MUST NOT** use a bottom sheet.
 
 ### Reference patterns
 
-> [Use cases](https://www.figma.com/design/kV7w4lzYz6xDsJkl1Ro6CW/-Juan----MDSBottomSheet?node-id=61304-26920)
+Canonical Figma board: **[BottomSheet [References]](https://www.figma.com/design/kV7w4lzYz6xDsJkl1Ro6CW/-Juan----MDSBottomSheet?node-id=61304-26920)** (`61304:26920`).
 
-| Pattern | Typical `slot` stack | When |
-|---------|----------------------|------|
-| **`bottomSheetTextDefault`** | **No illustration** — `sectionHeader` → body copy → Bottom CTAs | **Confirm actions** (approve, cancel, acknowledge) · **help / informational** copy |
-| `bottomSheetText` | Illustration → `sectionHeader` → body copy → Bottom CTAs | Marketing, education, or emotional context that needs visual support |
-| `bottomSheetTextBullets` | Illustration → `sectionHeader` → `bottomSheetTextBulletsSlot` → Bottom CTAs | Multi-point explanations — [dot bullets pattern](../patterns/bullet-points.md) |
-| `bottomSheetItemList` | `bottomSheetListItemSlot` (list variant per task) | Pick one option from a list |
-| `bottomSheetItemListSearch` | `sectionHeader` → [Search Field](./search-field.md) `list` → `bottomSheetListItemSlot` | Long or searchable lists |
+| Pattern | Typical `slot` stack | When | Figma instance |
+|---------|----------------------|------|----------------|
+| **`bottomSheetTextDefault`** | **No illustration** — `sectionHeader` → body copy → Bottom CTAs | **Confirm actions** (approve, cancel, acknowledge) · **help / informational** copy | Spec-only — omit illustration from [`bottomSheetText`](https://www.figma.com/design/kV7w4lzYz6xDsJkl1Ro6CW/-Juan----MDSBottomSheet?node-id=61304-21219) · `hasButtons=true` |
+| [`bottomSheetText`](https://www.figma.com/design/kV7w4lzYz6xDsJkl1Ro6CW/-Juan----MDSBottomSheet?node-id=61304-21219) | Illustration → `sectionHeader` → body copy → Bottom CTAs | Marketing, education, or emotional context that needs visual support | `61304:21219` · `hasButtons=true` |
+| [`bottomSheetTextBullets`](https://www.figma.com/design/kV7w4lzYz6xDsJkl1Ro6CW/-Juan----MDSBottomSheet?node-id=61304-19586) | Illustration → `sectionHeader` → `bottomSheetTextBulletsSlot` → Bottom CTAs | Multi-point explanations — [dot bullets pattern](../patterns/bullet-points.md) | `61304:19586` · `hasButtons=true` |
+| [`bottomSheetItemList`](https://www.figma.com/design/kV7w4lzYz6xDsJkl1Ro6CW/-Juan----MDSBottomSheet?node-id=61304-25287) | `sectionHeader` (optional) → `bottomSheetListItemSlot` (scroll in `slot`) | Pick one option · long lists · **no** [Search Field](./search-field.md) | `61304:25287` · `hasButtons=false` · `list` `variant` per task · `61304:4913` (header + list — legacy name `bottomSheetItemListSearch`, **no search field**) |
 
 **`bottomSheetTextDefault`** is the default text sheet in product: text-forward, no hero illustration — prefer it for confirmations and help unless an illustration is required.
 
@@ -168,11 +195,12 @@ Bullet spacing → [bullet-points pattern](../patterns/bullet-points.md#token-bi
 
 ## Verification
 
-- [ ] Usage & behavior: correct pattern; not dismiss-locked; no App Bar / Tabs / `screenHeader` in sheet; not stacked.
+- [ ] Usage & behavior: correct pattern; not dismiss-locked; no App Bar / Tabs / Search Field / `screenHeader` in sheet; not stacked.
 - [ ] Interactions: scrim + blur; iOS slide/fade; dismiss via handle, scrim, or CTA; scroll in `slot`.
 - [ ] Accessibility: role, focus trap, handle labeled.
 - [ ] Bullet sheets: dot markers only · ≤5 items · pattern spacing; not arrow list in sheet.
-- [ ] Tokens · list `variant` · `hasButtons` · library not detached.
+- [ ] Props match Figma: `hasButtons` per pattern · `bottomSheetListItemSlot` `hasInfoPanel` only when needed · one `list` `variant` per sheet ([Props to avoid](#props-to-avoid)).
+- [ ] Tokens · library not detached.
 
 ## Related specs
 
@@ -184,6 +212,10 @@ Bullet spacing → [bullet-points pattern](../patterns/bullet-points.md#token-bi
 
 ## Figma & library (optional)
 
-- Catalog: BottomSheet `11381:30960` in [`../figma-catalog/mobile-components.md`](../figma-catalog/mobile-components.md)
-- Workstream: [Juan MDS BottomSheet](https://www.figma.com/design/kV7w4lzYz6xDsJkl1Ro6CW/-Juan----MDSBottomSheet?node-id=15726-83880) — `MDSBottomSheet` `10994:23790` in frontmatter
-- References: [BottomSheetView + scrim](https://www.figma.com/design/kV7w4lzYz6xDsJkl1Ro6CW/-Juan----MDSBottomSheet?node-id=61344-1775) · [use cases](https://www.figma.com/design/kV7w4lzYz6xDsJkl1Ro6CW/-Juan----MDSBottomSheet?node-id=61304-26920) · list `16971:115344`
+- **File:** [Juan — MDS BottomSheet](https://www.figma.com/design/kV7w4lzYz6xDsJkl1Ro6CW/-Juan----MDSBottomSheet)
+- **Reference patterns (canonical):** [BottomSheet [References]](https://www.figma.com/design/kV7w4lzYz6xDsJkl1Ro6CW/-Juan----MDSBottomSheet?node-id=61304-26920) (`61304:26920`) — see [Reference patterns](#reference-patterns) for per-instance nodes
+- **BottomSheetView + scrim:** [BottomSheetScreen](https://www.figma.com/design/kV7w4lzYz6xDsJkl1Ro6CW/-Juan----MDSBottomSheet?node-id=61344-1775) (`61344:1775`, inside references board)
+- **`bottomSheetListItemSlot`:** [`16796:78595`](https://www.figma.com/design/kV7w4lzYz6xDsJkl1Ro6CW/-Juan----MDSBottomSheet?node-id=16796-78595) — `hasInfoPanel` · nested **`list`**
+- **`list` variants:** [`16971:115344`](https://www.figma.com/design/kV7w4lzYz6xDsJkl1Ro6CW/-Juan----MDSBottomSheet?node-id=16971-115344) — `default` · `transactional` · `radio` · `currency`
+- **Catalog:** BottomSheet `11381:30960` in [`../figma-catalog/mobile-components.md`](../figma-catalog/mobile-components.md)
+- **Component (`figma node` in frontmatter):** `MDSBottomSheet` `10994:23790`

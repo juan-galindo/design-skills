@@ -126,7 +126,7 @@ Dots avoid false affordance in tight sheet surfaces. Arrows suggest forward flow
 
 ## Related specs
 
-- [`../components/bottom-sheet.md`](../components/bottom-sheet.md) — `bottomSheetTextBulletsSlot` · sheet patterns
+- [`../components/bottom-sheet.md`](../components/bottom-sheet.md) — `bottomSheetTextBulletsSlot` · sheet patterns · Figma [`bottomSheetTextBullets`](https://www.figma.com/design/kV7w4lzYz6xDsJkl1Ro6CW/-Juan----MDSBottomSheet?node-id=61304-19586) (`61304:19586`) on [references board](https://www.figma.com/design/kV7w4lzYz6xDsJkl1Ro6CW/-Juan----MDSBottomSheet?node-id=61304-26920)
 - [`../components/header.md`](../components/header.md) — `sectionHeader` above bullet block in sheets
 - [`../content/guidelines/bullets.md`](../content/guidelines/bullets.md)
 - [`../tokens/spacing-tokens.md`](../tokens/spacing-tokens.md) · [`../tokens/typography-tokens.md`](../tokens/typography-tokens.md)
