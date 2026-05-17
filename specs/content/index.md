@@ -75,8 +75,9 @@ Rules and templates by content format (what you're producing).
 | `types/help-center/workflow.md` | HC creation and publication workflow |
 | `types/help-center/content-strategy.md` | HC-specific content strategy guidance |
 | `types/help-center/structure.md` | HC article structure rules |
-| `types/help-center/templates.md` | HC article templates |
-| `types/help-center/writing-guidelines.md` | HC writing guidelines |
+| `types/help-center/templates.md` | Article template, title decision rule, formatting rules (bold, bullets, numbered lists, UI refs), example |
+| `types/help-center/templates-new-listings.md` | Template and example for new asset listing articles |
+| `types/help-center/writing-guidelines.md` | Titles (direct vs indirect), capitalization, bold, bullets, direct UI references — with Do/Don't tables |
 | `types/help-center/checklist.md` | HC self-review checklist before publishing |
 
 ### Content strategy

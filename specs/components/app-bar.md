@@ -3,126 +3,132 @@ id: app-bar
 name: App Bar
 category: component
 platform: mobile
-tags: [navigation]
+tier: organism
+tags: [navigation, search]
+aliases: [top app bar, top navigation bar, MDSAppBar]
 status: ready
-figma node: "6701:44162"
+figma node: "39425:3265"
+relationships:
+  composes_with: [header, tabs, search-field]
+  conflicts_with: [bottom-sheet]
+  substitutes: []
+  requires: []
 ---
 
-## What it is
+## Agent summary
 
-The App Bar is the primary navigation component on mobile. It always appears as the first element on every app screen, providing context about the current screen and actions to navigate between screens.
+- One **MDSAppBar** per screen (`variant` + `background`); topmost (status bar only above); **no gap** below.
+- **`global` / `accent`:** home, portfolio, markets only — T1 notifications · T2 rewards.
+- **Other variants:** trailing = close, filter, or favorite — never notifications/rewards.
+- **`progressBar`:** ≥3 steps only; T1 close only; no T2.
+- **Title:** [Header](./header.md) in content — **not** on `global` + `accent`. `calculator` center = action label only (not screen title).
+- **Copy:** [`../content/index.md`](../content/index.md) · Text slot rules below.
 
-## When to use
+## Overview
 
-- On every app screen, without exception.
-- As the topmost element content begins immediately below it.
-- To surface actions that directly support the main task of that screen.
+Primary mobile navigation — first UI element every screen. Leading control + center (search, progress, calculator action) + optional trailing. **64px** (`global`) · **56px** (others).
 
-## When NOT to use
+## Structure
 
-- Inside bottom sheets or modals — the App Bar is a screen-level component only.
+Properties: `variant` · `background` (`default` | `accent`, `global` only) · `hasIconLeading` · `hasIconTrailing1` · `hasIconTrailing2` · `hasIconCurrency` (`calculator` only).
 
-## Variants
+| Variant | When | Leading | Center | Trailing |
+|---------|------|---------|--------|----------|
+| `global` | Home, portfolio, markets | Menu | Search | T2 rewards · T1 notifications |
+| `global` + `accent` | Same on accent surface | Menu | Search (on-accent) | Same as `global` |
+| `default` | Root tab (bottom nav primary) | `arrow_back` | — | close · filter · favorite |
+| `backButton` | Pushed sub-screen | `arrow_back` | — | close (common) · filter · favorite |
+| `calculator` | Buy / sell / convert | `arrow_back` | Action + currency icon | Order-type dropdown |
+| `globalSearch` | Search from `global`, keyboard up | `arrow_back` | Focused search | Clear on field |
+| `progressBar` | Flow ≥3 steps | `arrow_back` | Progress + step (e.g. `1/4`) | Close on T1 only |
 
-### default
+**`default` vs `backButton`:** root tab vs forward navigation into a sub-screen.
 
-Shows a leading `arrow_back` icon. Trailing icon slots are optional. The screen title lives in the content below, not in the bar.
+**Trailing:** `iconTrailing1` rightmost · `iconTrailing2` left of T1. Max 2 slots (1 on `progressBar`). No T2 without T1. Secondary only — no primary CTA.
 
-Use when the screen has a clear back-stack but no need to show a back button — for example, a root-level tab screen.
+## Usage & behavior
 
-### backButton
+### When to use
 
-Shows a leading `arrow_back` icon. Trailing icon slots are optional. `iconTrailing1` is commonly a `close` icon when the screen needs an explicit dismiss action alongside the back navigation.
+- One **MDSAppBar** as the primary top navigation anchor on every mobile screen (variant per screen type).
 
-Use on any screen the user navigated into and needs to return from. This is the most common variant for sub-screens.
+### When NOT to use
 
-### calculator
+- Inside [bottom-sheet](./bottom-sheet.md) or modals; detached instance.
 
-Shows a leading `arrow_back` icon, a centered action title (e.g. "Comprar BTC") with an optional currency icon `hasIconCurrency`, and a trailing MDS Dropdown for **order type selection**.
+### Composition
 
-Order type options vary by asset class:
+| Variant | Stack | [Header](./header.md) |
+|---------|-------|----------------------|
+| `global` + `accent` | App Bar → content | No |
+| `backButton` | App Bar → Header → content | Yes |
+| `global` | App Bar → feed / [Tabs](./tabs.md) | Typically no |
+| `globalSearch` | Pushed search bodies → [Search Field](./search-field.md) `activeFocusEmpty` + body (**global search** · **catalog browse** · **Markets category search**) | No |
+| `default` | App Bar → Header → content/tabs | If needed |
+| `calculator` | App Bar → form | Optional |
 
-| Asset class | Options |
-|---|---|
-| Crypto, Stablecoins, Fiat | Ahora, Diaria, Semanal, Mensual, Precio deseado |
-| Stocks | Mercado, Límite |
+Header MUST NOT sit above the App Bar.
 
-Use only on the Calculator screen (buy, sell, convert). See the Calculator screen exception in the Title placement section.
+## Interactions
 
-### global
+| Interaction | Behavior | Notes |
+|-------------|----------|-------|
+| Leading · `global` | Opens menu (drawer) | Not back — menu affordance |
+| Leading · other variants | `arrow_back` navigates up / back | Stack exit |
+| Trailing icons | Secondary actions (close, filter, favorite, notifications, rewards) | Max 2 slots; rules per variant |
+| Search · `global` | Tap affordance → **fade animation** (required) to **global search** · back same (Flow **A**) | [Search Field](./search-field.md) |
+| Search · `globalSearch` | Shared chrome · body varies by entry ([Search Field](./search-field.md)) · `activeFocusEmpty` · 56px bar | **S1–S4** |
+| Calculator center | Action label + currency icon | Order-type dropdown on trailing |
+| Calculator orders | Crypto/stable/fiat → Ahora, Diaria, Semanal, Mensual, Precio deseado | Stocks → Mercado, Límite |
+| `progressBar` | Step indicator (e.g. `1/4`) | Close on T1 only; ≥3 steps |
 
-Shows a permanent leading `menu` icon, a full-width MDSSearchField, and up to two trailing icon slots.
+## Accessibility
 
-Use only on the main home screen. Do not use on sub-screens.
+> **Mobile** — VoiceOver (iOS) · TalkBack (Android). Copy → [`../content/index.md`](../content/index.md).
 
-### globalSearch
+| Concern | Requirement |
+|---------|-------------|
+| Role / semantics | Navigation bar — leading: **menu** (`global`) or **back** (stack); trailing icons as buttons |
+| Focus & traversal | VoiceOver / TalkBack reach all icons and search; logical left-to-right order (leading → center → trailing) |
+| Labels & announcements | Each icon: localized `accessibilityLabel` (notifications, rewards, close, filter, favorite, clear); search field label when focused |
+| Touch & gestures | Icon hit areas ≥ 44×44 pt (iOS) / 48×48 dp (Android); `progressBar` announces step + total (e.g. step 1 of 4); calculator action label MUST differ from [Header](./header.md) screen title |
 
-Shows a leading `arrow_back` icon and a full-width MDSSearchField in its active/focused state (visible cursor, focus border).
+## Design intent
 
-Use when the user has tapped the MDSSearchField on the `global` variant and the keyboard is open.
+One nav anchor per screen: discovery (`global`) vs stack (`backButton`) vs task modes (calculator, search, progress). Bar navigates; Header names the screen except calculator action in the bar.
 
-When the search field is focused and empty, the screen below displays two suggestion sections:
+## Token bindings
 
-- **Top 3 popular cryptocurrencies** — each item is a tappable link that navigates to the asset detail. The section includes a "Ver todas" link that navigates to the full crypto list.
-- **Top 3 popular stocks** — each item is a tappable link that navigates to the asset detail. The section includes a "Ver todas" link that navigates to the full stocks list.
+> [`../tokens/token-reference.md`](../tokens/token-reference.md)
 
-### progressBar
+| Role | Token path |
+|------|------------|
+| Bar surface | AppBar · `background` default \| accent |
+| Search | [Search Field](./search-field.md) — token bindings |
+| Calculator action / dropdown | `body/base-medium` / `tiny/base-bold` |
+| Progress label | `body/small` |
+| Icons | Semantic · on-accent for `global`+`accent` |
 
-Shows a leading `arrow_back` icon, a centered progress indicator with a step counter (e.g. "1/4"), and a single optional trailing `close` icon
+## Text slot rules
 
-Use on multi-step flows with a minimum of 3 steps where the user needs to know how far along they are and must be able to exit.
+| Slot | Max | Rules |
+|------|-----|-------|
+| Screen title | per [header](./header.md) | In content — not in bar |
+| Search placeholder | [Search Field](./search-field.md) | Home: **Busca activos** + animated suffix · pushed search: **Busca activos** |
+| Calculator action | 12 chars | Infinitive + optional icon — Comprar/Vender/Convertir |
 
----
+MUST NOT duplicate calculator action string and screen title.
 
-## Trailing icon behavior
+## Verification
 
-The trailing container holds up to two icon buttons, stacked right-to-left. Both slots hold **secondary or complementary actions** — never primary actions.
-
-Typical actions per slot:
-
-| Slot | Position | Common actions |
-|---|---|---|
-| `iconTrailing1` | Right | `close` (dismiss flow), `notifications`, `filter` |
-| `iconTrailing2` | Left | `rewards`, `favorites` (`fav`), complementary screen action |
-
-**global variant specifically:** `iconTrailing2` = rewards, `iconTrailing1` = notifications.
-
-**Rules:**
-- Never show `hasIconTrailing2` without `hasIconTrailing1`.
-- The `progressBar` variant supports only one trailing icon (`close`). Do not enable `hasIconTrailing2` on it.
-- Both slots are for secondary actions only — never place a primary CTA in the trailing area.
-
----
-
-## Placement
-
-The App Bar must always be the **top element** on every screen and must always be present. No other element may appear above it. Screen content starts directly below it with no gap.
-
-## Exception — Title in App Bar
-
-Only place the title inside the App Bar on the **Calculator screen** (conversion, buy/sell). No other screen qualifies for this exception.
-
-On calculator screen:
-- Display the action (e.g. Convertir) inside the App Bar.
-- Optionally include a MDSIcon currency alongside the title when the selected asset needs to be identified at a glance.
-
-## Actions
-
-The App Bar can display actions that support the main tasks of the current screen. Keep them minimal only expose actions that are directly relevant to the screen's primary goal.
-
-## Content guidelines
-
-- Use sentence case for AppBar titles.
-- Keep titles short — one to four words when possible.
-- Do not duplicate the title in both the App Bar and the screen content.
-- **Calculator screen exception:** use an infinitive verb. 12 characters maximum including the space.
-
-| Mode | Formula | Example |
-|---|---|---|
-| Buy | Comprar [MDSIcon] | Comprar BTC |
-| Sell | Vender [MDSIcon] | Vender ETH |
-| Convert | Convertir | Convertir |
+- [ ] Usage & behavior: variant + `global` scope; composition + Header rules; not detached.
+- [ ] Interactions: leading/trailing per variant; search screen + `activeFocusEmpty` empty state; calculator orders; `progressBar` ≥3 steps.
+- [ ] Accessibility: menu vs back semantics; icon labels; progress step announcement.
+- [ ] Tokens · text slots · related specs.
 
 ## Related specs
 
-- [`header.md`](./header.md)
+- [`header.md`](./header.md) · [`tabs.md`](./tabs.md) · [`search-field.md`](./search-field.md)
+- [`../content/index.md`](../content/index.md) · [`../figma-catalog/mobile-components.md`](../figma-catalog/mobile-components.md)
+
+---

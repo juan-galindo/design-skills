@@ -104,35 +104,24 @@ When you invoke a skill, the AI loads the skill's instructions automatically and
 
 ---
 
+## Spec Library
+
+Reference specs used by skills at runtime. See [`specs/README.md`](specs/README.md) for the full index.
+
+---
+
 ## Project structure
 
 ```
 design-skills/
-├── .claude/
-│   ├── figma.config.json     # Figma file keys and node IDs
-│   ├── settings.json         # Claude Code permissions and hooks
-│   └── skills/
-│       └── <skill-name>/
-│           ├── SKILL.md      # Skill definition — instructions, trigger conditions, workflow
-│           ├── scripts/      # Optional automation scripts (TypeScript or Python)
-│           └── assets/       # Optional templates, examples, or static resources
-├── docs/
-│   ├── content/              # Exported content artifacts (e.g. Lokalise project keys)
-│   └── workflows/            # Contribution guides for skills, content, and org plugin
-├── specs/
-│   ├── _template.md          # Blank spec template — copy to start a new spec
-│   ├── components/           # MDS component specs (atoms, molecules, organisms)
-│   ├── content/              # UX writing guidelines, localization rules, content types
-│   ├── figma-catalog/        # Figma file keys and node IDs for MDS libraries and assets
-│   ├── patterns/             # Layout and composition rules
-│   └── tokens/               # Token reference — authoritative token list
-├── CLAUDE.md                 # Agent instructions for this repo
+├── .claude/skills/   # One folder per skill, each with a SKILL.md
+├── docs/             # Produced artifacts (content, decisions, features, workflows)
+├── specs/            # Reference specs used by skills at runtime
+├── CLAUDE.md         # Agent instructions
 └── README.md
 ```
 
-Skill naming follows a `<category>-<purpose>` convention:
-- `design-*` — design-specific skills (Figma, UX writing, design system)
-- `dev-*` — engineering and cross-functional skills
+Skill naming follows a `<category>-<purpose>` convention: `design-*` for design skills, `dev-*` for engineering and cross-functional.
 
 ---
 
