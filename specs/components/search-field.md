@@ -238,7 +238,7 @@ MUST NOT use placeholder-only **Buscar** / **Search**.
 
 ## Related specs
 
-- [`app-bar.md`](./app-bar.md) · [`header.md`](./header.md) · [`bottom-sheet.md`](./bottom-sheet.md) (conflicts — no search in sheet)
+- [`app-bar.md`](./app-bar.md) · [`header.md`](./header.md) (conflicts — no search in sheet)
 - [`../content/index.md`](../content/index.md) · [`../tokens/token-reference.md`](../tokens/token-reference.md) · [`../figma-catalog/mobile-components.md`](../figma-catalog/mobile-components.md) · [`../figma-catalog/assets/icons.md`](../figma-catalog/assets/icons.md)
 
 ---
