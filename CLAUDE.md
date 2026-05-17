@@ -16,8 +16,8 @@ All UX pattern specs live in `specs/`. Load them as reference context before mak
 |--------|---------|
 | `specs/figma-catalog/` | Figma lookup tables — `mobile-components.md`, `web-components.md`, `assets/` |
 | `specs/tokens/` | Token reference — authoritative token list |
-| `specs/components/` | All MDS components (atoms, molecules, organisms merged) |
-| `specs/patterns/` | Layout and composition rules |
+| `specs/components/` | All MDS components (atoms, molecules, organisms merged) — read `specs/components/CLAUDE.md` when loading component specs |
+| `specs/patterns/` | Composition rules across components — read `specs/patterns/CLAUDE.md` when loading patterns |
 | `specs/content/` | UX writing guidelines, localization rules — entry point: `specs/content/index.md` |
 
 ### Loading specs in a skill step
@@ -50,5 +50,8 @@ All skills live in `.claude/skills/`. Each skill has a `SKILL.md` with numbered,
 
 ## New spec files
 
-Copy `specs/_template.md` to the appropriate folder and fill in each section.
-Set `status: draft` until the spec has been reviewed.
+- **Component** — copy `specs/_template.md` to `specs/components/{id}.md` (`category: component`). See `specs/components/CLAUDE.md` and pilot `specs/components/app-bar.md`.
+- **Pattern** — copy `specs/_template-pattern.md` to `specs/patterns/{id}.md` (`category: pattern`). See `specs/patterns/CLAUDE.md` and pilot `specs/patterns/bullet-points.md`.
+- **Token** — extend `specs/tokens/` per `token-reference.md`.
+
+Set `status: draft` until reviewed.

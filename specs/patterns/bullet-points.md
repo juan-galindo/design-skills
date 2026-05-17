@@ -4,84 +4,132 @@ name: Bullet Points
 category: pattern
 platform: mobile
 tags: [list, arrow, dot, bullet]
+aliases: [bullet list, dot bullets, arrow list]
 status: ready
 figma node: "2255:3032"
+relationships:
+  applies_to: [bottom-sheet]
+  conflicts_with: []
+  requires: []
 ---
 
-## What it is
+## Agent summary
 
-Two patterns for presenting non-interactive, scannable lists on mobile. Each uses a distinct marker type that signals context and surface:
+- Two **non-interactive** list markers on mobile — **never mix** in one list.
+- **Dot bullets (`•`):** [bottom-sheet](../components/bottom-sheet.md) only — slot **`bottomSheetTextBulletsSlot`** · sheet pattern **`bottomSheetTextBullets`**.
+- **Arrow list (`→`):** full-screen only — **`MDS ListItem`** ReadOnly + prefix icon · **MUST NOT** in sheets/modals.
+- Max **5** items · 1–2 lines each · markers **never tappable**.
+- **Copy:** [`../content/guidelines/bullets.md`](../content/guidelines/bullets.md) · Text slot rules below.
 
-| Pattern | Marker | Surface |
-|---------|--------|---------|
-| Arrow list | `→` icon | Full-screen layouts |
-| Dot bullets | `•` | Bottom sheets / modals |
+## Overview
 
----
+Scannable, informational lists where items are peers — not navigation, filters, or [bottom-sheet list picks](../components/bottom-sheet.md#list-variant-bottomsheetlistitemslot--list). Marker choice signals **surface**: constrained modal/sheet → dots; full screen → arrows.
 
-## Arrow list
+## Structure
 
-### When to use
+| Variant | Marker | Host | Surface |
+|---------|--------|------|---------|
+| **Dot bullets** | Typographic `•` inline with body | `bottomSheetTextBulletsSlot` in **MDSBottomSheet** | Bottom sheets · modals |
+| **Arrow list** | `arrow_forward` (or equivalent) prefix on **MDS ListItem** | ReadOnly / Default list row | Full-screen layouts |
 
-- Sequential steps, onboarding flows, or feature discovery on full-screen layouts
-- Paired with a clear CTA button that continues the flow
+**Not this pattern:** `bottomSheetListItemSlot` — selectable rows (`radio`, `currency`, etc.) — see [bottom-sheet](../components/bottom-sheet.md).
 
-### When NOT to use
+### Dot bullets — sheet stack
 
-- Inside bottom sheets or modals — arrows read as tappable in constrained surfaces
-- For unordered facts, restrictions, or disclaimers — use dot bullets instead
+Per [bottom-sheet — Bullet lists](../components/bottom-sheet.md#bullet-lists-bottomsheettextbulletsslot):
 
-### Component
+`bottomSheetTextBullets` → optional illustration → [Header](../components/header.md) `sectionHeader` → **`bottomSheetTextBulletsSlot`** → optional Bottom CTAs.
 
-Use `MDS ListItem` (Default / ReadOnly state) with a prefix icon set to the arrow icon (`arrow_forward` or equivalent directional arrow from MDS icon set).
+### Arrow list — screen stack
 
-## Dot bullets
+Typically below [App Bar](../components/app-bar.md) / [Header](../components/header.md): informational rows with arrow prefix + optional screen CTA. Rows are **not** sheet list picks.
 
-### When to use
+## Usage & behavior
 
-- Restrictions, disclaimers, or feature limitations in constrained surfaces
-- Non-tappable informational lists inside bottom sheets or modals
-- Short items (1–2 lines maximum per bullet)
+### Dot bullets — When to use
 
-### When NOT to use
+- Restrictions, disclaimers, feature limits, or **3+** parallel facts in a [bottom-sheet](../components/bottom-sheet.md).
+- Non-tappable copy inside sheets/modals.
 
-- On full-screen layouts or navigation lists — use arrow list instead
-- When items exceed 5 — restructure the content instead
+### Dot bullets — When NOT to use
 
-### Component
+- Full-screen layouts or navigation — use **arrow list** or tappable **ListItem** instead.
+- More than **5** items — restructure (subheadings, body copy, or multiple blocks).
+- Tappable / selectable options — use `bottomSheetListItemSlot`, not this pattern.
+- Inside sheets when a single short paragraph suffices — prefer **`bottomSheetTextDefault`**.
 
-Rendered inside `MDS BottomSheet`. The dot marker is a typographic bullet (`•`) inline with body text, not a separate icon component.
+### Arrow list — When to use
 
-## Good practices (both patterns)
+- Sequential steps, onboarding, or feature discovery on **full-screen** layouts.
+- Paired with a clear primary CTA that continues the flow.
 
-### One marker type per list
-Never mix dots and arrows within the same list. Each list must use a single marker type. Mixing implies a hierarchy or item-type difference that doesn't exist.
+### Arrow list — When NOT to use
 
-### Markers are never tappable
-Markers are decorative. They must never be wrapped in a touchable area or respond to taps independently. If a row needs to be tappable, the entire row is the touch target.
+- Inside [bottom-sheet](../components/bottom-sheet.md) or modals — arrows read as tappable in constrained surfaces.
+- Unordered facts, restrictions, disclaimers — use **dot bullets** instead.
+- Selectable lists — use interactive **ListItem** / sheet list slot.
 
-### Marker aligns to the cap-height of the first line
-When an item wraps to multiple lines, the marker sits at the cap-height of the first line — never vertically centered to the full text block.
+### Shared rules (both variants)
 
-### Keep lists short (max 5 items)
-More than 5 items signals the content needs restructuring. Group under subheadings or split into separate sections if more items are genuinely needed.
+| Rule | Requirement |
+|------|-------------|
+| One marker per list | MUST NOT mix `•` and `→` in the same list |
+| Markers | Decorative only — MUST NOT be separate touch targets |
+| Line wrap | Marker at **cap-height of first line** — not vertically centered on multi-line blocks |
+| Items | One complete idea each; consistent grammar across items |
+| Length | 1–2 lines per item; max **5** items |
 
-### Each item is self-contained
-One complete idea per item. If an item needs a follow-up explanation, it belongs in body text — not as a sub-item or continuation.
+## Interactions
 
-### Use consistent grammatical structure
-All items must follow the same grammatical pattern (e.g., all start with a verb, or all are noun phrases). Inconsistent structure makes lists harder to scan.
+N/A — static informational lists. If a row must be tappable, use **MDS ListItem** (arrow or default) or `bottomSheetListItemSlot` — not dot bullets.
 
-### Spacing — the half-rule
-| Gap | Token | Light Bitso | Dark Bitso | Source |
-|-----|-------|-------------|------------|--------|
-| Between list items | `spacing/stack/sm` | 8px | 8px | [spacing-tokens](../tokens/spacing-tokens.md) |
-| Between list block and surrounding elements | `spacing/padding/base` | 16px | 16px | [spacing-tokens](../tokens/spacing-tokens.md) |
+## Accessibility
 
----
+> **Mobile** — VoiceOver · TalkBack. Copy → [`../content/guidelines/accessibility.md`](../content/guidelines/accessibility.md).
+
+| Concern | Requirement |
+|---------|-------------|
+| Role / semantics | Static list — not buttons; dot variant: items are list text, not separate controls |
+| Focus & traversal | One focus stop per item (full row text); marker not independently focusable |
+| Labels & announcements | Item text = label; no “button” or “link” trait on non-interactive bullets |
+| Touch & gestures | No touch handling on markers; arrow/dot rows MUST NOT look like sheet **list picks** unless using list-item component |
+
+## Design intent
+
+Dots avoid false affordance in tight sheet surfaces. Arrows suggest forward flow on full screens where rows may still be read-only. Selectable sheet content uses list-item slots, not bullet markers.
+
+## Token bindings
+
+> [`../tokens/token-reference.md`](../tokens/token-reference.md) — no raw hex in specs.
+
+| Role | Token path | Variant |
+|------|------------|---------|
+| Gap between items | `spacing/stack/sm` | both |
+| Block margin (list ↔ surrounding content) | `spacing/padding/base` | both |
+| Body text | `body/base` (or slot typography from host component) | dot bullets in sheet |
+
+## Text slot rules
+
+> Period and phrasing → [`../content/guidelines/bullets.md`](../content/guidelines/bullets.md) · voice → [`../content/index.md`](../content/index.md).
+
+| Slot | Rules |
+|------|--------|
+| Bullet item | 1–2 lines · max 5 items · same grammatical pattern across items |
+| Punctuation | Period when item is a complete sentence with conjugated verb; omit for phrases / infinitives |
+
+## Verification
+
+- [ ] Correct variant for surface (dots in sheet · arrows on screen only).
+- [ ] ≤5 items; single marker type; markers not tappable.
+- [ ] Cap-height alignment on wrap; token spacing applied.
+- [ ] Not confused with `bottomSheetListItemSlot` selectable lists.
 
 ## Related specs
 
-- [`specs/components/bottom-sheet.md`](../components/bottom-sheet.md)
-- [`specs/tokens/spacing-tokens.md`](../tokens/spacing-tokens.md)
-- [`specs/tokens/typography-tokens.md`](../tokens/typography-tokens.md)
+- [`../components/bottom-sheet.md`](../components/bottom-sheet.md) — `bottomSheetTextBulletsSlot` · sheet patterns
+- [`../components/header.md`](../components/header.md) — `sectionHeader` above bullet block in sheets
+- [`../content/guidelines/bullets.md`](../content/guidelines/bullets.md)
+- [`../tokens/spacing-tokens.md`](../tokens/spacing-tokens.md) · [`../tokens/typography-tokens.md`](../tokens/typography-tokens.md)
+- [`../figma-catalog/mobile-components.md`](../figma-catalog/mobile-components.md) — List Item
+
+---
