@@ -106,12 +106,13 @@ Only one tab MAY be `focus` at a time.
 |------|------------|---------------|
 | Label | `body/small-medium` | `focus` |
 | Label | `body/small` | `default` |
+| Label color | `color/tertiary/selected` | `focus` |
 | Active underline color | `color/tertiary/selected` | `focus` |
 | Active underline width | `border/width/200` | `focus` |
 | Inactive divider color | `color/border/light` | `default` |
 | Inactive divider width | `border/width/100` | `default` |
 | Row divider (`default` variant) | `color/border/light` · `border/width/100` | `MDSTabs` `variant=default` |
-| Icon | Icon semantic + 16px component size | optional `hasIconLeading` |
+| Icon | `MDSIcon` `small` size | optional `hasIconLeading` |
 
 ## Text slot rules
 
@@ -124,7 +125,7 @@ Only one tab MAY be `focus` at a time.
 
 MUST NOT truncate or wrap — shorten copy or use `variant=default`.
 
-`hasPulsingDot`: new/unread only.
+`hasPulsingDot`: new/unread only.   
 
 ## Verification
 
