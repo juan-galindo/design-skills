@@ -103,7 +103,7 @@ The screen is designed for continuous vertical scanning — users browse section
 | # | Element | Config |
 |---|---------|--------|
 | Header | `MDSHeader` `sectionHeader` | `hasTopBorder=false` · `hasDescription=true` |
-| Strip | `MDSfeaturedAsset` × N in card | horizontal scroll · `px=spacing/padding/base` (16) · `gap=spacing/inline/xs` (8) · card `bg=color/surface/default` · `borderRadius=16` · `hasFavIcon=true` · `hasChart=true` |
+| Strip | `MDSfeaturedAsset` × N in card | horizontal scroll · `px=spacing/padding/base` (16) · `gap=spacing/inline/xs` (8) · card `bg=color/surface/default` · `borderRadius=16` · `hasFavIcon=true` |
 
 `hasTopBorder=false` because this section directly follows a section (3c) that ends with a full-width button.
 
