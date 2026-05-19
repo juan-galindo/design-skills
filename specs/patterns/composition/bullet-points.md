@@ -6,9 +6,8 @@ platform: mobile
 tags: [list, arrow, dot, bullet]
 aliases: [bullet list, dot bullets, arrow list]
 status: ready
-figma node: "2255:3032"
 relationships:
-  applies_to: [bottom-sheet]
+  applies_to: []
   conflicts_with: []
   requires: []
 ---

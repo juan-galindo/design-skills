@@ -24,7 +24,7 @@ All UX pattern specs live in `specs/`. Load them as reference context before mak
 
 ```markdown
 ## Step 1 — Load relevant spec
-Read `specs/patterns/bullet-points.md` to get pattern rules before proceeding.
+Read `specs/patterns/composition/bullet-points.md` to get pattern rules before proceeding.
 ```
 
 To load an entire tier: `Glob specs/components/*.md → Read each file → apply rules`
@@ -51,7 +51,7 @@ All skills live in `.claude/skills/`. Each skill has a `SKILL.md` with numbered,
 ## New spec files
 
 - **Component** — copy `specs/_template.md` to `specs/components/{id}.md` (`category: component`). See `specs/components/CLAUDE.md` and pilot `specs/components/app-bar.md`.
-- **Pattern** — copy `specs/_template-pattern.md` to `specs/patterns/{id}.md` (`category: pattern`). See `specs/patterns/CLAUDE.md` and pilot `specs/patterns/bullet-points.md`.
+- **Pattern** — copy `specs/_template-pattern.md` to `specs/patterns/{scope}/{id}.md` where `{scope}` is `composition/` (slot-level) or `layouts/` (full-screen). Set `category: pattern`. See `specs/patterns/CLAUDE.md` and pilot `specs/patterns/composition/bullet-points.md`.
 - **Token** — extend `specs/tokens/` per `token-reference.md`.
 
 Set `status: draft` until reviewed.

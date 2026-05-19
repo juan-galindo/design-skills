@@ -1,0 +1,18 @@
+{
+  "name": "bitso-design-skills",
+  "owner": {
+    "name": "Bitso Design",
+    "url": "https://github.com/bitso-labs/design-skills"
+  },
+  "plugins": [
+    {
+      "name": "figma-agent",
+      "description": "Figma design partner for the Bitso design team. Orchestrates Figma layouts and in-product copy through MDS-aware agents backed by foundation lenses (tokens, composition, rhythm, taste, quality, implementation).",
+      "source": "./plugin",
+      "category": "design",
+      "tags": ["design", "figma", "agents"],
+      "version": "1.0.0",
+      "strict": false
+    }
+  ]
+}

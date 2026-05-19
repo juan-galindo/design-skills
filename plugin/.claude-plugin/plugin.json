@@ -1,0 +1,9 @@
+{
+  "name": "figma-agent",
+  "version": "1.0.0",
+  "description": "Figma design partner for the Bitso design team. Orchestrates Figma layouts and in-product copy through MDS-aware agents backed by foundation lenses (tokens, composition, rhythm, taste, quality, implementation).",
+  "author": {
+    "name": "Bitso Design"
+  },
+  "homepage": "https://github.com/bitso-labs/design-skills"
+}
