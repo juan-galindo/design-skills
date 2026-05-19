@@ -20,41 +20,15 @@ relationships:
 - Discovery without navigation — filter in place on **pushed search screens** only.
 - **Variants:** `default` · `accent` (tab affordance). **States:** `default` · `pressed` · `activeFocus` · **`activeFocusEmpty`** · `filled` · **`loading`** · `disabled`.
 - Non-interactive search icon · **clear** when `value` ≠ empty · placeholder **Busca activos** (not lone **Buscar**).
-- **Three pushed bodies** under shared `globalSearch` chrome — see [Search screens](#search-screens). Tab affordance **MUST** use **fade animation** (in · out) — not slide · not optional. **Explorar todas** → stack **push** only.
-- **On type:** debounce → **`loading`** → results · [no results](#query-results) · [connection error](#query-results).
+- Tab affordance **MUST** use **fade animation** (in · out) — not slide · not optional. **Explorar todas** → stack **push** only.
+- **On type:** debounce → **`loading`** → results · no results · connection error — body layouts → [`../patterns/composition/search-global.md`](../patterns/composition/search-global.md).
 - **MUST NOT** in forms (**TextField**) or inside [bottom-sheet](./bottom-sheet.md) — any variant.
 
 ## Overview
 
 Users tap the App Bar affordance on **home** · **markets** · **portfolio** — **MUST** transition with **fade animation** (required · not slide). Back to the tab **MUST** use the same fade animation. **Explorar todas** uses stack **push** only. Copy → [`../content/index.md`](../content/index.md).
 
-## Search screens
-
-Shared chrome ([`app-bar.md`](./app-bar.md) `globalSearch` · 56px): `arrow_back` · field **`activeFocusEmpty`** on entry · **Busca activos** · keyboard · `CloseSmall` + in-field clear when typing.
-
-| Screen | Entry | Transition | Empty body (`activeFocusEmpty`) |
-|--------|-------|------------|--------------------------------|
-| **Global search** | Tab search affordance | **Fade animation** (in · out) · **required** | Top 3 cryptos + top 3 stocks · **Ver todas** each → **catalog browse** |
-| **Catalog browse** | **Ver todas** on global search | Stack push | **Chips** (**Criptos** · **Acciones**) + full **CurrencyListItem** list |
-| **Markets category search** | **Explorar todas** on category card | Stack push | One `sectionHeader` + full **CurrencyListItem** list (fixed category) |
-| **Markets category** | — | — | Not a search screen — preview card only (**B1**) |
-
-### Global search · top 3
-
-No `screenHeader`. Two blocks:
-
-1. **`sectionHeader`** **Criptos populares** + **TextButton** **Ver todas** → `topCryptos` card (`color/surface/default` · `border/radius/500`) · 3 × **StackableAsset** (horizontal).
-2. Same for **Acciones populares** / `topStocks`.
-
-**StackableAsset:** extra-large icon · ticker · optional **PriceChangePercentage** (small). Tap → asset detail. **Ver todas** → **catalog browse** with matching chip.
-
-### Catalog browse
-
-**MDS Chips** row + `sectionHeader` (active chip) + vertical **CurrencyListItem** list. Chip tap swaps list; query filters within active chip.
-
-### Markets category search
-
-`sectionHeader` (category name only) + vertical **CurrencyListItem** list. **MUST NOT** show top 3 blocks or chips. **B1** (preview): `screenHeader` · **Tabs** · card with 3 items + **Explorar todas** (`Secondary`).
+Body layouts for the three pushed search screens (global search, catalog browse, Markets category search) → [`../patterns/composition/search-global.md`](../patterns/composition/search-global.md).
 
 ## Structure
 
@@ -72,74 +46,6 @@ Tab affordance is read-only until push. **Sizing:** small only on mobile; large 
 | Tab App Bar center | `accent` (home) / `default` | `default` (+ suffix animation on **home**) |
 | Pushed search | `default` | `activeFocusEmpty` → `filled` / **`loading`** |
 
-## Flows
-
-### Shared · pushed search (**S1–S4**)
-
-| Step | Behavior |
-|------|----------|
-| **S1–S3** | Push · `globalSearch` · `activeFocusEmpty` · **Busca activos** · keyboard |
-| **S4** | `filled` + clear when query present |
-| Back | Pop · clear query (default) |
-
-### Query results
-
-Applies when typing on pushed search screens only.
-
-| Phase | Field | Body |
-|-------|-------|------|
-| Fetching | **`loading`** (query visible) | Loading / prior body hidden |
-| Matches | `filled` | **CurrencyListItem** (scoped by screen/chip/category) |
-| Zero matches | `filled` | **No results** — see below |
-| Failure | `filled` | **Connection error** — see below |
-
-**No results** (request succeeded · zero matches):
-
-| Element | Component | Spec |
-|---------|-----------|------|
-| Icon | **MDS Icon** · `icon=error` | `size=extra large` · centered · decorative (title carries meaning) |
-| Title | `heading/base` | **No encontramos resultados para** `{query}` |
-| Hint | `body/base` · medium emphasis | **Quizás quisiste decir:** |
-| Suggestions | **MDS Tag** row (`status` accent) | API-driven tickers |
-
-**MDS Icon** `size` on mobile: `extra small` · `small` · `base` · `large` · **`extra large`**. **MUST** use **`extra large`** for no-results empty state (48×48 container) — do not hardcode dimensions. Glyph: [`error`](../figma-catalog/assets/icons.md). Component: [`Icon`](../figma-catalog/mobile-components.md).
-
-Tap **Tag** → new query + **loading**. No suggestions → hide hint + **Tag** row.
-
-**Connection error** (no icon — text + action only):
-
-| Element | Component | Copy |
-|---------|-----------|------|
-| Message | `heading/base` | **Por el momento no pudimos conectarnos con los servidores de Bitso, por favor intenta otra vez.** |
-| Action | **MDS Button** · primary | **Intentar de nuevo** |
-
-**Clear** restores prior `activeFocusEmpty` body. Debounce before **loading** to avoid flash.
-
-### Flow A · tabs → global path
-
-| Step | UI |
-|------|-----|
-| **A1** | Tab · `global` affordance (`accent` on home) |
-| **A1a** | **Home** only: suffix **activos** → **acciones** → **cripto** · 300ms linear · infinite |
-| **A1b** | Tap → **fade animation** (required) → **S1–S3** |
-| **A3** | Empty → [top 3](#global-search--top-3) |
-| **A3v** / **A3v′** | **Ver todas** → **catalog browse** (pre-selected chip) |
-| **A3b–d** | [Catalog browse](#catalog-browse) · back → **A3** |
-| **A4** | Type → **Query results** |
-| **A5** | Clear → **A3** or **A3b** |
-| **A6** | Back → **fade animation** (required) to tab |
-
-### Flow B · Markets category → scoped search
-
-> Tab search affordance = Flow **A**, not **B**.
-
-| Step | UI |
-|------|-----|
-| **B1** | [Markets category](#markets-category-search) preview |
-| **B2** | **Explorar todas** → **push** → **S1–S3** |
-| **B3** | Empty → [Markets category search](#markets-category-search) body |
-| **B4–B5** | **Query results** (category scope) · clear → **B3** |
-| **B6** | Back → **B1** |
 
 ## Usage & behavior
 
@@ -171,7 +77,7 @@ Tap **Tag** → new query + **loading**. No suggestions → hide hint + **Tag** 
 | **`loading`** | Fetch in flight (**A4** / **B4**) |
 | `disabled` | Feature unavailable |
 
-Navigation, chips, tags, and retry behaviors → [Flows](#flows).
+Navigation, chips, tags, and retry behaviors → [`../patterns/composition/search-global.md`](../patterns/composition/search-global.md).
 
 ## Accessibility
 
@@ -218,27 +124,21 @@ One search chrome, three discovery bodies: cross-catalog tease (top 3), full cat
 |------|------|
 | Placeholder (tab + pushed) | **Busca activos** |
 | Home suffix | **activos** / **acciones** / **cripto** (animated) |
-| Top 3 sections | **Criptos populares** · **Acciones populares** |
-| Links | **Ver todas** · **Explorar todas** |
-| Chips | **Criptos** · **Acciones** |
-| No results | **No encontramos resultados para** `{query}` · **Quizás quisiste decir:** |
-| Connection error | **Por el momento no pudimos conectarnos…** · **Intentar de nuevo** |
 
-MUST NOT use placeholder-only **Buscar** / **Search**.
+MUST NOT use placeholder-only **Buscar** / **Search**. Body copy (section headers, chips, links, no-results, error) → [`../patterns/composition/search-global.md`](../patterns/composition/search-global.md).
 
 ## Verification
 
 - [ ] Not in forms; **not** in [bottom-sheet](./bottom-sheet.md).
 - [ ] Tab ↔ global search: **fade animation** required on enter and back — **MUST NOT** slide; **Explorar todas** / **Ver todas** → stack push only.
-- [ ] **S1–S4** · **Busca activos** · type → **`loading`** → results / no results / connection error.
-- [ ] **No results:** **MDS Icon** `error` · `size=extra large` · suggestions optional.
-- [ ] Top 3 · catalog browse · Markets bodies match [Search screens](#search-screens).
-- [ ] [Token bindings](#token-bindings) — `searchbar/*` shell · no `input/color/background/*`.
-- [ ] a11y · content locales.
+- [ ] Field states: `activeFocusEmpty` on entry · `filled` + clear when query present · `loading` on fetch.
+- [ ] Token bindings — `searchbar/*` shell · no `input/color/background/*`.
+- [ ] Body layouts and flows → [`../patterns/composition/search-global.md`](../patterns/composition/search-global.md).
 
 ## Related specs
 
 - [`app-bar.md`](./app-bar.md) · [`header.md`](./header.md) (conflicts — no search in sheet)
+- [`../patterns/composition/search-global.md`](../patterns/composition/search-global.md) — body layouts, flows, query result states
 - [`../content/index.md`](../content/index.md) · [`../tokens/token-reference.md`](../tokens/token-reference.md) · [`../figma-catalog/mobile-components.md`](../figma-catalog/mobile-components.md) · [`../figma-catalog/assets/icons.md`](../figma-catalog/assets/icons.md)
 
 ---

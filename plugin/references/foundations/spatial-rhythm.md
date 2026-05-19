@@ -97,7 +97,8 @@ MDSHeader (all variants) ships its own bottom whitespace internally. Adding a st
 |---|---|---|
 | Between distinct content blocks in the same section (e.g. `SegmentedButton` → grid) | `spacing/stack/lg` | 24px |
 | Rows inside a grid | `spacing/stack/base` | 16px |
-| Items inside a list | `list-item/spacing/between-stack` | 4px |
+| Items inside a list (`MDS CurrencyListItem`, `MDS TransactionalListItem`) | **0** — component owns vertical rhythm | none |
+| Items inside a surface card **with accent/yield tags** (e.g. Rendimientos) | `list-item/spacing/between-stack` | 4px |
 | Stacked headers (see above) | `spacing/stack/xs` | 4px |
 
 ### Bottom safe area below sticky CTAs
@@ -174,6 +175,7 @@ If a screen has multiple horizontal collections, **all of them must use the same
 - Asymmetric vertical padding on a card / surface (top ≠ bottom) — the last child will touch the bottom edge
 - Section root with a non-zero `pt` — the first child should be a header that owns its top whitespace
 - Non-zero stack gap below a header followed by non-header content — the layout is re-adding spacing the header already provides
+- `gap` or `spacing/stack/*` token between `MDS CurrencyListItem` or `MDS TransactionalListItem` rows — these components own their vertical rhythm; external gap = 0 (exception: surface card + accent/yield tags → `list-item/spacing/between-stack` 4px)
 - 0 gap between two stacked headers — they'll visually merge; should be `spacing/stack/xs` (4px)
 - Wrapper that injects vertical padding only present in one section of a screen — usually means the buffer belongs inside the component, not the wrapper
 - Horizontal collection laid out by `x` coordinate instead of `flex` + `px-[spacing/padding/base]` + `gap-[spacing/inline/*]` — positional placement is invisible to audits and breaks at any non-375 width

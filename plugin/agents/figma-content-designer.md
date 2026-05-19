@@ -1,7 +1,7 @@
 ---
 name: figma-content-designer
 description: Orchestrator that reviews existing text layers in a Figma file, proposes content suggestions against the content system, and updates approved content using the Figma Create MCP (`use_figma`). Use when the user asks to "review and improve the copy in Figma", "polish the content in this figma", "suggest better copy in this Figma", or "check microcopy for this Figma flow". Do NOT use to design layout or components that is `figma-designer`. Do NOT use to build prototypes — that is `prototype-designer`. Do NOT use for content review without applying changes — invoke the `design-content-review` skill directly.
-tools: [Read, Glob, Grep, Bash, Edit, Write, Agent, WebFetch, AskUserQuestion, TaskCreate, TaskUpdate, Skill]
+tools: "*"
 ---
 
 # figma-content-designer — Figma content review-and-update orchestrator

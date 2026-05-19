@@ -20,9 +20,19 @@ The goal is **one build pass + one verify pass**, no screenshots in the loop.
 
 ## Step 1 — Resolve the build from the repo
 
+Available layout specs (load the matching one before building):
+
+| Spec | id |
+|------|----|
+| [Confirmation Screen](../../../specs/patterns/layouts/confirmation-screen.md) | `layout-confirmation-screen` |
+| [Markets Crypto](../../../specs/patterns/layouts/markets-crypto-screen.md) | `layout-markets-crypto` |
+| [Markets View All Category](../../../specs/patterns/layouts/markets-view-all-category-screen.md) | `layout-markets-view-all-category` |
+| [Portfolio All](../../../specs/patterns/layouts/portfolio-all-screen.md) | `layout-portfolio-all` |
+| [Successful Action](../../../specs/patterns/layouts/successful-action-screen.md) | `layout-successful-action` |
+
 1. **Layout** — read the layout spec in `specs/patterns/layouts/`. The spec defines the stack, the slot rules, the variants, and which components compose the screen.
 2. **Components** — for each composed component, read its spec in `specs/components/{id}.md`. The frontmatter `figma node` is the canonical main-component key; the body lists the prop names in shorthand (e.g. `variant`, `hasIconLeading`, `heading`).
-3. **Catalog** — confirm the component key against `specs/figma-catalog/mobile-components.md` and use it for `importComponentByKeyAsync`.
+3. **Catalog** — confirm the component key against `specs/figma-catalog/mobile-components.md` and use it for `importComponentByKeyAsync`. For illustrations, import `MDSIllustrationFullScreen` (listed in `mobile-components.md`) — it is the only illustration component. To pick a specific illustration, load `specs/figma-catalog/assets/illustrations.md`, find the illustration's node ID, import that node's main component, and pass it as the INSTANCE_SWAP value on the inner illustration property of `MDSIllustrationFullScreen`.
 4. **Prop names at write time** — after you instantiate, the Plugin API returns suffixed names like `heading#10994:12`. Match by prefix (`pname.startsWith('heading')`) when calling `setProperties`, so the GUID doesn't pin you to one library snapshot. Never copy prop names from a React snippet — they diverge from the Plugin API.
 
 ## Step 2 — Force-write text nodes
@@ -139,7 +149,7 @@ In the verification block, walk every auto-layout frame and assert that each non
 
 ### 3. Frame naming — `row` wrapper only for components without a horizontal-padding guideline
 
-Components that **own** their horizontal padding (AppBar, MDSHeader / screenHeader, ConfirmationHeader, BottomCTAs, StatusBar, illustrations placed via the documented illustration row) drop directly into the container with their semantic name — **no `row` wrapper**.
+Components that **own** their horizontal padding (AppBar, MDSHeader / screenHeader, ConfirmationHeader, BottomCTAs, StatusBar, `MDSIllustrationFullScreen`) drop directly into the container with their semantic name — **no `row` wrapper**. To select a specific illustration: import `MDSIllustrationFullScreen` from `mobile-components.md`, then look up the target illustration's node ID in [`specs/figma-catalog/assets/illustrations.md`](../../../specs/figma-catalog/assets/illustrations.md) and pass it as an INSTANCE_SWAP on the inner illustration variant property.
 
 Components that **do not** own their horizontal padding (ReadOnlyList, InfoPanel, raw lists, free-floating tags / chips, anything that ships edge-to-edge by default) must be wrapped in a `row*` frame that owns the 16px screen inset (`spacing/padding/base`). This is the "Horizontal gutter ownership" rule — inset owned by the wrapper OR the component, never both.
 

@@ -13,6 +13,16 @@ Load this foundation when assembling a surface from multiple components. A **rec
 
 Recipes live in [`specs/patterns/layouts/`](../../../specs/patterns/layouts/). Each recipe is a spec file that names the host components, their stacking order, and the rules that govern the composition. Read the recipe first; load each referenced component and pattern spec as needed.
 
+### Available layout specs
+
+| Spec | id | Status |
+|------|----|--------|
+| [Confirmation Screen](../../../specs/patterns/layouts/confirmation-screen.md) | `layout-confirmation-screen` | draft |
+| [Markets Crypto](../../../specs/patterns/layouts/markets-crypto-screen.md) | `layout-markets-crypto` | ready |
+| [Markets View All Category](../../../specs/patterns/layouts/markets-view-all-category-screen.md) | `layout-markets-view-all-category` | draft |
+| [Portfolio All](../../../specs/patterns/layouts/portfolio-all-screen.md) | `layout-portfolio-all` | draft |
+| [Successful Action](../../../specs/patterns/layouts/successful-action-screen.md) | `layout-successful-action` | ready |
+
 ## Recipes vs patterns vs components
 
 | Layer | Defines | Lives in |
