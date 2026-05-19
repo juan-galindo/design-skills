@@ -18,7 +18,7 @@ relationships:
 - **Shell:** absolute `containerTop` (StatusBar + `MDSAppBar` `variant=global, background=accent` + `MDSTabs`) h=164 + scrollable content + fixed `navigationApp` bottom bar.
 - **MUST** position `containerTop` as absolute `top=0`; scrollable content reserves `pt=164` clearance.
 - **Section pattern:** each section = `MDSHeader` `variant=sectionHeader` + content block + `pb=spacing/padding/lg` (24). No inter-section gap — each section owns its bottom padding.
-- **Top border rule:** `hasTopBorder=false` on the first section header and on any section header that directly follows a section ending with a full-width button. `hasTopBorder=true` on all other `sectionHeader` instances.
+- **Top border rule:** `hasTopBorder=false` on the first two section headers ("Nuevas en Bitso", "Favoritas") and on any section header that directly follows a section ending with a full-width button ("Líderes"). `hasTopBorder=true` on all other `sectionHeader` instances.
 - **MUST NOT** inject gap between any `sectionHeader` and the content block below it — the header owns its bottom padding.
 - **Legal disclaimer** MUST appear as the first element in scrollable content, before all section headers.
 - **Copy:** [`../../content/index.md`](../../content/index.md)
@@ -83,7 +83,7 @@ The screen is designed for continuous vertical scanning — users browse section
 
 | # | Element | Config |
 |---|---------|--------|
-| Header | `MDSHeader` `sectionHeader` | `hasTopBorder=true` · `hasDescription=false` |
+| Header | `MDSHeader` `sectionHeader` | `hasTopBorder=false` · `hasDescription=false` |
 | Empty state | `MDS emptyState` | `px=spacing/padding/base` (16) · star icon + title + description + `MDS TextButton` "Agregar criptos" |
 | Populated | `MDS Stackable Asset` × N | same strip pattern as 3a |
 
@@ -109,7 +109,7 @@ The screen is designed for continuous vertical scanning — users browse section
 
 | # | Element | Config |
 |---|---------|--------|
-| Header | `MDSHeader` `sectionHeader` | `hasTopBorder=true` · `hasDescription=true` |
+| Header | `MDSHeader` `sectionHeader` | `hasTopBorder=false` · `hasDescription=true` |
 | Controls | `MDS SegmentedButtons` | centered · `pt=spacing/stack/sm` (16) · filters grid by time period |
 | Grid | `MDS Stackable Asset` 3 × 2 | `px=spacing/padding/base` (16) · 3 columns · col gap ~15 · row gap `spacing/stack/sm` (16) |
 
@@ -117,7 +117,7 @@ The screen is designed for continuous vertical scanning — users browse section
 
 | # | Element | Config |
 |---|---------|--------|
-| Header | `MDSHeader` `sectionHeader` | `hasTopBorder=true` · `hasDescription=true` · `hasArrow=true` → full yields list |
+| Header | `MDSHeader` `sectionHeader` | `hasTopBorder=false` · `hasDescription=true` · `hasArrow=true` → full yields list |
 | List | `MDS CurrencyListItem` × N in surface card | `px=spacing/padding/base` (16) · card `bg=color/surface/default` · `borderRadius=16` · gap `list-item/spacing/between-stack` (4) |
 
 ## Usage & behavior
@@ -223,7 +223,7 @@ Markets Crypto is a **discovery feed**, not a dashboard. Sections are curated ed
 - [ ] `MDSTabs` is **inside** `containerTop`, not inline in the scroll
 - [ ] Legal disclaimer is the **first** element in scrollable content, before any section header
 - [ ] Every section ends with `pb=spacing/padding/lg` (24); no extra gap between sections
-- [ ] `hasTopBorder=false` on "Nuevas en Bitso" (first) and "Líderes" (follows button); `hasTopBorder=true` on "Favoritas", "Explora", "Dinámicas", "Rendimientos"
+- [ ] `hasTopBorder=false` on "Nuevas en Bitso" (first), "Favoritas" (second), and "Líderes" (follows button); `hasTopBorder=true` on "Explora", "Dinámicas", "Rendimientos"
 - [ ] Horizontal strips use `px=spacing/padding/base` (16) and `gap=spacing/inline/xs` (8)
 - [ ] Category and Rendimientos surface cards use `bg=color/surface/default` and `borderRadius=16`
 - [ ] Favorites shows `MDS emptyState` when empty; horizontal strip when populated
