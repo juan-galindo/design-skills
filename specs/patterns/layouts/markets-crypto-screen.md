@@ -118,7 +118,7 @@ The screen is designed for continuous vertical scanning — users browse section
 | # | Element | Config |
 |---|---------|--------|
 | Header | `MDSHeader` `sectionHeader` | `hasTopBorder=false` · `hasDescription=true` · `hasArrow=true` → full yields list |
-| List | `MDS CurrencyListItem` × N in surface card | `px=spacing/padding/base` (16) · card `bg=color/surface/default` · `borderRadius=16` · gap `list-item/spacing/between-stack` (4) |
+| List | `MDS CurrencyListItem` × 3 in surface card | `px=spacing/padding/base` (16) · card `bg=color/surface/default` · `borderRadius=16` · gap `list-item/spacing/between-stack` (4) |
 
 ## Usage & behavior
 
@@ -223,7 +223,7 @@ Markets Crypto is a **discovery feed**, not a dashboard. Sections are curated ed
 - [ ] `MDSTabs` is **inside** `containerTop`, not inline in the scroll
 - [ ] Legal disclaimer is the **first** element in scrollable content, before any section header
 - [ ] Every section ends with `pb=spacing/padding/lg` (24); no extra gap between sections
-- [ ] `hasTopBorder=false` on "Nuevas en Bitso" (first), "Favoritas" (second), and "Líderes" (follows button); `hasTopBorder=true` on "Explora", "Dinámicas", "Rendimientos"
+- [ ] `hasTopBorder=false` on "Nuevas en Bitso" (first), "Favoritas" (second), "Líderes" (follows button), "Dinámicas", and "Rendimientos"; `hasTopBorder=true` on "Explora"
 - [ ] Horizontal strips use `px=spacing/padding/base` (16) and `gap=spacing/inline/xs` (8)
 - [ ] Category and Rendimientos surface cards use `bg=color/surface/default` and `borderRadius=16`
 - [ ] Favorites shows `MDS emptyState` when empty; horizontal strip when populated
