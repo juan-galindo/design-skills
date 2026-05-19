@@ -95,7 +95,7 @@ The screen is designed for continuous vertical scanning — users browse section
 | Cards row | `categoryContainer` × N | horizontal scroll · `px=spacing/padding/base` (16) · `gap=spacing/inline/xs` (8) · card w=324 |
 | Card wrapper | — | card `bg=color/surface/default` · `borderRadius=16` |
 | Card header | `MDSHeader` `variant=subSection` `hasArrow=true` | `pt=spacing/padding/base` (16) · points to full category view |
-| Card content | `MDS CurrencyListItem` × 3 | `pb=spacing/padding/xs` (8) · no list gap (0) |
+| Card content | `MDS CurrencyListItem` × 3 | `pb=spacing/padding/xs` (8) · no list gap (0) · no border |
 | Button | `MDSButtonSecondary` full-width | `mx=spacing/padding/base` (16) · `hasIcon=false` · label "Explorar todas" → full category browser |
 
 ### 3d — Líderes (featured asset cards)
@@ -120,7 +120,7 @@ The screen is designed for continuous vertical scanning — users browse section
 | # | Element | Config |
 |---|---------|--------|
 | Header | `MDSHeader` `sectionHeader` | `hasTopBorder=false` · `hasDescription=true` · `hasArrow=true` → full yields list |
-| List | `MDS CurrencyListItem` × 3 in surface card | `px=spacing/padding/base` (16) · card `bg=color/surface/default` · `borderRadius=16` · gap `list-item/spacing/between-stack` (4) · **do not force CurrencyListItem to fill width** |
+| List | `MDS CurrencyListItem` × 3 in surface card | `px=spacing/padding/base` (16) · card `bg=color/surface/default` · `borderRadius=16` · no border · gap `list-item/spacing/between-stack` (4) · **do not force CurrencyListItem to fill width** |
 
 ## Usage & behavior
 
