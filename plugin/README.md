@@ -8,7 +8,7 @@ Reference and foundation layer for Bitso product design, plus two orchestrator a
 - **Three orchestrators** — each tailored to a specific output medium:
   - `figma-designer` → designs layouts and components in a Figma file (uses `use_figma`)
   - `figma-content-designer` → reviews existing text layers, proposes content suggestions, applies approved updates (uses `use_figma`)
-  - `prototype-designer` → builds React code in `/Users/juangalindo/bitso-labs/design-prototyping-playground`
+  - `prototype-designer` → builds React code in `bitso-labs/design-prototyping-playground`
 
 The orchestrators do not replace the `design-*` skills. They sequence and delegate.
 
