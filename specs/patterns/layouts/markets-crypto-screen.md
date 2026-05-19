@@ -93,7 +93,7 @@ The screen is designed for continuous vertical scanning — users browse section
 |---|---------|--------|
 | Header | `MDSHeader` `sectionHeader` | `hasTopBorder=true` · `hasDescription=true` |
 | Cards row | `categoryContainer` × N | horizontal scroll · `px=spacing/padding/base` (16) · `gap=spacing/inline/xs` (8) · card w=324 |
-| Card interior | `MDSHeader` `variant=subSection` `hasArrow=true` + 3× `MDS CurrencyListItem` | card `bg=color/surface/default` · `borderRadius=16` · `pt=spacing/padding/base` (16) · `pb=spacing/padding/xs` (8) · no list gap (0) · **do not force CurrencyListItem to fill width** |
+| Card interior | `MDSHeader` `variant=subSection` `hasArrow=true` + 3× `MDS CurrencyListItem` | card `bg=color/surface/default` · `borderRadius=16` · `pt=spacing/padding/base` (16) · `pb=spacing/padding/xs` (8) · no list gap (0) |
 | Button | `MDSButtonSecondary` full-width | `mx=spacing/padding/base` (16) · label "Explorar todas" → full category browser |
 
 ### 3d — Líderes (featured asset cards)
