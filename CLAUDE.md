@@ -14,7 +14,7 @@ All UX pattern specs live in `specs/`. Load them as reference context before mak
 
 | Folder | Contains |
 |--------|---------|
-| `specs/figma-catalog/` | Figma lookup tables — `mobile-components.md`, `web-components.md`, `assets/` |
+| `specs/figma-catalog/` | Figma lookup tables — `mobile-components.md`, `web-components.md`, `os-components.md`, `assets/` |
 | `specs/tokens/` | Token reference — authoritative token list |
 | `specs/components/` | All MDS components (atoms, molecules, organisms merged) — read `specs/components/CLAUDE.md` when loading component specs |
 | `specs/patterns/` | Composition rules across components — read `specs/patterns/CLAUDE.md` when loading patterns |
