@@ -99,7 +99,7 @@ return { createdNodeId: root.id, checks };
 - Every entry in `checks.text` matches the spec's text-slot rules (no leftover "Heading" / "This is a paragraph!" placeholders).
 - `checks.dims.topContainer` matches the sum of `StatusBar + MDSAppBar` — if the wrapper has children but reports a tiny height, its `primaryAxisSizingMode` is still `FIXED` and needs `AUTO`. See the screen shell in [`composition-recipes.md`](./composition-recipes.md).
 - Every entry in `checks.swaps` resolves to the expected component (e.g. AppBar trailing icon must equal the imported Close icon id).
-- **Frame contract** (see below): root frame `fills` is bound to `color/background/default`; every non-zero padding on every auto-layout frame has a `boundVariables` entry; side-by-side children of any container are named `row*`.
+- **Frame contract** (see below): root frame `fills` is bound to `color/background/default`; every non-zero padding on every auto-layout frame has a `boundVariables` entry; every frame's `primaryAxisSizingMode` is `'AUTO'` (hug); side-by-side children of any container are named `row*`.
 
 If all three pass, the build is correct **without ever rendering pixels**. Only render a screenshot when a human is reviewing taste — not when the agent is verifying contract.
 
@@ -111,7 +111,7 @@ When you build, instantiate the shell first, then fill `container` from the reci
 
 ## Frame contract (every frame you create)
 
-Every frame you author must satisfy these three rules. Verify them in the `checks` block before returning.
+Every frame you author must satisfy these four rules. Verify them in the `checks` block before returning.
 
 ### 1. Background = `color/background/default` (token-bound)
 
@@ -183,9 +183,26 @@ screen (root)
 
 This keeps `row*` meaningful — it always signals "this is the wrapper that owns the gutter" — instead of decorating every stripe in the layout.
 
+### 4. Height sizing = HUG (`primaryAxisSizingMode = 'AUTO'`)
+
+Every auto-layout frame must hug its children in the primary (vertical) axis. Never leave `primaryAxisSizingMode` as `'FIXED'` — a fixed-height frame silently clips or gaps content as children resize, and produces wrong `checks.dims` values.
+
+```js
+frame.layoutMode = 'VERTICAL';
+frame.primaryAxisSizingMode = 'AUTO';      // hug height
+frame.counterAxisSizingMode = 'FIXED';    // fill width (set after appendChild)
+```
+
+**Exceptions** — only two frames use a fixed height:
+- The root screen frame (`390 × 844` or the target device dimensions) — this is the viewport, not a content container.
+- `spacer` nodes used to push BottomCTAs to the bottom of the screen — explicit fixed height is intentional there.
+
+In the verification block, walk every non-root auto-layout frame and assert `primaryAxisSizingMode === 'AUTO'`. Fail loud if any wrapper reports `'FIXED'`.
+
 ## Common build gotchas
 
-- **`topContainer.height === 10`** after appending StatusBar + AppBar → `primaryAxisSizingMode` got coerced to FIXED by a `resize()` call after `appendChild`. Set it to `AUTO` after appending children, never before.
+- **Frame height collapses to 0 or stays fixed** → `primaryAxisSizingMode` was never set to `AUTO`, or a `resize()` call after `appendChild` coerced it back to `FIXED`. Always set `primaryAxisSizingMode = 'AUTO'` **after** appending all children, never before. The root screen frame and explicit spacers are the only `FIXED`-height exceptions.
+- **`topContainer.height === 10`** after appending StatusBar + AppBar → same cause as above. Set it to `AUTO` after appending children.
 - **`layoutSizingHorizontal = 'FILL'` errors** → must be set **after** `parent.appendChild(child)`, never before. Wrap in try/catch only at the boundary, not as a habit.
 - **Library variables return zero from `getLocalVariablesAsync()`** → linked-library files have no local vars. Use `figma.teamLibrary.getAvailableLibraryVariableCollectionsAsync()` + `importVariableByKeyAsync()`.
 - **`setCurrentPageAsync(page)`** before `page.loadAsync()` then `targetPage.appendChild(root)` — required for cross-page authoring.
