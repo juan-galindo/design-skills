@@ -97,7 +97,7 @@ The screen between the calculator (or entry form) and the success screen. It pre
 - **DO** use a bottom sheet before this screen when a forced informational interruption is required (PDT rule, regulatory notice) — the sheet acknowledges the warning; the confirmation screen closes the transaction.
 - MUST NOT show this screen while pricing is still loading — show a loading state in the prior screen.
 - MUST NOT use for non-transactional confirmations (e.g. "Delete account?") — use the appropriate modal or sheet.
-- MUST NOT route here after the action has already committed — use [Successful Action Screen](./successful-action-screen.md).
+- MUST NOT route here after the action has already committed — use [Successful Action](./successful-action-screen.md).
 
 ### Edge cases
 
@@ -111,7 +111,7 @@ The screen between the calculator (or entry form) and the success screen. It pre
 | Interaction | Behavior | Source of truth |
 |-------------|----------|-----------------|
 | AppBar dismiss tap | Returns to entry form | [app-bar](../../components/app-bar.md) |
-| Primary CTA tap | Commits transaction → [Successful Action Screen](./successful-action-screen.md) | [bottom-ctas](../../components/bottom-ctas.md) |
+| Primary CTA tap | Commits transaction → [Successful Action](./successful-action-screen.md) | [bottom-ctas](../../components/bottom-ctas.md) |
 | TextButton "Cancelar" | Same as dismiss — returns to entry form | [bottom-ctas](../../components/bottom-ctas.md) |
 | Edit icon (ConfirmationHeader) | Returns to calculator with amount pre-filled | MDS ConfirmationHeader |
 | Hardware back (Android) | Same as dismiss | [app-bar](../../components/app-bar.md) |

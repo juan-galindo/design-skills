@@ -83,3 +83,4 @@
 | MDS Tag | `2303:40941` |
 | MDS TextField | `36066:8750` |
 | MDS Timeframes | `41934:2728` |
+| MDSIllustrationFullScreen | `2065:215` |

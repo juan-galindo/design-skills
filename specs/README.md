@@ -17,5 +17,5 @@ Reference library used by skills at runtime. All design decisions, copy, and tok
 | Type | How to start |
 |------|----------------|
 | **Component** | Copy [`_template.md`](_template.md) → `components/{id}.md`. Set `category: component`, `status: draft`. See [`components/CLAUDE.md`](components/CLAUDE.md). Pilot: [`components/app-bar.md`](components/app-bar.md). |
-| **Pattern** | Copy [`_template-pattern.md`](_template-pattern.md) → `patterns/{scope}/{id}.md` where `{scope}` is `composition/` (slot-level rules) or `layouts/` (full-screen recipes). Set `category: pattern`, `relationships.applies_to`. See [`patterns/CLAUDE.md`](patterns/CLAUDE.md). Pilot: [`patterns/composition/bullet-points.md`](patterns/composition/bullet-points.md). |
+| **Pattern** | Copy [`_template-pattern.md`](_template-pattern.md) → `patterns/{scope}/{id}.md` where `{scope}` is `scope/` (slot-level rules) or `layouts/` (full-screen recipes). Set `category: pattern`, `relationships.applies_to`. See [`patterns/CLAUDE.md`](patterns/CLAUDE.md). Pilot: [`patterns/scope/bullet-points.md`](patterns/scope/bullet-points.md). |
 | **Token** | New file in `tokens/` or extend [`tokens/token-reference.md`](tokens/token-reference.md) per existing token docs. |

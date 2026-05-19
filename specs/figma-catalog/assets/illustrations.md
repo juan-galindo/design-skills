@@ -5,7 +5,6 @@
 **Figma:** https://www.figma.com/design/1sU62oEvpm7TdepgwMy2Yb/Illustrations--1.0-
 **Section:** `2299:202`
 
-**Refresh after:** 14 days (re-run `/scan` if today's date exceeds 2026-04-29)
 **Shared by:** Mobile + Web
 
 > All illustrations live on page `1:99` ("Illustrations") inside section `2299:202`. Use `get_design_context("1sU62oEvpm7TdepgwMy2Yb", nodeId)` to fetch any illustration.

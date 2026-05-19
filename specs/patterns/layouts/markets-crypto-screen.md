@@ -93,7 +93,7 @@ The screen is designed for continuous vertical scanning — users browse section
 |---|---------|--------|
 | Header | `MDSHeader` `sectionHeader` | `hasTopBorder=true` · `hasDescription=true` |
 | Cards row | `categoryContainer` × N | horizontal scroll · `px=spacing/padding/base` (16) · `gap=spacing/inline/xs` (8) · card w=324 |
-| Card interior | `MDSHeader` `variant=subSection` `hasArrow=true` + 3× `MDS CurrencyListItem` | card `bg=color/surface/default` · `borderRadius=16` · `pt=spacing/padding/base` (16) · list gap `spacing/stack/xs` (4) |
+| Card interior | `MDSHeader` `variant=subSection` `hasArrow=true` + 3× `MDS CurrencyListItem` | card `bg=color/surface/default` · `borderRadius=16` · `pt=spacing/padding/base` (16) · `pb=spacing/padding/xs` (8) · no list gap (0) |
 | Button | `MDSButtonSecondary` full-width | `mx=spacing/padding/base` (16) · label "Explorar todas" → full category browser |
 
 ### 3d — Líderes (featured asset cards)
@@ -130,7 +130,7 @@ The screen is designed for continuous vertical scanning — users browse section
 
 ### When NOT to use
 
-- MUST NOT use for a category "View all" screen — use [`layout-markets-view-all-category`](./markets-view-all-category.md) instead.
+- MUST NOT use for a category "View all" screen — use [`layout-markets-view-all-category`](./markets-view-all-category-screen.md) instead.
 - MUST NOT use for asset detail screens.
 - MUST NOT add a bottom CTA bar — all actions are inline within sections.
 - MUST NOT render a `screenHeader` — the first `sectionHeader` acts as the de-facto page header because the screen uses `MDSTabs`.
@@ -195,7 +195,7 @@ Markets Crypto is a **discovery feed**, not a dashboard. Sections are curated ed
 | Legal horizontal padding | `spacing/padding/base` (16) | Disclaimer `px` |
 | Category / surface card background | `color/surface/default` | Explora cards (3c) and Rendimientos card (3f) |
 | Category card top padding | `spacing/padding/base` (16) | `pt` inside each category card |
-| Category card list gap | `spacing/stack/xs` (4) | `MDS CurrencyListItem` gap inside category card |
+| Category card bottom padding | `spacing/padding/xs` (8) | `pb` inside each category card |
 | Rendimientos card horizontal padding | `spacing/padding/base` (16) | Outer wrapper `px` around surface card |
 | Rendimientos list gap | `list-item/spacing/between-stack` (4) | gap inside Rendimientos surface card |
 | Dinámicas grid horizontal padding | `spacing/padding/base` (16) | Outer wrapper `px` |
@@ -235,7 +235,7 @@ Markets Crypto is a **discovery feed**, not a dashboard. Sections are curated ed
 
 - [`../../components/app-bar.md`](../../components/app-bar.md) — `variant=global, background=accent`
 - [`../../components/header.md`](../../components/header.md) — `variant=sectionHeader` rules
-- [`./markets-view-all-category.md`](./markets-view-all-category.md) — destination when user taps "view all" from any section
+- [`./markets-view-all-category-screen.md`](./markets-view-all-category-screen.md) — destination when user taps "view all" from any section
 - [`../../figma-catalog/mobile-components.md`](../../figma-catalog/mobile-components.md) — `MDS Stackable Asset`, `MDSfeaturedAsset`, `MDS CurrencyListItem`, `MDS SegmentedButtons`, `MDS emptyState`
 - [`../../content/index.md`](../../content/index.md)
 - [`../../tokens/token-reference.md`](../../tokens/token-reference.md)

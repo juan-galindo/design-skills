@@ -1,14 +1,6 @@
 # Design Skills
 
-This repository is the source of truth for AI skills used by the Bitso Product Design team built to run inside Claude Code. Each skill is a focused assistant that knows how to handle a specific design task: writing UX copy, auditing a Figma file, generating a PRD, reviewing content, and more.
-
-Think of each skill as a trained assistant that already knows Bitso's tone of voice, design system conventions, and product context — so you don't have to explain them every time.
-
-
-**Learn more about skills:**
-- [How to create custom skills](https://support.claude.com/en/articles/12512198-how-to-create-custom-skills)
-- [Equipping agents for the real world with Agent Skills](https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills)
-
+AI skills for the Bitso Product Design team, built to run inside Claude Code. Each skill is a focused assistant that already knows Bitso's tone of voice, design system conventions, and product context — so you don't have to explain them every time.
 
 ---
 
@@ -17,8 +9,8 @@ Think of each skill as a trained assistant that already knows Bitso's tone of vo
 | Tool | Purpose | Install |
 |------|---------|---------|
 | Claude Code CLI or Desktop | Required to run design skills | [Guide for non-coders](https://bitsomx.atlassian.net/wiki/spaces/Design/pages/6133514286/1.1+Set+up+Claude+Code+CLI+for+non-coders) |
-| GitHub | Required to download or interate skills | [Guide for non-coders](https://bitsomx.atlassian.net/wiki/spaces/Design/pages/6131580942/3.+Set+up+your+GitHub+access) |
-| Figma account | Required to edit Figma by design system skills | Must have full design seat |
+| GitHub | Required to download or iterate skills | [Guide for non-coders](https://bitsomx.atlassian.net/wiki/spaces/Design/pages/6131580942/3.+Set+up+your+GitHub+access) |
+| Figma account | Required by design system skills that edit Figma | Must have full design seat |
 
 ---
 
@@ -35,28 +27,16 @@ Skills are automatically available once you open a session in this directory. No
 
 ---
 
-## How skills work
-
-```
-/design-content-write  → write UX copy for a screen
-/design-content-review → review copy or a design for quality
-/design-handoff        → audit a Figma file before dev handoff
-```
-
-When you invoke a skill, the AI loads the skill's instructions automatically and walks you through the task step by step.
-
----
-
 ## Design Skills
 
 ### Content Design
 
-| Skill | What it does | Owner |
-|-------|-------------|-------|
-| `/design-content-write` | Write or improve UX copy: titles, CTAs, error messages, empty states, onboarding flows, tooltips, push notifications, and transactional emails. Specialized for Mexican Spanish (es_MX) fintech. | Emilia Alegre |
-| `/design-content-review` | Review any content — UI copy, documentation, emails, or a Figma design — against Bitso's tone of voice, FEEL framework, glossary, and UX writing principles. Supports es_MX, es_AR, es_CO, pt_BR, and en_US. | Emilia Alegre |
-| `/design-content-keys-generation` | Generate structured Lokalise content keys from Figma text nodes (page, section, or frame), rename layers automatically, write a structured JSON file, and optionally upload directly to a Lokalise project via MCP. Auto-detects scan target from the URL. | Juan Galindo |
-| `/design-content-translation-review` | Connect to a Lokalise project, fetch automatically translated strings for a target locale, and review them against Bitso's content guidelines (glossary, locale rules, voice & tone, UX writing principles). Outputs a prioritized issues table. | Marina Meireles |
+| Skill | What it does |
+|-------|-------------|
+| `/design-content-write` | Write or improve UX copy: titles, CTAs, error messages, empty states, onboarding flows, tooltips, push notifications, and transactional emails. Specialized for Mexican Spanish (es_MX) fintech. |
+| `/design-content-review` | Review any content — UI copy, documentation, emails, or a Figma design — against Bitso's tone of voice, FEEL framework, glossary, and UX writing principles. Supports es_MX, es_AR, es_CO, pt_BR, and en_US. |
+| `/design-content-keys-generation` | Generate structured Lokalise content keys from Figma text nodes (page, section, or frame), rename layers automatically, write a structured JSON file, and optionally upload directly to a Lokalise project via MCP. Auto-detects scan target from the URL. |
+| `/design-content-translation-review` | Connect to a Lokalise project, fetch automatically translated strings for a target locale, and review them against Bitso's content guidelines (glossary, locale rules, voice & tone, UX writing principles). Outputs a prioritized issues table. |
 
 **Example prompts:**
 ```
@@ -67,46 +47,58 @@ When you invoke a skill, the AI loads the skill's instructions automatically and
 ```
 
 ---
+
 ### Product Design
 
-| Skill | What it does | Owner |
-|-------|-------------|-------|
-| `/design-prd-to-use-cases` | Transform a PRD into Jobs To Be Done (JTBD), structured use case scenarios, and MLP prioritization by revenue and frequency. | Juan Galindo |
-| `/design-figma-naming` | Audit and fix layer naming conventions in Figma files according to design system guidelines. | Esmeralda Carreño |
-| `/design-handoff` | Audit a Figma file against the Design Handoff Checklist before a handoff meeting with PM and Engineering. | Esmeralda Carreño |
-| `/design-visual-qa` | Run a Visual QA audit comparing implemented screens against Figma designs, producing a structured table report per screen focused on spacing, padding, font styles, and horizontal insets. | Juan Galindo |
+| Skill | What it does |
+|-------|-------------|
+| `/design-prd-to-use-cases` | Transform a PRD into Jobs To Be Done (JTBD), structured use case scenarios, and MLP prioritization by revenue and frequency. |
+| `/design-figma-naming` | Audit and fix layer naming conventions in Figma files according to design system guidelines. |
+| `/design-handoff` | Audit a Figma file against the Design Handoff Checklist before a handoff meeting with PM and Engineering. |
+| `/design-visual-qa` | Run a Visual QA audit comparing implemented screens against Figma designs, producing a structured table report per screen focused on spacing, padding, font styles, and horizontal insets. |
+| `/design-prototype-to-figma` | Convert a working Claude Code prototype into a structured Figma design file — exploding interaction flows into separate frames, applying design system components, and annotating interactions for async review. |
+
+**Example prompts:**
+```
+/design-prd-to-use-cases — Extract use cases and JTBD from this PRD [paste or share link]
+/design-figma-naming — Audit and fix layer names in this file: [Figma URL]
+/design-handoff — Run the checklist on this file before Thursday's handoff: [Figma URL]
+/design-visual-qa — Compare these implemented screens against the Figma: [Figma URL]
+/design-prototype-to-figma — Turn this prototype into Figma frames for async design review
+```
+
+---
 
 ### Design System
 
-| Skill | What it does | Owner |
-|-------|-------------|-------|
-| `/design-create-component` | Create new MDS Mobile components directly in Figma following naming conventions and design system standards. | Juan Galindo |
-| `/design-create-component-variant` | Create, expand, or audit component variant structures in Figma following MDS naming conventions. | Juan Galindo |
-| `/design-assign-tokens` | Assign MDS text styles and semantic color tokens to an existing Figma component — connects layers to real library styles without adding raw hex values. | Juan Galindo |
-| `/design-rename-component` | Rename layers and component properties in Figma following the MDS naming convention. | Juan Galindo |
+| Skill | What it does |
+|-------|-------------|
+| `/design-create-component` | Create new MDS Mobile components directly in Figma following naming conventions and design system standards. |
+| `/design-create-component-variant` | Create, expand, or audit component variant structures in Figma following MDS naming conventions. |
+| `/design-assign-tokens` | Assign MDS text styles and semantic color tokens to an existing Figma component — connects layers to real library styles without adding raw hex values. |
+| `/design-rename-component` | Rename layers and component properties in Figma following the MDS naming convention. |
 
 **Example prompts:**
 ```
 /design-create-component-variant — Add size variants (S, M, L) to this button component
 /design-assign-tokens — Connect text styles and colors to this component
-/design-figma-naming — Audit and fix layer names in this file: [Figma URL]
-/design-handoff — Run the checklist on this file before Thursday's handoff: [Figma URL]
+/design-rename-component — Clean up layer names in this component: [Figma URL]
 ```
 
 ---
 
-## Tooling skills
+## Tooling Skills
 
-| Skill | What it does | Owner |
-|-------|-------------|-------|
-| `/skill-creator` | Create new skills, modify and improve existing ones, run evals, and benchmark skill performance. | Juan Galindo |
-| `/dev-pr-workflow` | Open, update, and manage pull requests via GitHub CLI | Juan Galindo |
+| Skill | What it does |
+|-------|-------------|
+| `/skill-creator` | Create new skills, modify and improve existing ones, run evals, and benchmark skill performance. |
+| `/dev-pr-workflow` | Open, update, and manage pull requests via GitHub CLI. |
 
 ---
 
 ## Spec Library
 
-Reference specs used by skills at runtime. See [`specs/README.md`](specs/README.md) for the full index.
+Reference specs used by skills at runtime. See [`specs/README.md`](specs/README.md) for folder structure and templates.
 
 ---
 
@@ -133,4 +125,4 @@ Skill naming follows a `<category>-<purpose>` convention: `design-*` for design 
 | Add or edit a skill | [`docs/workflows/contribution-design-skill.md`](docs/workflows/contribution-design-skill.md) |
 | Port a skill to the Bitso org bundle | [`docs/workflows/contribution-org-skills-plugin.md`](docs/workflows/contribution-org-skills-plugin.md) |
 
-All PRs in bitsoex requires at least CodeRabbit validation and one human approval to merge.
+All PRs require at least CodeRabbit validation and one human approval to merge.

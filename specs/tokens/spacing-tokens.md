@@ -77,6 +77,7 @@ Use the lowest tier that applies: **Component → Semantic → Base**
 | `spacing/stack/3xl` | `spacing/600` | 48px |
 | `spacing/stack/4xl` | `spacing/1000` | 80px |
 
+
 ### spacing/padding — internal component padding
 
 | Token | Alias | Value |

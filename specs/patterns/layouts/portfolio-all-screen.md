@@ -151,9 +151,9 @@ MXN legal disclaimer: `tiny/base` · `color/onbackground/lowemphasis` · `pl=96`
 
 **Section header:** `MDSHeader` `variant=sectionHeader` · `hasTopBorder=false` · `hasDescription=false` · no trailing content
 
-**MovementsWrapper card:** `bg=color/surface/default` · `borderRadius=card/border/radius` (16) · `py=spacing/padding/xs` (8) · w=343 · `mx=spacing/padding/base` (16)
+**MovementsWrapper card:** `bg=color/surface/default` · `borderRadius=card/border/radius` (16) · `pb=spacing/padding/2xs` (4) · no top padding (rows start flush at top of card) · w=343 · `mx=spacing/padding/base` (16)
 
-Content: exactly **3 most recent** `TransactionalListItem` rows, filtered by the active tab (Todo = all asset types; Efectivo = cash; Criptos = crypto; Acciones y ETFs = stocks/ETFs). Transactions can carry `MDS Tag` (e.g. "Dividendo", "Earn"). Last element: `MDS TextButton` "Revisar todo →" · `pt=spacing/padding/2xs` (4) · `pb=spacing/padding/base` (16).
+Content: exactly **3 most recent** `TransactionalListItem` rows, filtered by the active tab (Todo = all asset types; Efectivo = cash; Criptos = crypto; Acciones y ETFs = stocks/ETFs). Transactions can carry `MDS Tag` (e.g. "Dividendo", "Earn"). Rows stack flush — no gap between them. Last element: `MDS TextButton` "Revisar todo →" · no external spacing — placed flush after the last row.
 
 ## Usage & behavior
 
@@ -247,10 +247,8 @@ Portfolio All is a **wealth dashboard**, not a transaction log. Balance + chart 
 | MXN disclaimer bottom | `spacing/padding/base` (16) | `pb` |
 | Movements card background | `color/surface/default` | |
 | Movements card radius | `card/border/radius` (16) | |
-| Movements card vertical padding | `spacing/padding/xs` (8) | `py` |
+| Movements card bottom padding | `spacing/padding/2xs` (4) | `pb` only — no top padding; rows start flush |
 | Movements card inset | `spacing/padding/base` (16) | `mx` on wrapper |
-| Movements TextButton bottom | `spacing/padding/base` (16) | `pb` |
-| Movements TextButton top | `spacing/padding/2xs` (4) | `pt` |
 | Eyebrow label tracking | `typography/letterSpacing/200` | Data group labels — uppercase |
 
 ## Text slot rules

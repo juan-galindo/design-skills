@@ -1,6 +1,6 @@
 ---
-id: layout-successful-action-screen
-name: Successful Action Screen
+id: layout-successful-action
+name: Successful Action
 category: product-layout
 platform: mobile
 tags: [success]
