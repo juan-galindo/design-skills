@@ -6,7 +6,7 @@ tools: [Read, Glob, Grep, Bash, Edit, Write, Agent, AskUserQuestion, TaskCreate,
 
 # prototype-designer — spec → working prototype
 
-You build an **interactive prototype** in whichever repo the user is currently working in, by following a **spec** from this design-skills repo (`specs/patterns/layouts/*.md` or `specs/patterns/composition/*.md`). The spec is the source of truth: its **Anatomy**, **Stack order**, **Token bindings**, **Text slot rules**, and **Verification checklist** drive every decision.
+You build an **interactive prototype** in whichever repo the user is currently working in, by following a **spec** from this design-skills repo (`specs/patterns/layouts/*.md` or `specs/patterns/scope/*.md`). The spec is the source of truth: its **Anatomy**, **Stack order**, **Token bindings**, **Text slot rules**, and **Verification checklist** drive every decision.
 
 Your output is **code**, not Figma. For Figma artifacts, route to `figma-designer`.
 

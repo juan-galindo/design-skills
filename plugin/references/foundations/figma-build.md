@@ -34,9 +34,9 @@ Available composition pattern specs (load when a layout uses one of these patter
 
 | Spec | id |
 |------|----|
-| [Bullet Points](../../../specs/patterns/composition/bullet-points.md) | `pattern-bullet-points` |
-| [Read-only List — First Level](../../../specs/patterns/composition/read-only-list/first-level.md) | `pattern-read-only-list-first-level` |
-| [Search Global](../../../specs/patterns/composition/search-global.md) | `pattern-search-global` |
+| [Bullet Points](../../../specs/patterns/scope/bullet-points.md) | `pattern-bullet-points` |
+| [Read-only List — First Level](../../../specs/patterns/scope/read-only-list/first-level.md) | `pattern-read-only-list-first-level` |
+| [Search Global](../../../specs/patterns/scope/search-global.md) | `pattern-search-global` |
 
 1. **Layout** — read the layout spec in `specs/patterns/layouts/`. The spec defines the stack, the slot rules, the variants, and which components compose the screen.
 2. **Components** — for each composed component, read its spec in `specs/components/{id}.md`. The frontmatter `figma node` is the canonical main-component key; the body lists the prop names in shorthand (e.g. `variant`, `hasIconLeading`, `heading`).

@@ -21,14 +21,14 @@ relationships:
 - **Variants:** `default` · `accent` (tab affordance). **States:** `default` · `pressed` · `activeFocus` · **`activeFocusEmpty`** · `filled` · **`loading`** · `disabled`.
 - Non-interactive search icon · **clear** when `value` ≠ empty · placeholder **Busca activos** (not lone **Buscar**).
 - Tab affordance **MUST** use **fade animation** (in · out) — not slide · not optional. **Explorar todas** → stack **push** only.
-- **On type:** debounce → **`loading`** → results · no results · connection error — body layouts → [`../patterns/composition/search-global.md`](../patterns/composition/search-global.md).
+- **On type:** debounce → **`loading`** → results · no results · connection error — body layouts → [`../patterns/scope/search-global.md`](../patterns/scope/search-global.md).
 - **MUST NOT** in forms (**TextField**) or inside [bottom-sheet](./bottom-sheet.md) — any variant.
 
 ## Overview
 
 Users tap the App Bar affordance on **home** · **markets** · **portfolio** — **MUST** transition with **fade animation** (required · not slide). Back to the tab **MUST** use the same fade animation. **Explorar todas** uses stack **push** only. Copy → [`../content/index.md`](../content/index.md).
 
-Body layouts for the three pushed search screens (global search, catalog browse, Markets category search) → [`../patterns/composition/search-global.md`](../patterns/composition/search-global.md).
+Body layouts for the three pushed search screens (global search, catalog browse, Markets category search) → [`../patterns/scope/search-global.md`](../patterns/scope/search-global.md).
 
 ## Structure
 
@@ -77,7 +77,7 @@ Tab affordance is read-only until push. **Sizing:** small only on mobile; large 
 | **`loading`** | Fetch in flight (**A4** / **B4**) |
 | `disabled` | Feature unavailable |
 
-Navigation, chips, tags, and retry behaviors → [`../patterns/composition/search-global.md`](../patterns/composition/search-global.md).
+Navigation, chips, tags, and retry behaviors → [`../patterns/scope/search-global.md`](../patterns/scope/search-global.md).
 
 ## Accessibility
 
@@ -125,7 +125,7 @@ One search chrome, three discovery bodies: cross-catalog tease (top 3), full cat
 | Placeholder (tab + pushed) | **Busca activos** |
 | Home suffix | **activos** / **acciones** / **cripto** (animated) |
 
-MUST NOT use placeholder-only **Buscar** / **Search**. Body copy (section headers, chips, links, no-results, error) → [`../patterns/composition/search-global.md`](../patterns/composition/search-global.md).
+MUST NOT use placeholder-only **Buscar** / **Search**. Body copy (section headers, chips, links, no-results, error) → [`../patterns/scope/search-global.md`](../patterns/scope/search-global.md).
 
 ## Verification
 
@@ -133,12 +133,12 @@ MUST NOT use placeholder-only **Buscar** / **Search**. Body copy (section header
 - [ ] Tab ↔ global search: **fade animation** required on enter and back — **MUST NOT** slide; **Explorar todas** / **Ver todas** → stack push only.
 - [ ] Field states: `activeFocusEmpty` on entry · `filled` + clear when query present · `loading` on fetch.
 - [ ] Token bindings — `searchbar/*` shell · no `input/color/background/*`.
-- [ ] Body layouts and flows → [`../patterns/composition/search-global.md`](../patterns/composition/search-global.md).
+- [ ] Body layouts and flows → [`../patterns/scope/search-global.md`](../patterns/scope/search-global.md).
 
 ## Related specs
 
 - [`app-bar.md`](./app-bar.md) · [`header.md`](./header.md) (conflicts — no search in sheet)
-- [`../patterns/composition/search-global.md`](../patterns/composition/search-global.md) — body layouts, flows, query result states
+- [`../patterns/scope/search-global.md`](../patterns/scope/search-global.md) — body layouts, flows, query result states
 - [`../content/index.md`](../content/index.md) · [`../tokens/token-reference.md`](../tokens/token-reference.md) · [`../figma-catalog/mobile-components.md`](../figma-catalog/mobile-components.md) · [`../figma-catalog/assets/icons.md`](../figma-catalog/assets/icons.md)
 
 ---

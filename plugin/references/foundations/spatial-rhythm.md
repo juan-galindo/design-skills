@@ -58,7 +58,7 @@ Examples documented in `specs/`:
 - `MDSBottomSheet` defines its own internal padding — see [`specs/components/bottom-sheet.md`](../../../specs/components/bottom-sheet.md)
 - `MDSHeader` documents bottom margin to the next content block — see [`specs/components/header.md`](../../../specs/components/header.md)
 - `MDSTabs` defines content-area top inset — see [`specs/components/tabs.md`](../../../specs/components/tabs.md)
-- `bullet-points` pattern uses `spacing/stack/sm` (8px) between items — see [`specs/patterns/composition/bullet-points.md`](../../../specs/patterns/composition/bullet-points.md)
+- `bullet-points` pattern uses `spacing/stack/sm` (8px) between items — see [`specs/patterns/scope/bullet-points.md`](../../../specs/patterns/scope/bullet-points.md)
 
 ## Vertical padding
 

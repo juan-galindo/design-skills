@@ -27,9 +27,9 @@ Recipes live in [`specs/patterns/layouts/`](../../../specs/patterns/layouts/). E
 
 | Spec | id | Status |
 |------|----|--------|
-| [Bullet Points](../../../specs/patterns/composition/bullet-points.md) | `pattern-bullet-points` | ready |
-| [Read-only List — First Level](../../../specs/patterns/composition/read-only-list/first-level.md) | `pattern-read-only-list-first-level` | ready |
-| [Search Global](../../../specs/patterns/composition/search-global.md) | `pattern-search-global` | draft |
+| [Bullet Points](../../../specs/patterns/scope/bullet-points.md) | `pattern-bullet-points` | ready |
+| [Read-only List — First Level](../../../specs/patterns/scope/read-only-list/first-level.md) | `pattern-read-only-list-first-level` | ready |
+| [Search Global](../../../specs/patterns/scope/search-global.md) | `pattern-search-global` | draft |
 
 ## Recipes vs patterns vs components
 
@@ -51,7 +51,7 @@ A recipe always **composes existing components and patterns**. If a recipe needs
 
 - `MDSBottomSheet` `bottomSheetTextDefault` (host) — see `specs/components/bottom-sheet.md`
 - Title slot — short statement of the rule or warning (`"Control de operador diario"`)
-- Body slot — bullets via the `bullet-points` pattern (`specs/patterns/composition/bullet-points.md`) explaining the constraint
+- Body slot — bullets via the `bullet-points` pattern (`specs/patterns/scope/bullet-points.md`) explaining the constraint
 - Primary action — acknowledgment verb: `"Entendido"` / `"Continuar"` (not a commit action)
 - Secondary action — `"Cancelar"` (dismisses and returns to entry form)
 
