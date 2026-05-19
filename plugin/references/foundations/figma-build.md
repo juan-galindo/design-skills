@@ -30,6 +30,14 @@ Available layout specs (load the matching one before building):
 | [Portfolio All](../../../specs/patterns/layouts/portfolio-all-screen.md) | `layout-portfolio-all` |
 | [Successful Action](../../../specs/patterns/layouts/successful-action-screen.md) | `layout-successful-action` |
 
+Available composition pattern specs (load when a layout uses one of these patterns):
+
+| Spec | id |
+|------|----|
+| [Bullet Points](../../../specs/patterns/composition/bullet-points.md) | `pattern-bullet-points` |
+| [Read-only List — First Level](../../../specs/patterns/composition/read-only-list/first-level.md) | `pattern-read-only-list-first-level` |
+| [Search Global](../../../specs/patterns/composition/search-global.md) | `pattern-search-global` |
+
 1. **Layout** — read the layout spec in `specs/patterns/layouts/`. The spec defines the stack, the slot rules, the variants, and which components compose the screen.
 2. **Components** — for each composed component, read its spec in `specs/components/{id}.md`. The frontmatter `figma node` is the canonical main-component key; the body lists the prop names in shorthand (e.g. `variant`, `hasIconLeading`, `heading`).
 3. **Catalog** — confirm the component key against `specs/figma-catalog/mobile-components.md` and use it for `importComponentByKeyAsync`. For illustrations, import `MDSIllustrationFullScreen` (listed in `mobile-components.md`) — it is the only illustration component. To pick a specific illustration, load `specs/figma-catalog/assets/illustrations.md`, find the illustration's node ID, import that node's main component, and pass it as the INSTANCE_SWAP value on the inner illustration property of `MDSIllustrationFullScreen`.

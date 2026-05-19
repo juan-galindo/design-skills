@@ -23,6 +23,14 @@ Recipes live in [`specs/patterns/layouts/`](../../../specs/patterns/layouts/). E
 | [Portfolio All](../../../specs/patterns/layouts/portfolio-all-screen.md) | `layout-portfolio-all` | draft |
 | [Successful Action](../../../specs/patterns/layouts/successful-action-screen.md) | `layout-successful-action` | ready |
 
+### Available composition pattern specs
+
+| Spec | id | Status |
+|------|----|--------|
+| [Bullet Points](../../../specs/patterns/composition/bullet-points.md) | `pattern-bullet-points` | ready |
+| [Read-only List — First Level](../../../specs/patterns/composition/read-only-list/first-level.md) | `pattern-read-only-list-first-level` | ready |
+| [Search Global](../../../specs/patterns/composition/search-global.md) | `pattern-search-global` | draft |
+
 ## Recipes vs patterns vs components
 
 | Layer | Defines | Lives in |
