@@ -99,7 +99,7 @@ return { createdNodeId: root.id, checks };
 - Every entry in `checks.text` matches the spec's text-slot rules (no leftover "Heading" / "This is a paragraph!" placeholders).
 - `checks.dims.topContainer` matches the sum of `StatusBar + MDSAppBar` — if the wrapper has children but reports a tiny height, its `primaryAxisSizingMode` is still `FIXED` and needs `AUTO`. See the screen shell in [`composition-recipes.md`](./composition-recipes.md).
 - Every entry in `checks.swaps` resolves to the expected component (e.g. AppBar trailing icon must equal the imported Close icon id).
-- **Frame contract** (see below): root frame `fills` is bound to `color/background/default`; every non-zero padding on every auto-layout frame has a `boundVariables` entry; every frame's `primaryAxisSizingMode` is `'AUTO'` (hug); side-by-side children of any container are named `row*`.
+- **Frame contract** (see below): root frame `fills` is bound to `color/background/default`; every non-zero padding has a `boundVariables` entry; every non-root frame hugs height (`primaryAxisSizingMode = 'AUTO'`) and fills width (`layoutSizingHorizontal = 'FILL'`); side-by-side children are named `row*`.
 
 If all three pass, the build is correct **without ever rendering pixels**. Only render a screenshot when a human is reviewing taste — not when the agent is verifying contract.
 
@@ -183,27 +183,34 @@ screen (root)
 
 This keeps `row*` meaningful — it always signals "this is the wrapper that owns the gutter" — instead of decorating every stripe in the layout.
 
-### 4. Height sizing = HUG (`primaryAxisSizingMode = 'AUTO'`)
+### 4. Sizing = HUG height · FILL width
 
-Every auto-layout frame must hug its children in the primary (vertical) axis. Never leave `primaryAxisSizingMode` as `'FIXED'` — a fixed-height frame silently clips or gaps content as children resize, and produces wrong `checks.dims` values.
+Every auto-layout frame obeys two sizing rules:
+
+| Axis | Rule | API |
+|------|------|-----|
+| Height (primary) | Hug contents | `primaryAxisSizingMode = 'AUTO'` |
+| Width (counter) | Fill parent container | `layoutSizingHorizontal = 'FILL'` |
+
+Never leave `primaryAxisSizingMode` as `'FIXED'` — a fixed-height frame silently clips or gaps content as children resize. Never use `counterAxisSizingMode = 'FIXED'` as a proxy for fill — that sets an explicit pixel width, not a fill relationship.
 
 ```js
+// Set AFTER parent.appendChild(frame) — both properties require a parent context
 frame.layoutMode = 'VERTICAL';
-frame.primaryAxisSizingMode = 'AUTO';      // hug height
-frame.counterAxisSizingMode = 'FIXED';    // fill width (set after appendChild)
+frame.primaryAxisSizingMode = 'AUTO';       // hug height
+frame.layoutSizingHorizontal = 'FILL';      // fill parent width
 ```
 
-**Exceptions** — only two frames use a fixed height:
-- The root screen frame (`390 × 844` or the target device dimensions) — this is the viewport, not a content container.
-- `spacer` nodes used to push BottomCTAs to the bottom of the screen — explicit fixed height is intentional there.
+**Exceptions:**
+- The root screen frame uses a fixed size (`390 × 844` or target device) — it is the viewport, not a child.
+- `spacer` nodes that push BottomCTAs to the bottom use a fixed height intentionally.
 
-In the verification block, walk every non-root auto-layout frame and assert `primaryAxisSizingMode === 'AUTO'`. Fail loud if any wrapper reports `'FIXED'`.
+In the verification block, walk every non-root auto-layout frame and assert both `primaryAxisSizingMode === 'AUTO'` and `layoutSizingHorizontal === 'FILL'`. Fail loud on any violation.
 
 ## Common build gotchas
 
-- **Frame height collapses to 0 or stays fixed** → `primaryAxisSizingMode` was never set to `AUTO`, or a `resize()` call after `appendChild` coerced it back to `FIXED`. Always set `primaryAxisSizingMode = 'AUTO'` **after** appending all children, never before. The root screen frame and explicit spacers are the only `FIXED`-height exceptions.
-- **`topContainer.height === 10`** after appending StatusBar + AppBar → same cause as above. Set it to `AUTO` after appending children.
-- **`layoutSizingHorizontal = 'FILL'` errors** → must be set **after** `parent.appendChild(child)`, never before. Wrap in try/catch only at the boundary, not as a habit.
+- **Frame height collapses to 0 or stays fixed / `topContainer.height === 10`** → `primaryAxisSizingMode` was never set to `'AUTO'`, or a `resize()` call after `appendChild` coerced it back to `'FIXED'`. Always set sizing properties **after** appending all children, never before.
+- **`layoutSizingHorizontal = 'FILL'` throws** → must be set **after** `parent.appendChild(child)` — the property requires a parent layout context. Wrap in try/catch only at the boundary, not as a habit.
 - **Library variables return zero from `getLocalVariablesAsync()`** → linked-library files have no local vars. Use `figma.teamLibrary.getAvailableLibraryVariableCollectionsAsync()` + `importVariableByKeyAsync()`.
 - **`setCurrentPageAsync(page)`** before `page.loadAsync()` then `targetPage.appendChild(root)` — required for cross-page authoring.
 - **AppBar trailing icon defaults to the library default** (often a list/document glyph), not Close. Always import the desired icon by key and `setProperties({ 'Icon#...': closeIcon.id })` on every visible `MDSIcon` inside the AppBar.
