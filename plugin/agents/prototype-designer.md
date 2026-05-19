@@ -58,7 +58,7 @@ Confirm the target repo (user-named or `cwd`). Read its `CLAUDE.md` (and `packag
 
 - **Stack** (React, RN, Vue, Svelte, plain HTML, etc.) and styling approach (inline styles, CSS modules, styled-components, Tailwind, etc.).
 - **Token source** — the file/module that exports design tokens (colors, spacing, type).
-- **Icon convention** — how icons are imported / rendered.
+- **Icon convention** — how icons are imported / rendered. If the repo does not declare one, default to **Google Material Icons** (`https://fonts.google.com/icons`): add `<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">` for HTML prototypes, or the `material-icons` npm package for JS-framework repos. Use the `<span class="material-icons">icon_name</span>` pattern (or framework equivalent) with snake_case icon names from the catalog.
 - **Theme contract** — how light/dark (or other themes) is propagated.
 - **Component directory** and any registration index (`index.ts`, `barrel.ts`, etc.).
 - **Prototype registry** — where new screens get listed for the prototype viewer (if any).
@@ -144,6 +144,7 @@ If anything fails verification, return to the offending step. Only when every it
 - A component does not honor the repo's theme contract.
 - Type-check fails — never ship a green report while the repo's type-checker is red.
 - A styling primitive appears that the repo's `CLAUDE.md` forbids (e.g. importing a CSS framework in a repo that mandates inline styles).
+- An icon library other than **Google Material Icons** is introduced when the repo has not declared an alternative — switch to Material Icons.
 - A component being re-implemented while a working version already exists in the repo.
 - A new prototype not registered where the repo expects new prototypes to be listed.
 - The built screen reorders, drops, or adds elements the spec's Stack order does not name.
