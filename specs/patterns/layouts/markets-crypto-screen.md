@@ -96,7 +96,7 @@ The screen is designed for continuous vertical scanning — users browse section
 | Card wrapper | — | card `bg=color/surface/default` · `borderRadius=16` |
 | Card header | `MDSHeader` `variant=subSection` `hasArrow=true` | `pt=spacing/padding/base` (16) · points to full category view |
 | Card content | `MDS CurrencyListItem` × 3 | `pb=spacing/padding/xs` (8) · no list gap (0) |
-| Button | `MDSButtonSecondary` full-width | `mx=spacing/padding/base` (16) · label "Explorar todas" → full category browser |
+| Button | `MDSButtonSecondary` full-width | `mx=spacing/padding/base` (16) · `hasIcon=false` · label "Explorar todas" → full category browser |
 
 ### 3d — Líderes (featured asset cards)
 
