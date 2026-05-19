@@ -101,7 +101,7 @@ The screen is designed for continuous vertical scanning — users browse section
 | # | Element | Config |
 |---|---------|--------|
 | Header | `MDSHeader` `sectionHeader` | `hasTopBorder=false` · `hasDescription=true` |
-| Strip | `MDSfeaturedAsset` × N | horizontal scroll · `px=spacing/padding/base` (16) · `gap=spacing/inline/xs` (8) · `hasFavIcon=true` · `hasChart=true` |
+| Strip | `MDSfeaturedAsset` × N in card | horizontal scroll · `px=spacing/padding/base` (16) · `gap=spacing/inline/xs` (8) · card `bg=color/surface/default` · `borderRadius=16` · `hasFavIcon=true` · `hasChart=true` |
 
 `hasTopBorder=false` because this section directly follows a section (3c) that ends with a full-width button.
 
@@ -225,7 +225,7 @@ Markets Crypto is a **discovery feed**, not a dashboard. Sections are curated ed
 - [ ] Every section ends with `pb=spacing/padding/lg` (24); no extra gap between sections
 - [ ] `hasTopBorder=false` on "Nuevas en Bitso" (first), "Favoritas" (second), "Líderes" (follows button), "Dinámicas", and "Rendimientos"; `hasTopBorder=true` on "Explora"
 - [ ] Horizontal strips use `px=spacing/padding/base` (16) and `gap=spacing/inline/xs` (8)
-- [ ] Category and Rendimientos surface cards use `bg=color/surface/default` and `borderRadius=16`
+- [ ] Category, Featured Asset (Líderes), and Rendimientos cards use `bg=color/surface/default` and `borderRadius=16`
 - [ ] Favorites shows `MDS emptyState` when empty; horizontal strip when populated
 - [ ] Rendimientos `sectionHeader` has `hasArrow=true` wired to full yields list
 - [ ] No bottom CTA bar present
