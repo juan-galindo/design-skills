@@ -17,10 +17,10 @@ relationships:
 
 ## Agent summary
 
-- **OS-native** component — time on leading edge, status icons (signal, wifi, battery) on trailing.
-- **Height:** 48px (includes safe area); **no padding override** — uses system defaults per platform.
-- **Background:** Transparent (system-controlled); blurred in dark UI contexts on iOS.
-- **Spacing:** Blank space center is intentional — no content placed there.
+- **OS-native** reference component — system-rendered on all screens. 48px height includes safe area.
+- **Do NOT customize:** System controls all colors, text (time), icons, and styling.
+- **Content below:** Respects safe area inset; [App Bar](./app-bar.md) sits directly below with no gap.
+- **Blank center space:** Intentional; do not place content there.
 
 ## Overview
 
@@ -28,13 +28,7 @@ System-level status bar displayed at the top of every mobile screen. Driven enti
 
 ## Structure
 
-| Part / slot | Required | Notes |
-|---|---|---|
-| Leading area | Yes | Device time (HH:MM format) |
-| Center area | No | Blank space — intentionally not used |
-| Trailing area | Yes | Status icons: signal strength · wifi · battery · location (conditional) |
-
-**Height:** 48px total (iOS 44pt + safe area; Android 24dp + system inset).
+N/A — OS-native component. System renders all elements (time, signal, wifi, battery). No custom anatomy or layout.
 
 ## Usage & behavior
 
@@ -76,25 +70,15 @@ Reserve top safe area for system chrome (time, indicators). Status bar appears o
 
 ## Token bindings
 
-| Role | Token path | Notes |
-|---|---|---|
-| Background | OS transparent | System-controlled; not bound to design tokens |
-| Text color | OS system gray · OS system white | Platform-specific; depends on light/dark mode |
-| Blur effect (iOS) | `blur/system-bars` (optional) | Applied in dark contexts; system-managed |
+N/A — OS-native styling. Status bar colors, typography, and layout are system-managed (not customizable in app design).
 
 ## Text slot rules
 
-| Slot | Max | Rules |
-|---|---|---|
-| Time | HH:MM | Displayed in device's time format (12h / 24h per locale settings) |
+N/A — time and all text are system-rendered. No customizable text slots.
 
 ## Examples
 
-| Scenario | Reference |
-|---|---|
-| Light background | Time + icons in dark gray; clear visibility |
-| Dark background | Time + icons in white; optional blur backdrop |
-| Landscape mode | Status bar height constant; safe area respects device notch |
+N/A — system-rendered. No design customization or variants.
 
 ## Verification
 
