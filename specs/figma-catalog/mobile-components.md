@@ -36,6 +36,7 @@
 | MDS CalculatorAmounts | `46813:3447` |
 | MDS CrossSellCard | `35299:10723` |
 | MDS Product Entry Point | `54733:596` |
+| MDS ProductRecommendation | `57016:46471` |
 | MDS FeedbackCard | `35205:3729` |
 | MDS SelectionCard | `43657:4247` |
 | MDS Checkbox | `18507:114148` |
@@ -62,6 +63,7 @@
 | MDS FavCurrencyListItem | `43773:23103` |
 | MDS ListItem | `43773:30362` |
 | MDS NumericPad | `6469:44089` |
+| MDS Nudge | `53580:3588` |
 | MDS PageIndicator | `23223:1147` |
 | MDS PasswordField | `15569:80834` |
 | MDS priceChangePercentage | `41577:731` |

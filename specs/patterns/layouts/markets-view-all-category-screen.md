@@ -17,8 +17,8 @@ relationships:
 ## Agent summary
 
 - **MUST** use this full-screen scrollable layout for a single markets category — "view all" entries from Markets home (xStocks, top movers, watchlist, search results, etc.). No bottom CTA.
-- **Stack (top → bottom):** absolute `containerTop` (StatusBar + MDSAppBar with **back arrow** leading, no trailing) → `MDSHeader` `screenHeader` (no top border, with description, no tags, no trailing content) → `container` (vertical stack of `MDS CurrencyListItem` rows, gap `list-item/spacing/between-stack`).
-- **MUST** position `containerTop` as **absolute** (`top=0`); root frame reserves `pt=104` clearance (StatusBar 48 + AppBar 56). Required on scrollable screens taller than 812.
+- **Stack (top → bottom):** absolute `topContainer` (StatusBar + MDSAppBar with **back arrow** leading, no trailing) → `MDSHeader` `screenHeader` (no top border, with description, no tags, no trailing content) → `container` (vertical stack of `MDS CurrencyListItem` rows, gap `list-item/spacing/between-stack`).
+- **MUST** position `topContainer` as **absolute** (`top=0`); root frame reserves `pt=104` clearance (StatusBar 48 + AppBar 56). Required on scrollable screens taller than 812.
 - **MUST NOT** apply horizontal padding to `container` or root — the 16 horizontal inset is owned by each `MDS CurrencyListItem` row.
 - **MUST NOT** inject any gap between `MDSHeader screenHeader` and `container` — the header brings its own bottom padding.
 - **MUST** reserve `spacing/padding/base` (16) on root `paddingBottom` as bottom safe area.
@@ -35,7 +35,7 @@ Use it whenever the list is **read-only navigation** (tap a row → asset detail
 
 ```
 ┌──────────────────────────────────────────┐
-│ 1. containerTop (absolute, top=0)        │
+│ 1. topContainer (absolute, top=0)        │
 │    ┌──────────────────────────────────┐  │
 │    │ 1a. StatusBar                    │  │
 │    │ 1b. MDSAppBar (back arrow leading)│ │
@@ -66,7 +66,7 @@ Use it whenever the list is **read-only navigation** (tap a row → asset detail
 
 | # | Element | Host / slot | Spec | Required | Notes |
 |---|---------|-------------|------|----------|-------|
-| 1 | `containerTop` | wrapper frame, **absolute** `top=0` | — | Yes | Holds status bar + app bar; full bleed |
+| 1 | `topContainer` | wrapper frame, **absolute** `top=0` | — | Yes | Holds status bar + app bar; full bleed |
 | 1a | StatusBar | platform | — | Yes | OS-themed; auto-adapts to background |
 | 1b | App Bar | `MDSAppBar` `variant=default` | [app-bar](../../components/app-bar.md) | Yes | **Back arrow** in leading; **no** trailing icons |
 | 2 | Header | `MDSHeader` `variant=screenHeader` | [header](../../components/header.md) | Yes | `hasTopBorder=false` · `hasDescription` true when narrative adds value · no tags · no trailing content |
@@ -124,7 +124,7 @@ Root frame: `paddingTop=104` (StatusBar 48 + AppBar 56) · `paddingBottom=spacin
 |-------------|----------|-----------------|
 | AppBar leading back tap | Navigates to the **entry surface** (Markets home or search) — not necessarily the previous stack screen | [app-bar](../../components/app-bar.md) |
 | Row tap | Navigates to the **asset detail screen** for the tapped asset — push transition; the category list remains in the stack so back returns here | per `MDS CurrencyListItem` |
-| Vertical scroll | Standard; `containerTop` stays anchored at the top of the viewport | — |
+| Vertical scroll | Standard; `topContainer` stays anchored at the top of the viewport | — |
 | Pull-to-refresh (when wired) | Re-fetches the list; spinner inside refresh control; AppBar visible throughout | — |
 | Pagination on scroll-end (when wired) | Appends next page of rows to element 3 | — |
 | Hardware back (Android) | Equivalent to AppBar back | [app-bar](../../components/app-bar.md) |
@@ -143,7 +143,7 @@ Root frame: `paddingTop=104` (StatusBar 48 + AppBar 56) · `paddingBottom=spacin
 
 ## Design intent
 
-A category list is **navigation**, not selection. Removing the bottom CTA and centering all action on the row tap keeps the surface honest: every row is a destination. `containerTop` is absolute so the AppBar persists during scroll without redrawing the header, and the screenHeader sits flush against the list because the list **is** the page content — no decorative gap.
+A category list is **navigation**, not selection. Removing the bottom CTA and centering all action on the row tap keeps the surface honest: every row is a destination. `topContainer` is absolute so the AppBar persists during scroll without redrawing the header, and the screenHeader sits flush against the list because the list **is** the page content — no decorative gap.
 
 ## Token bindings
 
@@ -152,7 +152,7 @@ A category list is **navigation**, not selection. Removing the bottom CTA and ce
 | Role | Token path | Element # | Notes |
 |------|------------|:---------:|-------|
 | Screen background | `color/background/default` | root | White surface |
-| Top padding (containerTop clearance) | StatusBar 48 + AppBar 56 = **104** | root pt | Composed from container heights — **no token exists** for this sum; bound to the heights of 1a + 1b, not a raw layout value |
+| Top padding (topContainer clearance) | StatusBar 48 + AppBar 56 = **104** | root pt | Composed from container heights — **no token exists** for this sum; bound to the heights of 1a + 1b, not a raw layout value |
 | Bottom safe area | `spacing/padding/base` (16) | root pb | Always reserved — per memory: scrollable screens reserve 16 below |
 | Gap between list rows | 0 — no gap | 3 | Each `MDS CurrencyListItem` owns its own vertical rhythm; do **not** inject any spacing token between rows |
 | Horizontal row inset | `spacing/padding/base` (16) | each row in 3 | Owned by `MDS CurrencyListItem` — **not** by `container` or root (per memory: horizontal gutter ownership) |
@@ -179,7 +179,7 @@ A category list is **navigation**, not selection. Removing the bottom CTA and ce
 
 | Do | Don't |
 |----|-------|
-| Anchor `containerTop` absolutely at `top=0` and reserve `pt=104` on the root | Stack the AppBar inline — the list scrolls under it, not past it |
+| Anchor `topContainer` absolutely at `top=0` and reserve `pt=104` on the root | Stack the AppBar inline — the list scrolls under it, not past it |
 | Let each `CurrencyListItem` own its 16 horizontal inset | Add `paddingHorizontal=16` to `container` or root |
 | Keep gap between header and list at 0 | Inject `spacing/stack/*` between header and list |
 | Keep inter-row gap at 0 — each `MDS CurrencyListItem` owns its own vertical rhythm | Inject any spacing token between rows |
@@ -197,14 +197,14 @@ A category list is **navigation**, not selection. Removing the bottom CTA and ce
 
 ## Verification
 
-- [ ] Stack matches the **Stack order** table top → bottom — `containerTop` (absolute) → `screenHeader` → list container — nothing else.
+- [ ] Stack matches the **Stack order** table top → bottom — `topContainer` (absolute) → `screenHeader` → list container — nothing else.
 - [ ] AppBar has the **back arrow** in leading and **no trailing** icons.
 - [ ] `MDSHeader` is `variant=screenHeader` with `hasTopBorder=false`; description present only when it adds value.
 - [ ] Inter-row gap in element 3 is **0** — do not inject any spacing token between `MDS CurrencyListItem` rows.
 - [ ] Horizontal 16 inset is owned by each `MDS CurrencyListItem` — `container` and root have **no** horizontal padding.
 - [ ] Header → list gap is **0** (no stack gap, no padding) — header brings its own bottom padding.
 - [ ] Root `paddingTop` = 104 (StatusBar 48 + AppBar 56); `paddingBottom` = `spacing/padding/base` (16).
-- [ ] Scroll behavior: `containerTop` stays pinned; list scrolls under it; pull-to-refresh wired when applicable.
+- [ ] Scroll behavior: `topContainer` stays pinned; list scrolls under it; pull-to-refresh wired when applicable.
 - [ ] Focus on entry lands on the header title; row announcement matches the Accessibility table.
 - [ ] Tapping a `MDS CurrencyListItem` navigates to the asset detail screen — wired on every row.
 

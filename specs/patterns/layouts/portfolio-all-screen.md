@@ -15,7 +15,7 @@ relationships:
 ## Agent summary
 
 - **MUST** use this layout for the Portfolio "Todo" tab — the full portfolio view showing balance, chart, scheduled transactions, assets, and movements.
-- **Shell:** absolute `containerTop` (StatusBar + `MDSAppBar` `variant=global, background=accent` + `MDSTabs` 4 tabs) h=164 + absolute `navigationApp` bottom bar. Root: `pt=164` · `pb=110`.
+- **Shell:** absolute `topContainer` (StatusBar + `MDSAppBar` `variant=global, background=accent` + `MDSTabs` 4 tabs) h=164 + absolute `navBottomContainer` h=94. Root: `pt=164` · `pb=94`.
 - **Balance row** MUST be the first scroll element: `MDS CurrencyPrice` (large) + `MDS IconButton` (visibility toggle). No `sectionHeader` above it.
 - **MUST NOT** render a `screenHeader` — `MDSTabs` establishes screen identity; `sectionHeader` is the correct header variant throughout.
 - **"Tus activos" sectionHeader** MUST have `hasTopBorder=true` and `hasTrailingContent=true` with `MDS Dropdown` (sorts the list — e.g. by Patrimonio).
@@ -35,12 +35,12 @@ Asset rows expand inline to reveal gain/loss, allocation, and price detail plus 
 
 ```
 ┌──────────────────────────────────────────────┐
-│ containerTop (absolute, top=0, h=164)        │
+│ topContainer (absolute, top=0, h=164)        │
 │   StatusBar                            h=48  │
 │   MDSAppBar variant=global/accent      h=64  │
 │   MDSTabs 4 tabs (default)             h=52  │
 ├──────────────────────────────────────────────┤
-│ ↕ pt=164 · pb=110 (nav clearance)            │
+│ ↕ pt=164 · pb=94 (nav clearance)             │
 │                                              │
 │ 1. Balance row                               │
 │    MDS CurrencyPrice (large) + IconButton    │
@@ -64,8 +64,10 @@ Asset rows expand inline to reveal gain/loss, allocation, and price detail plus 
 │    card: TransactionalListItem × N + TextBtn │
 │                                              │
 ├──────────────────────────────────────────────┤
-│ navigationApp (absolute, bottom, h=110)      │
-│   MDS BottomNavigation + FAB button          │
+│ navBottomContainer (absolute, bottom=0, h=94)│
+│   px=16 · py=16                              │
+│   MDS BottomNavigation activeTab=Portfolio   │
+│   w=343 · h=62 (FAB embedded)               │
 └──────────────────────────────────────────────┘
 ```
 
@@ -161,7 +163,7 @@ Content: exactly **3 most recent** `TransactionalListItem` rows, filtered by the
 
 - MUST use for the Portfolio "Todo" tab — the all-assets portfolio view.
 - MUST render the balance row and chart before any section headers.
-- MUST use `MDSTabs` (4 tabs) pinned inside `containerTop`.
+- MUST use `MDSTabs` (4 tabs) pinned inside `topContainer`.
 
 ### When NOT to use
 
@@ -178,13 +180,13 @@ Content: exactly **3 most recent** `TransactionalListItem` rows, filtered by the
 - **Accordion expanded**: "Transacciones programadas" grows in place; rest of scroll stack shifts down.
 - **Asset row expanded**: `AssetAdditionalData` card renders inline below the tapped row; `chevron_down` rotates 180°.
 - **Empty movements (active tab)**: Hide MovementsWrapper card and "Movimientos" section header — do not render an empty shell. If movements exist in other tabs but not the current one, the section is still hidden for that tab.
-- **Tab switch**: Content filters to selected asset class; `containerTop` stays pinned; scroll resets to top.
+- **Tab switch**: Content filters to selected asset class; `topContainer` stays pinned; scroll resets to top.
 
 ## Interactions
 
 | Interaction | Behavior |
 |-------------|----------|
-| Vertical scroll | Content scrolls; `containerTop` pinned |
+| Vertical scroll | Content scrolls; `topContainer` pinned |
 | Balance visibility tap | Toggles all amounts masked/unmasked on screen |
 | Chart tab tap | Switches chart mode (Desempeño total / G&P / Ingresos / Distribución) |
 | Timeframe chip tap | Re-renders chart for selected period; chip updates selection state |
@@ -221,8 +223,9 @@ Portfolio All is a **wealth dashboard**, not a transaction log. Balance + chart 
 | Role | Token path | Notes |
 |------|------------|-------|
 | Screen background | `color/background/default` | Root |
-| `containerTop` clearance | 48 + 64 + 52 = **164** | Composed from component heights; bind `pt` |
-| Bottom nav clearance | **110** | `pb` on root; matches `navigationApp` height |
+| `topContainer` clearance | 48 + 64 + 52 = **164** | Composed from component heights; bind `pt` |
+| Bottom clearance | **94** | `pb` on root — matches `navBottomContainer` h |
+| navBottomContainer padding | `spacing/padding/base` (16) | `px` and `py` around `MDS BottomNavigation` |
 | Balance row top padding | `spacing/padding/lg` (24) | `pt` |
 | Balance row horizontal padding | `spacing/padding/base` (16) | `px` |
 | Balance row gap | `spacing/inline/sm` (12) | Between price and icon button |
@@ -272,7 +275,7 @@ Portfolio All is a **wealth dashboard**, not a transaction log. Balance + chart 
 
 ## Verification
 
-- [ ] `containerTop` absolute `top=0` h=164; root `pt=164` · `pb=110`
+- [ ] `topContainer` absolute `top=0` h=164; root `pt=164` · `pb=110`
 - [ ] `MDSAppBar` `variant=global, background=accent` — hamburger · SearchField · gifts · notifications
 - [ ] `MDSTabs` has **4 tabs**: Todo · Efectivo · Criptos · Acciones y ETFs
 - [ ] Balance row is **first in scroll**: `MDS CurrencyPrice` (large) + `MDS IconButton` — no section header above
@@ -285,12 +288,13 @@ Portfolio All is a **wealth dashboard**, not a transaction log. Balance + chart 
 - [ ] MXN basket includes legal disclaimer text below MXNB sub-row
 - [ ] "Movimientos" header: `hasTopBorder=false` · no trailing content
 - [ ] Movements card (w=343) shows **exactly 3** most recent rows, filtered by active tab, and ends with `MDS TextButton` "Revisar todo →"
-- [ ] `navigationApp` includes FAB button
+- [ ] `navBottomContainer` is **absolute** `bottom=0`, h=94 — `MDS BottomNavigation` `activeTab=Portfolio` (w=343, h=62) at `px=16, py=16`; FAB is embedded in the component
 
 ## Related specs
 
 - [`../../components/app-bar.md`](../../components/app-bar.md) — `variant=global, background=accent`
 - [`../../components/header.md`](../../components/header.md) — `variant=sectionHeader`
+- [`../../components/bottom-navigation.md`](../../components/bottom-navigation.md) — `activeTab=Portfolio`; FAB always present
 - [`../../components/accordion.md`](../../components/accordion.md) — `MDS Accordion` collapsed default
 - [`../../figma-catalog/mobile-components.md`](../../figma-catalog/mobile-components.md) — `TransactionalListItem`, `BFF NestedTransactionalListItem`, `MDSPortfolioChart`, `MDS Dropdown`
 - [`../../content/index.md`](../../content/index.md)
