@@ -20,8 +20,9 @@
 | MDS Avatar | `35288:14706` |
 | MDS assetBalance | `42267:597` |
 | MDS Asset Statistics | `42097:3522` |
-| MDS balanceHome | `42086:3564` |
+| MDSBalance | `42086:3564` |
 | MDS balanceBreakdown | `46952:6883` |
+| MDS balancePortfolio | `45848:2959` |
 | MDS BottomCTAs | `20247:122042` |
 | MDS BottomNavigation | `2:115` |
 | MDS BottomSheet | `11047:24044` |
@@ -36,6 +37,7 @@
 | MDS CalculatorAmounts | `46813:3447` |
 | MDS CrossSellCard | `35299:10723` |
 | MDS Product Entry Point | `54733:596` |
+| MDS ProductRecommendation | `57016:46471` |
 | MDS FeedbackCard | `35205:3729` |
 | MDS SelectionCard | `43657:4247` |
 | MDS Checkbox | `18507:114148` |
@@ -62,6 +64,7 @@
 | MDS FavCurrencyListItem | `43773:23103` |
 | MDS ListItem | `43773:30362` |
 | MDS NumericPad | `6469:44089` |
+| MDS Nudge | `53580:3588` |
 | MDS PageIndicator | `23223:1147` |
 | MDS PasswordField | `15569:80834` |
 | MDS priceChangePercentage | `41577:731` |
@@ -83,3 +86,4 @@
 | MDS Tag | `2303:40941` |
 | MDS TextField | `36066:8750` |
 | MDS Timeframes | `41934:2728` |
+| MDSIllustrationFullScreen | `2065:215` |

@@ -23,7 +23,7 @@ relationships:
 - **`BottomSheetView`:** scrim `color/overlay/scrim` + blur — see **Interactions** · **Token bindings**.
 - **`hasButtons`** on **`MDSBottomSheet`** — `true` for text / confirm sheets · **`false`** for **`bottomSheetItemList`** (row tap selects).
 - **`bottomSheetListItemSlot`** — nested **`list`** `variant` + optional **`hasInfoPanel`** — see [Structure](#structure) · [Props to avoid](#props-to-avoid).
-- Multi-point copy in sheets → **`bottomSheetTextBullets`** + [`bottomSheetTextBulletsSlot`](#bullet-lists-bottomsheettextbulletsslot) — **dot bullets only** per [Bullet points pattern](../patterns/composition/bullet-points.md) (max 5 items).
+- Multi-point copy in sheets → **`bottomSheetTextBullets`** + [`bottomSheetTextBulletsSlot`](#bullet-lists-bottomsheettextbulletsslot) — **dot bullets only** per [Bullet points pattern](../patterns/scope/bullet-points.md) (max 5 items).
 - **Copy:** [`../content/index.md`](../content/index.md) · slot content rules below.
 
 ## Overview
@@ -94,7 +94,7 @@ Canonical slot: [`bottomSheetListItemSlot`](https://www.figma.com/design/kV7w4lz
 
 ### Bullet lists (`bottomSheetTextBulletsSlot`)
 
-MUST follow [Bullet points pattern](../patterns/composition/bullet-points.md) (dot bullets variant). Sheet-specific stack only:
+MUST follow [Bullet points pattern](../patterns/scope/bullet-points.md) (dot bullets variant). Sheet-specific stack only:
 
 | | |
 |--|--|
@@ -131,7 +131,7 @@ Canonical Figma board: **[BottomSheet [References]](https://www.figma.com/design
 |---------|----------------------|------|----------------|
 | **`bottomSheetTextDefault`** | **No illustration** — `sectionHeader` → body copy → Bottom CTAs | **Confirm actions** (approve, cancel, acknowledge) · **help / informational** copy | Spec-only — omit illustration from [`bottomSheetText`](https://www.figma.com/design/kV7w4lzYz6xDsJkl1Ro6CW/-Juan----MDSBottomSheet?node-id=61304-21219) · `hasButtons=true` |
 | [`bottomSheetText`](https://www.figma.com/design/kV7w4lzYz6xDsJkl1Ro6CW/-Juan----MDSBottomSheet?node-id=61304-21219) | Illustration → `sectionHeader` → body copy → Bottom CTAs | Marketing, education, or emotional context that needs visual support | `61304:21219` · `hasButtons=true` |
-| [`bottomSheetTextBullets`](https://www.figma.com/design/kV7w4lzYz6xDsJkl1Ro6CW/-Juan----MDSBottomSheet?node-id=61304-19586) | Illustration → `sectionHeader` → `bottomSheetTextBulletsSlot` → Bottom CTAs | Multi-point explanations — [dot bullets pattern](../patterns/composition/bullet-points.md) | `61304:19586` · `hasButtons=true` |
+| [`bottomSheetTextBullets`](https://www.figma.com/design/kV7w4lzYz6xDsJkl1Ro6CW/-Juan----MDSBottomSheet?node-id=61304-19586) | Illustration → `sectionHeader` → `bottomSheetTextBulletsSlot` → Bottom CTAs | Multi-point explanations — [dot bullets pattern](../patterns/scope/bullet-points.md) | `61304:19586` · `hasButtons=true` |
 | [`bottomSheetItemList`](https://www.figma.com/design/kV7w4lzYz6xDsJkl1Ro6CW/-Juan----MDSBottomSheet?node-id=61304-25287) | `sectionHeader` (optional) → `bottomSheetListItemSlot` (scroll in `slot`) | Pick one option · long lists · **no** [Search Field](./search-field.md) | `61304:25287` · `hasButtons=false` · `list` `variant` per task · `61304:4913` (header + list — legacy name `bottomSheetItemListSearch`, **no search field**) |
 
 **`bottomSheetTextDefault`** is the default text sheet in product: text-forward, no hero illustration — prefer it for confirmations and help unless an illustration is required.
@@ -160,7 +160,7 @@ Prefer system-consistent spring timing/easing (UIKit sheet curve) — see [`../t
 | Focus & traversal | On open: VoiceOver / TalkBack land in sheet first; focus stays in sheet until dismiss; background not traversable |
 | Labels & announcements | Post-announce sheet on open (e.g. bottom sheet); handle has dismiss label + hint; primary CTA labeled |
 | Touch & gestures | Handle + scrim + close CTA meet min touch targets; provide accessibility custom action or equivalent for dismiss if drag-only path exists |
-| Bullet lists | Per [pattern — Accessibility](../patterns/composition/bullet-points.md#accessibility) |
+| Bullet lists | Per [pattern — Accessibility](../patterns/scope/bullet-points.md#accessibility) |
 
 ## Design intent
 
@@ -181,7 +181,7 @@ Sheets keep context on the parent screen while focusing one decision. The handle
 | Slot area | Component / scroll container tokens |
 | Max height | ~719px (library) — ~85% viewport cap |
 
-Bullet spacing → [bullet-points pattern](../patterns/composition/bullet-points.md#token-bindings).
+Bullet spacing → [bullet-points pattern](../patterns/scope/bullet-points.md#token-bindings).
 
 ## Text slot rules
 
@@ -191,7 +191,7 @@ Bullet spacing → [bullet-points pattern](../patterns/composition/bullet-points
 |------|--------|
 | Sheet title | In `sectionHeader` (or sheet chrome) — sentence case; short |
 | Body (plain) | Short paragraphs — `bottomSheetTextDefault` / `bottomSheetText` |
-| Bullet items (`bottomSheetTextBulletsSlot`) | [pattern](../patterns/composition/bullet-points.md#text-slot-rules) + [`bullets.md`](../content/guidelines/bullets.md) |
+| Bullet items (`bottomSheetTextBulletsSlot`) | [pattern](../patterns/scope/bullet-points.md#text-slot-rules) + [`bullets.md`](../content/guidelines/bullets.md) |
 | CTA labels | Per button / Bottom CTAs spec |
 
 ## Verification
@@ -206,7 +206,7 @@ Bullet spacing → [bullet-points pattern](../patterns/composition/bullet-points
 ## Related specs
 
 - [`app-bar.md`](./app-bar.md) · [`header.md`](./header.md) · [`tabs.md`](./tabs.md)
-- [`../patterns/composition/bullet-points.md`](../patterns/composition/bullet-points.md) — dot bullets in sheets
+- [`../patterns/scope/bullet-points.md`](../patterns/scope/bullet-points.md) — dot bullets in sheets
 - [`../content/index.md`](../content/index.md) · [`../figma-catalog/mobile-components.md`](../figma-catalog/mobile-components.md)
 
 ---

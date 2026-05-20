@@ -1,10 +1,10 @@
 # Pattern Spec — Agent Guide
 
 > AI agents apply this file when reading or writing under `specs/patterns/`.
-> Template: [`../_template-pattern.md`](../_template-pattern.md) · Reference: [`composition/bullet-points.md`](./composition/bullet-points.md).
+> Template: [`../_template-pattern.md`](../_template-pattern.md) · Reference: [`scope/bullet-points.md`](./scope/bullet-points.md).
 >
 > Patterns are organized by **scope**:
-> - **`composition/`** — slot-level rules that compose inside hosts (bullets, lists, stacks)
+> - **`scope/`** — slot-level rules that compose inside hosts (bullets, lists, stacks)
 > - **`layouts/`** — full-screen layout recipes (product screens, modals, sheets)
 
 ## Patterns vs components
@@ -40,7 +40,7 @@ Same section order as [component specs](../components/CLAUDE.md) for predictable
 
 | Task | Load |
 |------|------|
-| Pattern rules | `specs/patterns/{scope}/{id}.md` (`composition/` or `layouts/`) |
+| Pattern rules | `specs/patterns/{scope}/{id}.md` (`scope/` or `layouts/`) |
 | Host component behavior | `specs/components/{id}.md` (e.g. bottom-sheet for dot bullets) |
 | Copy / bullets punctuation | `specs/content/` |
 | Tokens | `specs/tokens/token-reference.md` |

@@ -1,6 +1,6 @@
 ---
-id: layout-successful-action-screen
-name: Successful Action Screen
+id: layout-successful-action
+name: Successful Action
 category: product-layout
 platform: mobile
 tags: [success]
@@ -17,7 +17,7 @@ relationships:
 ## Agent summary
 
 - **MUST** use this full-screen layout (not a sheet) as the terminal step after a committed action — buy, sell, convert, send, withdraw, deposit.
-- **Stack (top → bottom):** `containerTop` (StatusBar + MDSAppBar with **Close** trailing) → `container` (MDSIllustrationFullScreen → MDSHeader `screenHeader` with description) → MDS BottomCTAs (primary "next action" + TextButton feedback link).
+- **Stack (top → bottom):** `topContainer` (StatusBar + MDSAppBar with **Close** trailing) → `Container` (MDSIllustrationFullScreen → MDSHeader `screenHeader` with description) → MDS BottomCTAs (primary "next action" + TextButton feedback link).
 - **MUST NOT** put a back arrow on the AppBar — the user cannot return to the in-flight flow; only a trailing **Close** dismisses to the entry surface.
 - **MUST** use `MDSIllustrationFullScreen` success illustration centered in its row with `spacing/padding/base` horizontal insets — never a custom hero.
 - **MUST** reserve `spacing/padding/base` (16) as the bottom safe-area below BottomCTAs.
@@ -39,7 +39,7 @@ Use it only when the action has fully committed server-side. If commit is still 
 │    │ 1b. MDSAppBar (Close in trailing)│  │
 │    └──────────────────────────────────┘  │
 │                                          │
-│ 2. container (flex 1)                    │
+│ 2. Container (flex 1)                    │
 │    ┌──────────────────────────────────┐  │
 │    │ 2a. row — MDSIllustrationFullScreen │
 │    │     (success illustration, centered)│
@@ -68,7 +68,7 @@ Use it only when the action has fully committed server-side. If commit is still 
 | 1 | `topContainer` | wrapper frame | — | Yes | Holds status bar + app bar; full bleed |
 | 1a | StatusBar | platform | — | Yes | OS-themed; auto-adapts to background |
 | 1b | App Bar | `MDSAppBar` `variant=default` | [app-bar](../../components/app-bar.md) | Yes | **Close** in `iconTrailing1`; **no** leading back arrow; no T2 |
-| 2 | `container` | flex column, `flex: 1 0 0` | — | Yes | Holds illustration + header; centered horizontally |
+| 2 | `Container` | flex column, `flex: 1 0 0` | — | Yes | Holds illustration + header; centered horizontally |
 | 2a | Illustration row | `MDSIllustrationFullScreen` (success) | — | Yes | Centered in row; `spacing/padding/base` horizontal insets; row height ≈ 184 |
 | 2b | Header row | `MDSHeader` `variant=screenHeader` | [header](../../components/header.md) | Yes | `hasTopBorder=true` · `hasDescription=true` · `hasTrailingContent` optional |
 | 3 | Bottom CTAs | `MDS BottomCTAs` | [bottom-ctas](../../components/bottom-ctas.md) | Yes | Primary `layoutAdaptive` button + TextButton with `thumb_up` prefix icon; `pb = spacing/padding/base` |

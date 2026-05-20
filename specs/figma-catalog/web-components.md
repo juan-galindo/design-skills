@@ -4,8 +4,6 @@
 **File key:** `fwbiE8VlLXBS3mAUNWUQIt`
 **Figma:** https://www.figma.com/design/fwbiE8VlLXBS3mAUNWUQIt/-New-DS--Web-Core-Components
 
-**Refresh after:** 14 days (re-run `/scan` if today's date exceeds 2026-04-28)
-
 > **Shared assets:** Icons, Flags, Currencies, Stocks, and Illustrations are shared with Mobile — see `specs/figma-catalog/assets/`.
 > To get design context for any component: use the Figma MCP `get_design_context` tool with `(fileKey, pageId)`
 > `wip` components are in progress — confirm with the designer before using in production.

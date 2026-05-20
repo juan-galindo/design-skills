@@ -4,11 +4,11 @@ Reference and foundation layer for Bitso product design, plus two orchestrator a
 
 ## What this plugin is
 
-- **A knowledge layer** — six foundation files describing the lenses (tokens, implementation, quality, taste, composition, rhythm) used across every design decision.
+- **A knowledge layer** — seven foundation files describing the lenses (tokens, implementation, quality, taste, composition, figma-build, rhythm) used across every design decision.
 - **Three orchestrators** — each tailored to a specific output medium:
   - `figma-designer` → designs layouts and components in a Figma file (uses `use_figma`)
   - `figma-content-designer` → reviews existing text layers, proposes content suggestions, applies approved updates (uses `use_figma`)
-  - `prototype-designer` → builds React code in `/Users/juangalindo/bitso-labs/design-prototyping-playground`
+  - `prototype-designer` → builds React code in `bitso-labs/design-prototyping-playground`
 
 The orchestrators do not replace the `design-*` skills. They sequence and delegate.
 
@@ -39,7 +39,8 @@ Each foundation file describes a lens to apply when designing or reviewing. Fron
 | [`implementation.md`](./references/foundations/implementation.md) | On-demand | Will the code actually work? API contracts + runtime resolution |
 | [`quality.md`](./references/foundations/quality.md) | On-demand | Would a designer flag this in review? Component / severity fit |
 | [`taste.md`](./references/foundations/taste.md) | On-demand | Does it feel like a Bitso surface? Hierarchy, density, whitespace |
-| [`composition-recipes.md`](./references/foundations/composition-recipes.md) | On-demand | How are UI structures assembled? Recipes from [`specs/patterns/layouts/`](../specs/patterns/layouts/) |
+| [`composition-recipes.md`](./references/foundations/composition-recipes.md) | On-demand | How are UI structures assembled? Layout specs ([`specs/patterns/layouts/`](../specs/patterns/layouts/)) + composition pattern specs ([`specs/patterns/scope/`](../specs/patterns/scope/)) |
+| [`figma-build.md`](./references/foundations/figma-build.md) | On-demand | How to build a screen in Figma in one `use_figma` pass — Plugin API prop names, force-write text overrides, verification block |
 | [`spatial-rhythm.md`](./references/foundations/spatial-rhythm.md) | On-demand | How much space between things? 48 / 24 / 12 rule |
 
 All foundations point at the canonical specs in [`specs/`](../specs/) — never edit a token, component contract, or pattern in this plugin. Update the spec, and the foundation continues to be valid.
@@ -144,4 +145,4 @@ Both agents refuse to orchestrate single-step asks and point the user at the rig
 
 ## Status
 
-`v0.1.0` — foundations + two orchestrators (`figma-designer`, `prototype-designer`). Additional plugin-local skills may be added in subsequent versions.
+`v0.2.0` — seven foundations + three orchestrators (`figma-designer`, `figma-content-designer`, `prototype-designer`). Layout specs and scope pattern specs are now enumerated with direct links in `composition-recipes.md` and `figma-build.md`.

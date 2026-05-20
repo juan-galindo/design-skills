@@ -5,7 +5,7 @@ category: pattern
 platform: mobile
 tags: [confirmation, transaction, buy, sell, convert, send, withdraw, deposit]
 aliases: [confirmation screen, buy confirmation, sell confirmation, pre-commit confirmation]
-status: draft
+status: ready
 relationships:
   composes: [app-bar, confirmation-header, read-only-list, bottom-ctas]
   applies_to: [buy-flow, sell-flow, convert-flow, send-flow, withdraw-flow, deposit-flow]
@@ -18,9 +18,9 @@ relationships:
 
 - **MUST** use this full-screen layout as the pre-commit confirmation step in any transaction flow (buy, sell, convert, send, withdraw, deposit) — the step that shows the price breakdown and asks the user to commit.
 - **MUST NOT** use a bottom sheet for this step. Bottom sheets are for **forced informational interruptions** (e.g. pattern day trader warning, regulatory notice, risk disclosure) that gate entry but carry no price breakdown and no commit action. See [bottom-sheet.md](../../components/bottom-sheet.md).
-- **Stack (top → bottom):** `topContainer` (StatusBar + MDSAppBar with **leading dismiss icon**) → `container` (`MDS ConfirmationHeader` → `rowReadOnlyList` → `MDS ReadOnlyList`) → `MDS BottomCTAs` (primary commit + "Cancelar" TextButton) → `spacing/padding/base` safe area.
+- **Stack (top → bottom):** `topContainer` (StatusBar + MDSAppBar with **leading dismiss icon**) → `Container` (`MDS ConfirmationHeader` → `RowReadOnlyList` → `MDS ReadOnlyList`) → `MDS BottomCTAs` (primary commit + "Cancelar" TextButton) → `spacing/padding/base` safe area.
 - **MUST** use `MDS ConfirmationHeader` for the asset + amount summary — never a custom header, `screenHeader`, or plain text.
-- **MUST** use `rowReadOnlyList` (16 px horizontal inset wrapper) → `MDS ReadOnlyList` for the price breakdown — never raw text rows.
+- **MUST** use `RowReadOnlyList` (16 px horizontal inset wrapper) → `MDS ReadOnlyList` for the price breakdown — never raw text rows.
 - **MUST** apply `Bold / Total` on the Label instance + `ContentType.Type = Total` on the final ReadOnlyList row; re-apply the label text override after the variant change.
 - **Copy:** [`../../content/index.md`](../../content/index.md) · per-slot limits below.
 
@@ -48,14 +48,14 @@ The screen between the calculator (or entry form) and the success screen. It pre
 │    │ 1b. MDSAppBar (dismiss leading)  │  │
 │    └──────────────────────────────────┘  │
 │                                          │
-│ 2. container (flex 1)                    │
+│ 2. Container (flex 1)                    │
 │    ┌──────────────────────────────────┐  │
 │    │ 2a. MDS ConfirmationHeader       │  │
 │    │     main amount · asset          │  │
 │    │     "Con" · secondary amount     │  │
 │    └──────────────────────────────────┘  │
 │    ┌──────────────────────────────────┐  │
-│    │ 2b. rowReadOnlyList (16px inset) │  │
+│    │ 2b. RowReadOnlyList (16px inset) │  │
 │    │     └ MDS ReadOnlyList           │  │
 │    │       row 1: Precio de mercado   │  │
 │    │       row 2: Comisión            │  │
@@ -78,9 +78,9 @@ The screen between the calculator (or entry form) and the success screen. It pre
 | 1 | `topContainer` | wrapper frame | — | Yes | Holds StatusBar + AppBar |
 | 1a | StatusBar | platform | — | Yes | OS-themed |
 | 1b | App Bar | `MDSAppBar` `variant=default` | [app-bar](../../components/app-bar.md) | Yes | Dismiss icon leading; no trailing icons; no title |
-| 2 | `container` | flex column `flex: 1 0 0` | — | Yes | Holds header + list; grows to fill |
+| 2 | `Container` | flex column `flex: 1 0 0` | — | Yes | Holds header + list; grows to fill |
 | 2a | Confirmation header | `MDS ConfirmationHeader` | — | Yes | Full width; owns its horizontal padding |
-| 2b | ReadOnly list row | `rowReadOnlyList` (16px H inset) → `MDS ReadOnlyList` | — | Yes | Wrapper owns inset; last row **Bold / Total** |
+| 2b | ReadOnly list row | `RowReadOnlyList` (16px H inset) → `MDS ReadOnlyList` | — | Yes | Wrapper owns inset; last row **Bold / Total** |
 | 3 | Bottom CTAs | `MDS BottomCTAs` | [bottom-ctas](../../components/bottom-ctas.md) | Yes | Primary commit + TextButton "Cancelar"; `hasAltText=false` |
 | — | Safe area | `spacing/padding/base` (16) | — | Yes | Below BottomCTAs; shell-owned |
 
@@ -97,7 +97,7 @@ The screen between the calculator (or entry form) and the success screen. It pre
 - **DO** use a bottom sheet before this screen when a forced informational interruption is required (PDT rule, regulatory notice) — the sheet acknowledges the warning; the confirmation screen closes the transaction.
 - MUST NOT show this screen while pricing is still loading — show a loading state in the prior screen.
 - MUST NOT use for non-transactional confirmations (e.g. "Delete account?") — use the appropriate modal or sheet.
-- MUST NOT route here after the action has already committed — use [Successful Action Screen](./successful-action-screen.md).
+- MUST NOT route here after the action has already committed — use [Successful Action](./successful-action-screen.md).
 
 ### Edge cases
 
@@ -111,7 +111,7 @@ The screen between the calculator (or entry form) and the success screen. It pre
 | Interaction | Behavior | Source of truth |
 |-------------|----------|-----------------|
 | AppBar dismiss tap | Returns to entry form | [app-bar](../../components/app-bar.md) |
-| Primary CTA tap | Commits transaction → [Successful Action Screen](./successful-action-screen.md) | [bottom-ctas](../../components/bottom-ctas.md) |
+| Primary CTA tap | Commits transaction → [Successful Action](./successful-action-screen.md) | [bottom-ctas](../../components/bottom-ctas.md) |
 | TextButton "Cancelar" | Same as dismiss — returns to entry form | [bottom-ctas](../../components/bottom-ctas.md) |
 | Edit icon (ConfirmationHeader) | Returns to calculator with amount pre-filled | MDS ConfirmationHeader |
 | Hardware back (Android) | Same as dismiss | [app-bar](../../components/app-bar.md) |
@@ -164,7 +164,7 @@ The confirmation screen is the last moment of informed consent before money move
 - [ ] AppBar has leading dismiss icon; no trailing icons; no title text
 - [ ] ConfirmationHeader shows main amount · currency · "Con" · secondary amount · secondary currency
 - [ ] ReadOnlyList has ≥ 3 rows: price · fee · Total; Total row is `Bold / Total` + `ContentType.Type = Total`
-- [ ] `rowReadOnlyList` wrapper owns 16 px inset; `MDS ReadOnlyList` has no additional inset
+- [ ] `RowReadOnlyList` wrapper owns 16 px inset; `MDS ReadOnlyList` has no additional inset
 - [ ] BottomCTAs: primary = flow-specific verb; TextButton = "Cancelar"; `hasAltText = false`
 - [ ] Safe area `spacing/padding/base` (16) reserved below BottomCTAs
 - [ ] No raw hex, px, or dp values in the frame

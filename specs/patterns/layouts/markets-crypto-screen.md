@@ -5,7 +5,7 @@ category: product-layout
 platform: mobile
 tags: [markets, discovery]
 aliases: [markets screen, markets cripto, mercados, markets hub]
-status: ready
+status: draft
 relationships:
   applies_to: [markets-tab]
   conflicts_with: []
@@ -15,10 +15,10 @@ relationships:
 ## Agent summary
 
 - **MUST** use this layout for the Markets top-level screen — the tab-driven discovery hub showing themed asset sections.
-- **Shell:** absolute `containerTop` (StatusBar + `MDSAppBar` `variant=global, background=accent` + `MDSTabs`) h=164 + scrollable content + fixed `navigationApp` bottom bar.
-- **MUST** position `containerTop` as absolute `top=0`; scrollable content reserves `pt=164` clearance.
+- **Shell:** absolute `topContainer` (StatusBar + `MDSAppBar` `variant=global, background=accent` + `MDSTabs`) h=164 + scrollable content + absolute `navBottomContainer` h=78.
+- **MUST** position `topContainer` as absolute `top=0`; scrollable content reserves `pt=164` clearance.
 - **Section pattern:** each section = `MDSHeader` `variant=sectionHeader` + content block + `pb=spacing/padding/lg` (24). No inter-section gap — each section owns its bottom padding.
-- **Top border rule:** `hasTopBorder=false` on the first section header and on any section header that directly follows a section ending with a full-width button. `hasTopBorder=true` on all other `sectionHeader` instances.
+- **Top border rule:** `hasTopBorder=false` on the first two section headers ("Nuevas en Bitso", "Favoritas") and on any section header that directly follows a section ending with a full-width button ("Líderes"). `hasTopBorder=true` on all other `sectionHeader` instances.
 - **MUST NOT** inject gap between any `sectionHeader` and the content block below it — the header owns its bottom padding.
 - **Legal disclaimer** MUST appear as the first element in scrollable content, before all section headers.
 - **Copy:** [`../../content/index.md`](../../content/index.md)
@@ -33,12 +33,12 @@ The screen is designed for continuous vertical scanning — users browse section
 
 ```
 ┌──────────────────────────────────────────────┐
-│ 1. containerTop (absolute, top=0, h=164)     │
+│ 1. topContainer (absolute, top=0, h=164)     │
 │    1a. StatusBar                       h=48  │
 │    1b. MDSAppBar variant=global/accent h=64  │
 │    1c. MDSTabs variant=default         h=52  │
 ├──────────────────────────────────────────────┤
-│ ↕ pt=164 (containerTop clearance)            │
+│ ↕ pt=164 (topContainer clearance)            │
 │                                              │
 │ 2. Legal disclaimer                          │
 │    tiny/base · lowEmphasis · pt=24 · px=16   │
@@ -56,9 +56,12 @@ The screen is designed for continuous vertical scanning — users browse section
 │ 3e. Dinámicas        — segmented grid        │
 │ 3f. Rendimientos     — v-list in surface card│
 │                                              │
-│ ↕ pb = navigation bar height + spacing/padding/base │
+│ ↕ pb = 78 (navBottomContainer clearance)     │
 ├──────────────────────────────────────────────┤
-│ navigationApp (fixed bottom, h=110)          │
+│ navBottomContainer (absolute, bottom=0, h=78)│
+│   px=16 · pb=16 (no top padding)             │
+│   MDS BottomNavigation activeTab=Markets     │
+│   w=343 · h=62 (FAB embedded)               │
 └──────────────────────────────────────────────┘
 ```
 
@@ -83,7 +86,7 @@ The screen is designed for continuous vertical scanning — users browse section
 
 | # | Element | Config |
 |---|---------|--------|
-| Header | `MDSHeader` `sectionHeader` | `hasTopBorder=true` · `hasDescription=false` |
+| Header | `MDSHeader` `sectionHeader` | `hasTopBorder=false` · `hasDescription=false` |
 | Empty state | `MDS emptyState` | `px=spacing/padding/base` (16) · star icon + title + description + `MDS TextButton` "Agregar criptos" |
 | Populated | `MDS Stackable Asset` × N | same strip pattern as 3a |
 
@@ -92,16 +95,18 @@ The screen is designed for continuous vertical scanning — users browse section
 | # | Element | Config |
 |---|---------|--------|
 | Header | `MDSHeader` `sectionHeader` | `hasTopBorder=true` · `hasDescription=true` |
-| Cards row | `categoryContainer` × N | horizontal scroll · `px=spacing/padding/base` (16) · `gap=spacing/inline/xs` (8) · card w=324 |
-| Card interior | `MDSHeader` `variant=subSection` `hasArrow=true` + 3× `MDS CurrencyListItem` | card `bg=color/surface/default` · `borderRadius=16` · `pt=spacing/padding/base` (16) · list gap `spacing/stack/xs` (4) |
-| Button | `MDSButtonSecondary` full-width | `mx=spacing/padding/base` (16) · label "Explorar todas" → full category browser |
+| Cards row | `CategoryContainer` × N | horizontal scroll · `px=spacing/padding/base` (16) · `gap=spacing/inline/xs` (8) · card w=324 |
+| Card wrapper | — | card `bg=color/surface/default` · `borderRadius=16` |
+| Card header | `MDSHeader` `variant=subSection` `hasArrow=true` | `pt=spacing/padding/base` (16) · points to full category view |
+| Card content | `MDS CurrencyListItem` × 3 | `pb=spacing/padding/xs` (8) · no list gap (0) · no border |
+| Button | `MDSButtonSecondary` full-width | `mx=spacing/padding/base` (16) · `hasIcon=false` · label "Explorar todas" → full category browser |
 
 ### 3d — Líderes (featured asset cards)
 
 | # | Element | Config |
 |---|---------|--------|
 | Header | `MDSHeader` `sectionHeader` | `hasTopBorder=false` · `hasDescription=true` |
-| Strip | `MDSfeaturedAsset` × N | horizontal scroll · `px=spacing/padding/base` (16) · `gap=spacing/inline/xs` (8) · `hasFavIcon=true` · `hasChart=true` |
+| Strip | `MDSfeaturedAsset` × N in card | horizontal scroll · `px=spacing/padding/base` (16) · `gap=spacing/inline/xs` (8) · card `bg=color/surface/default` · `borderRadius=16` · `hasFavIcon=true` |
 
 `hasTopBorder=false` because this section directly follows a section (3c) that ends with a full-width button.
 
@@ -109,7 +114,7 @@ The screen is designed for continuous vertical scanning — users browse section
 
 | # | Element | Config |
 |---|---------|--------|
-| Header | `MDSHeader` `sectionHeader` | `hasTopBorder=true` · `hasDescription=true` |
+| Header | `MDSHeader` `sectionHeader` | `hasTopBorder=false` · `hasDescription=true` |
 | Controls | `MDS SegmentedButtons` | centered · `pt=spacing/stack/sm` (16) · filters grid by time period |
 | Grid | `MDS Stackable Asset` 3 × 2 | `px=spacing/padding/base` (16) · 3 columns · col gap ~15 · row gap `spacing/stack/sm` (16) |
 
@@ -117,20 +122,20 @@ The screen is designed for continuous vertical scanning — users browse section
 
 | # | Element | Config |
 |---|---------|--------|
-| Header | `MDSHeader` `sectionHeader` | `hasTopBorder=true` · `hasDescription=true` · `hasArrow=true` → full yields list |
-| List | `MDS CurrencyListItem` × N in surface card | `px=spacing/padding/base` (16) · card `bg=color/surface/default` · `borderRadius=16` · gap `list-item/spacing/between-stack` (4) |
+| Header | `MDSHeader` `sectionHeader` | `hasTopBorder=false` · `hasDescription=true` · `hasArrow=true` → full yields list |
+| List | `MDS CurrencyListItem` × 3 in surface card | `px=spacing/padding/base` (16) · card `bg=color/surface/default` · `borderRadius=16` · no border · gap `list-item/spacing/between-stack` (4) · **do not force CurrencyListItem to fill width** |
 
 ## Usage & behavior
 
 ### When to use
 
 - MUST use for the Markets top-level screen (all content tabs).
-- MUST keep `MDSTabs` inside the absolute `containerTop` so it stays pinned during scroll.
+- MUST keep `MDSTabs` inside the absolute `topContainer` so it stays pinned during scroll.
 - MUST include the legal disclaimer as the first element in scrollable content when regulatory context is required.
 
 ### When NOT to use
 
-- MUST NOT use for a category "View all" screen — use [`layout-markets-view-all-category`](./markets-view-all-category.md) instead.
+- MUST NOT use for a category "View all" screen — use [`layout-markets-view-all-category`](./markets-view-all-category-screen.md) instead.
 - MUST NOT use for asset detail screens.
 - MUST NOT add a bottom CTA bar — all actions are inline within sections.
 - MUST NOT render a `screenHeader` — the first `sectionHeader` acts as the de-facto page header because the screen uses `MDSTabs`.
@@ -140,14 +145,14 @@ The screen is designed for continuous vertical scanning — users browse section
 - **Favorites populated**: Replace `MDS emptyState` with a horizontal `MDS Stackable Asset` strip. Section header and spacing unchanged.
 - **Server-driven section not available**: Hide the entire section (header + content + spacing) — do not show an empty shell.
 - **Section loading**: Replace the content block with skeletons of equal height; section header remains visible.
-- **Tab switch (Cripto ↔ Acciones)**: Scrollable content replaces; `containerTop` stays pinned; scroll position resets to top.
+- **Tab switch (Cripto ↔ Acciones)**: Scrollable content replaces; `topContainer` stays pinned; scroll position resets to top.
 - **Long section description**: Wraps to 2 lines inside `sectionHeader` — never truncate.
 
 ## Interactions
 
 | Interaction | Behavior |
 |-------------|----------|
-| Vertical scroll | Content scrolls; `containerTop` stays pinned at `top=0` |
+| Vertical scroll | Content scrolls; `topContainer` stays pinned at `top=0` |
 | Horizontal scroll (strips, cards) | Swipes within the section strip only; does not affect vertical scroll |
 | Tab tap (`MDSTabs`) | Switches content tab; resets scroll to top |
 | `MDS Stackable Asset` tap | Navigates to asset detail screen |
@@ -185,7 +190,7 @@ Markets Crypto is a **discovery feed**, not a dashboard. Sections are curated ed
 | Role | Token path | Notes |
 |------|------------|-------|
 | Screen background | `color/background/default` | Root + all section wrappers |
-| `containerTop` clearance | StatusBar 48 + AppBar 64 + Tabs 52 = **164** | No single token — composed from component heights; bind `pt` to this sum |
+| `topContainer` clearance | StatusBar 48 + AppBar 64 + Tabs 52 = **164** | No single token — composed from component heights; bind `pt` to this sum |
 | Section bottom padding | `spacing/padding/lg` (24) | Every section wrapper `pb` |
 | Strip horizontal padding | `spacing/padding/base` (16) | Horizontal scroll strips (3a, 3d) and categories row (3c) `px` |
 | Strip / card item gap | `spacing/inline/xs` (8) | Gap between Stackable Asset cards, featured cards, and category cards |
@@ -195,12 +200,13 @@ Markets Crypto is a **discovery feed**, not a dashboard. Sections are curated ed
 | Legal horizontal padding | `spacing/padding/base` (16) | Disclaimer `px` |
 | Category / surface card background | `color/surface/default` | Explora cards (3c) and Rendimientos card (3f) |
 | Category card top padding | `spacing/padding/base` (16) | `pt` inside each category card |
-| Category card list gap | `spacing/stack/xs` (4) | `MDS CurrencyListItem` gap inside category card |
+| Category card bottom padding | `spacing/padding/xs` (8) | `pb` inside each category card |
 | Rendimientos card horizontal padding | `spacing/padding/base` (16) | Outer wrapper `px` around surface card |
 | Rendimientos list gap | `list-item/spacing/between-stack` (4) | gap inside Rendimientos surface card |
 | Dinámicas grid horizontal padding | `spacing/padding/base` (16) | Outer wrapper `px` |
 | Dinámicas controls top padding | `spacing/stack/sm` (16) | `MDS SegmentedButtons` `pt` |
-| Bottom safe area | `spacing/padding/base` (16) + navigation bar height | Scrollable content `pb` |
+| Bottom clearance | **78** | Scrollable content `pb` — matches `navBottomContainer` h |
+| navBottomContainer horizontal padding | `spacing/padding/base` (16) | `px` only — no top padding; `pb=spacing/padding/base` (16) below BottomNavigation |
 | AppBar surface | per [app-bar](../../components/app-bar.md) `variant=global, background=accent` | Owned by `MDSAppBar` |
 
 ## Text slot rules
@@ -218,24 +224,26 @@ Markets Crypto is a **discovery feed**, not a dashboard. Sections are curated ed
 
 ## Verification
 
-- [ ] `containerTop` is **absolute** `top=0`, h=164; scrollable content reserves `pt=164`
+- [ ] `topContainer` is **absolute** `top=0`, h=164; scrollable content reserves `pt=164`
 - [ ] `MDSAppBar` is `variant=global, background=accent` — hamburger leading, SearchField, trailing: gifts + notifications
-- [ ] `MDSTabs` is **inside** `containerTop`, not inline in the scroll
+- [ ] `MDSTabs` is **inside** `topContainer`, not inline in the scroll
 - [ ] Legal disclaimer is the **first** element in scrollable content, before any section header
 - [ ] Every section ends with `pb=spacing/padding/lg` (24); no extra gap between sections
-- [ ] `hasTopBorder=false` on "Nuevas en Bitso" (first) and "Líderes" (follows button); `hasTopBorder=true` on "Favoritas", "Explora", "Dinámicas", "Rendimientos"
+- [ ] `hasTopBorder=false` on "Nuevas en Bitso" (first), "Favoritas" (second), "Líderes" (follows button), "Dinámicas", and "Rendimientos"; `hasTopBorder=true` on "Explora"
 - [ ] Horizontal strips use `px=spacing/padding/base` (16) and `gap=spacing/inline/xs` (8)
-- [ ] Category and Rendimientos surface cards use `bg=color/surface/default` and `borderRadius=16`
+- [ ] Category, Featured Asset (Líderes), and Rendimientos cards use `bg=color/surface/default` and `borderRadius=16`
 - [ ] Favorites shows `MDS emptyState` when empty; horizontal strip when populated
 - [ ] Rendimientos `sectionHeader` has `hasArrow=true` wired to full yields list
 - [ ] No bottom CTA bar present
 - [ ] Bottom of scrollable content reserves navigation bar clearance + `spacing/padding/base`
+- [ ] `navBottomContainer` is **absolute** `bottom=0`, h=78 — `MDS BottomNavigation` `activeTab=Markets` (w=343, h=62) at `px=16, y=0`; `pb=16` below; FAB is embedded in the component
 
 ## Related specs
 
 - [`../../components/app-bar.md`](../../components/app-bar.md) — `variant=global, background=accent`
 - [`../../components/header.md`](../../components/header.md) — `variant=sectionHeader` rules
-- [`./markets-view-all-category.md`](./markets-view-all-category.md) — destination when user taps "view all" from any section
+- [`../../components/bottom-navigation.md`](../../components/bottom-navigation.md) — `activeTab=Markets`; FAB always present
+- [`./markets-view-all-category-screen.md`](./markets-view-all-category-screen.md) — destination when user taps "view all" from any section
 - [`../../figma-catalog/mobile-components.md`](../../figma-catalog/mobile-components.md) — `MDS Stackable Asset`, `MDSfeaturedAsset`, `MDS CurrencyListItem`, `MDS SegmentedButtons`, `MDS emptyState`
 - [`../../content/index.md`](../../content/index.md)
 - [`../../tokens/token-reference.md`](../../tokens/token-reference.md)

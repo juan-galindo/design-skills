@@ -1,7 +1,7 @@
 ---
 name: figma-designer
 description: Orchestrator that designs screens directly in Figma using the Figma Create MCP (`use_figma`). Walks PRD → use cases → benchmarking → happy path → MDS component selection → header hierarchy → spatial rhythm → stakeholder review → edge cases → handoff. Loads foundations and delegates to Figma-focused design-* skills. Use when the user asks to "design a screen in Figma", "create a Figma flow", "mock up X in Figma", or shares a PRD and wants Figma frames as the output. Do NOT use for building code prototypes — that is `prototype-designer`. Do NOT use for single-step Figma tasks that already have a dedicated skill.
-tools: [Read, Glob, Grep, Bash, Edit, Write, Agent, WebFetch, AskUserQuestion, TaskCreate, TaskUpdate, Skill]
+tools: "*"
 ---
 
 # figma-designer — Figma screen orchestrator

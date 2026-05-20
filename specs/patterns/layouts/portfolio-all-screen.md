@@ -15,8 +15,8 @@ relationships:
 ## Agent summary
 
 - **MUST** use this layout for the Portfolio "Todo" tab — the full portfolio view showing balance, chart, scheduled transactions, assets, and movements.
-- **Shell:** absolute `containerTop` (StatusBar + `MDSAppBar` `variant=global, background=accent` + `MDSTabs` 4 tabs) h=164 + absolute `navigationApp` bottom bar. Root: `pt=164` · `pb=110`.
-- **Balance row** MUST be the first scroll element: `MDS CurrencyPrice` (large) + `MDS IconButton` (visibility toggle). No `sectionHeader` above it.
+- **Shell:** absolute `topContainer` (StatusBar + `MDSAppBar` `variant=global, background=accent` + `MDSTabs` 4 tabs) h=164 + absolute `navBottomContainer` h=94. Root: `pt=164` · `pb=94`.
+- **Balance row** MUST be the first scroll element: `MDS balancePortfolio` (`Visibility=on`). No `sectionHeader` above it.
 - **MUST NOT** render a `screenHeader` — `MDSTabs` establishes screen identity; `sectionHeader` is the correct header variant throughout.
 - **"Tus activos" sectionHeader** MUST have `hasTopBorder=true` and `hasTrailingContent=true` with `MDS Dropdown` (sorts the list — e.g. by Patrimonio).
 - **"Movimientos" sectionHeader** has `hasTopBorder=false`. Shows exactly **3 most recent** movements filtered by active tab.
@@ -35,16 +35,16 @@ Asset rows expand inline to reveal gain/loss, allocation, and price detail plus 
 
 ```
 ┌──────────────────────────────────────────────┐
-│ containerTop (absolute, top=0, h=164)        │
+│ topContainer (absolute, top=0, h=164)        │
 │   StatusBar                            h=48  │
 │   MDSAppBar variant=global/accent      h=64  │
 │   MDSTabs 4 tabs (default)             h=52  │
 ├──────────────────────────────────────────────┤
-│ ↕ pt=164 · pb=110 (nav clearance)            │
+│ ↕ pt=164 · pb=94 (nav clearance)             │
 │                                              │
 │ 1. Balance row                               │
-│    MDS CurrencyPrice (large) + IconButton    │
-│    pt=24 · px=16 · gap=12                    │
+│    MDS balancePortfolio                      │
+│    pt=24 · px=16                             │
 │                                              │
 │ 2. MDSPortfolioChart                         │
 │    pt=24                                     │
@@ -64,8 +64,10 @@ Asset rows expand inline to reveal gain/loss, allocation, and price detail plus 
 │    card: TransactionalListItem × N + TextBtn │
 │                                              │
 ├──────────────────────────────────────────────┤
-│ navigationApp (absolute, bottom, h=110)      │
-│   MDS BottomNavigation + FAB button          │
+│ navBottomContainer (absolute, bottom=0, h=94)│
+│   px=16 · py=16                              │
+│   MDS BottomNavigation activeTab=Portfolio   │
+│   w=343 · h=62 (FAB embedded)               │
 └──────────────────────────────────────────────┘
 ```
 
@@ -75,10 +77,9 @@ Asset rows expand inline to reveal gain/loss, allocation, and price detail plus 
 
 | Element | Component | Config |
 |---------|-----------|--------|
-| Total portfolio value | `MDS CurrencyPrice` | `size=large` · `emphasis=high` · currency=MXN |
-| Visibility toggle | `MDS IconButton` | eye icon; toggles masked/unmasked state for all amounts |
+| Portfolio balance | `MDS balancePortfolio` | `Visibility=on` · `hasTitle=true` · `hasVisibilityIcon=true` · `hasInfoIcon=true` |
 
-Container: `pt=spacing/padding/lg` (24) · `px=spacing/padding/base` (16) · `gap=spacing/inline/sm` (12)
+Container: `pt=spacing/padding/lg` (24) · `px=spacing/padding/base` (16). See [`balance.md`](../../components/balance.md) for show/hide masking rules.
 
 ### 2 — MDSPortfolioChart
 
@@ -151,9 +152,9 @@ MXN legal disclaimer: `tiny/base` · `color/onbackground/lowemphasis` · `pl=96`
 
 **Section header:** `MDSHeader` `variant=sectionHeader` · `hasTopBorder=false` · `hasDescription=false` · no trailing content
 
-**MovementsWrapper card:** `bg=color/surface/default` · `borderRadius=card/border/radius` (16) · `py=spacing/padding/xs` (8) · w=343 · `mx=spacing/padding/base` (16)
+**MovementsWrapper card:** `bg=color/surface/default` · `borderRadius=card/border/radius` (16) · `pb=spacing/padding/2xs` (4) · no top padding (rows start flush at top of card) · w=343 · `mx=spacing/padding/base` (16)
 
-Content: exactly **3 most recent** `TransactionalListItem` rows, filtered by the active tab (Todo = all asset types; Efectivo = cash; Criptos = crypto; Acciones y ETFs = stocks/ETFs). Transactions can carry `MDS Tag` (e.g. "Dividendo", "Earn"). Last element: `MDS TextButton` "Revisar todo →" · `pt=spacing/padding/2xs` (4) · `pb=spacing/padding/base` (16).
+Content: exactly **3 most recent** `TransactionalListItem` rows, filtered by the active tab (Todo = all asset types; Efectivo = cash; Criptos = crypto; Acciones y ETFs = stocks/ETFs). Transactions can carry `MDS Tag` (e.g. "Dividendo", "Earn"). Rows stack flush — no gap between them. Last element: `MDS TextButton` "Revisar todo →" · no external spacing — placed flush after the last row.
 
 ## Usage & behavior
 
@@ -161,7 +162,7 @@ Content: exactly **3 most recent** `TransactionalListItem` rows, filtered by the
 
 - MUST use for the Portfolio "Todo" tab — the all-assets portfolio view.
 - MUST render the balance row and chart before any section headers.
-- MUST use `MDSTabs` (4 tabs) pinned inside `containerTop`.
+- MUST use `MDSTabs` (4 tabs) pinned inside `topContainer`.
 
 ### When NOT to use
 
@@ -171,20 +172,20 @@ Content: exactly **3 most recent** `TransactionalListItem` rows, filtered by the
 
 ### Edge cases
 
-- **Balance hidden**: Replace all amounts on screen with "••••••" when visibility is toggled off. Chart PnL values also mask.
+- **Balance hidden**: Replace all amounts on screen with `********` when visibility is toggled off. Chart PnL fiat values also mask; percentage and period labels remain visible per [`balance.md`](../../components/balance.md).
 - **Zero assets**: Show `MDS emptyState` inside AssetsWrapper. Section header "Tus activos" + Dropdown remain visible.
 - **Single USD stablecoin**: Display as a single `TransactionalListItem` row — no parent basket, no nesting. (Figma dev annotation.)
 - **MXN basket pending feature**: May render without nesting until savings team builds full functionality. (Figma dev annotation.)
 - **Accordion expanded**: "Transacciones programadas" grows in place; rest of scroll stack shifts down.
 - **Asset row expanded**: `AssetAdditionalData` card renders inline below the tapped row; `chevron_down` rotates 180°.
 - **Empty movements (active tab)**: Hide MovementsWrapper card and "Movimientos" section header — do not render an empty shell. If movements exist in other tabs but not the current one, the section is still hidden for that tab.
-- **Tab switch**: Content filters to selected asset class; `containerTop` stays pinned; scroll resets to top.
+- **Tab switch**: Content filters to selected asset class; `topContainer` stays pinned; scroll resets to top.
 
 ## Interactions
 
 | Interaction | Behavior |
 |-------------|----------|
-| Vertical scroll | Content scrolls; `containerTop` pinned |
+| Vertical scroll | Content scrolls; `topContainer` pinned |
 | Balance visibility tap | Toggles all amounts masked/unmasked on screen |
 | Chart tab tap | Switches chart mode (Desempeño total / G&P / Ingresos / Distribución) |
 | Timeframe chip tap | Re-renders chart for selected period; chip updates selection state |
@@ -221,11 +222,11 @@ Portfolio All is a **wealth dashboard**, not a transaction log. Balance + chart 
 | Role | Token path | Notes |
 |------|------------|-------|
 | Screen background | `color/background/default` | Root |
-| `containerTop` clearance | 48 + 64 + 52 = **164** | Composed from component heights; bind `pt` |
-| Bottom nav clearance | **110** | `pb` on root; matches `navigationApp` height |
+| `topContainer` clearance | 48 + 64 + 52 = **164** | Composed from component heights; bind `pt` |
+| Bottom clearance | **94** | `pb` on root — matches `navBottomContainer` h |
+| navBottomContainer padding | `spacing/padding/base` (16) | `px` and `py` around `MDS BottomNavigation` |
 | Balance row top padding | `spacing/padding/lg` (24) | `pt` |
 | Balance row horizontal padding | `spacing/padding/base` (16) | `px` |
-| Balance row gap | `spacing/inline/sm` (12) | Between price and icon button |
 | Chart top padding | `spacing/padding/lg` (24) | `pt` on chart section |
 | Chart card width | 343 | 375 − 2 × `spacing/padding/base` (16) |
 | Chart card bottom radius | `card/border/radius` (16) | Bottom corners only |
@@ -247,10 +248,8 @@ Portfolio All is a **wealth dashboard**, not a transaction log. Balance + chart 
 | MXN disclaimer bottom | `spacing/padding/base` (16) | `pb` |
 | Movements card background | `color/surface/default` | |
 | Movements card radius | `card/border/radius` (16) | |
-| Movements card vertical padding | `spacing/padding/xs` (8) | `py` |
+| Movements card bottom padding | `spacing/padding/2xs` (4) | `pb` only — no top padding; rows start flush |
 | Movements card inset | `spacing/padding/base` (16) | `mx` on wrapper |
-| Movements TextButton bottom | `spacing/padding/base` (16) | `pb` |
-| Movements TextButton top | `spacing/padding/2xs` (4) | `pt` |
 | Eyebrow label tracking | `typography/letterSpacing/200` | Data group labels — uppercase |
 
 ## Text slot rules
@@ -259,7 +258,7 @@ Portfolio All is a **wealth dashboard**, not a transaction log. Balance + chart 
 
 | Slot | Max chars | Grammar |
 |------|:---------:|---------|
-| Balance amount | — | Formatted number + currency; masked as "••••••" when hidden |
+| Balance amount | — | Formatted number + currency; masked as `********` when hidden |
 | Chart tab labels | 20 | Short noun phrase; sentence case |
 | Timeframe chips | 5 | Abbreviated: 1S · 1M · 6M · 1A · Total |
 | Accordion label | 28 | Noun phrase; sentence case |
@@ -274,10 +273,10 @@ Portfolio All is a **wealth dashboard**, not a transaction log. Balance + chart 
 
 ## Verification
 
-- [ ] `containerTop` absolute `top=0` h=164; root `pt=164` · `pb=110`
+- [ ] `topContainer` absolute `top=0` h=164; root `pt=164` · `pb=110`
 - [ ] `MDSAppBar` `variant=global, background=accent` — hamburger · SearchField · gifts · notifications
 - [ ] `MDSTabs` has **4 tabs**: Todo · Efectivo · Criptos · Acciones y ETFs
-- [ ] Balance row is **first in scroll**: `MDS CurrencyPrice` (large) + `MDS IconButton` — no section header above
+- [ ] Balance row is **first in scroll**: `MDS balancePortfolio` `Visibility=on` — no section header above
 - [ ] Chart section uses gradient card (w=343) with chart tabs on top, timeframe row at bottom
 - [ ] Accordion "Transacciones programadas" is **collapsed** by default
 - [ ] "Tus activos" header: `hasTopBorder=true` · `hasTrailingContent=true` with `MDS Dropdown`
@@ -287,14 +286,16 @@ Portfolio All is a **wealth dashboard**, not a transaction log. Balance + chart 
 - [ ] MXN basket includes legal disclaimer text below MXNB sub-row
 - [ ] "Movimientos" header: `hasTopBorder=false` · no trailing content
 - [ ] Movements card (w=343) shows **exactly 3** most recent rows, filtered by active tab, and ends with `MDS TextButton` "Revisar todo →"
-- [ ] `navigationApp` includes FAB button
+- [ ] `navBottomContainer` is **absolute** `bottom=0`, h=94 — `MDS BottomNavigation` `activeTab=Portfolio` (w=343, h=62) at `px=16, py=16`; FAB is embedded in the component
 
 ## Related specs
 
 - [`../../components/app-bar.md`](../../components/app-bar.md) — `variant=global, background=accent`
 - [`../../components/header.md`](../../components/header.md) — `variant=sectionHeader`
+- [`../../components/bottom-navigation.md`](../../components/bottom-navigation.md) — `activeTab=Portfolio`; FAB always present
 - [`../../components/accordion.md`](../../components/accordion.md) — `MDS Accordion` collapsed default
-- [`../../figma-catalog/mobile-components.md`](../../figma-catalog/mobile-components.md) — `TransactionalListItem`, `BFF NestedTransactionalListItem`, `MDSPortfolioChart`, `MDS Dropdown`
+- [`../../components/balance.md`](../../components/balance.md) — `MDS balancePortfolio` · show/hide · one Balance per screen
+- [`../../figma-catalog/mobile-components.md`](../../figma-catalog/mobile-components.md) — `MDSBalance`, `MDS balancePortfolio`, `TransactionalListItem`, `BFF NestedTransactionalListItem`, `MDSPortfolioChart`, `MDS Dropdown`
 - [`../../content/index.md`](../../content/index.md)
 - [`../../tokens/token-reference.md`](../../tokens/token-reference.md)
 
