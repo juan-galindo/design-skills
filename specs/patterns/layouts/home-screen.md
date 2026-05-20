@@ -17,7 +17,7 @@ relationships:
 - **MUST** use this layout for the Home top-level tab — the primary entry point showing greeting, balance, balance breakdown, product discovery, and market previews.
 - **Shell:** absolute `topContainer` (StatusBar + `MDSAppBar` `variant=global, background=accent` + `MDSHeader` `variant=screenHeader, background=accent`) h=192 + absolute `navBottomContainer` `bottom=16`. Root: `pt=192` · `pb=110`.
 - **Vertical rhythm uses per-row `pt: spacing/300` (24px) — no stack gap on the parent container.** Conditional rows (e.g. `signalRow`) are safe to add or remove without adjusting adjacent spacing.
-- **Horizontal gutter (16px) is always owned by either the component or its direct wrapper — never both.** `MDSHeader`, `MDS balanceHome`, and `MdsBalanceBreakdown` own their inset internally; explicit `px=spacing/margin/base` is added only on wrappers for components that do not own their own padding.
+- **Horizontal gutter (16px) is always owned by either the component or its direct wrapper — never both.** `MDSHeader`, `MDSBalance`, and `MDS balanceBreakdown` own their inset internally; explicit `px=spacing/margin/base` is added only on wrappers for components that do not own their own padding.
 - **Copy:** [`../../content/index.md`](../../content/index.md)
 
 ## Overview
@@ -43,11 +43,11 @@ The nudge (`signalRow`) is transient — when dismissed or inactive it is not re
 │    pt=spacing/300 (24) · px=spacing/margin/base (16) │
 │                                              │
 │ 2. balanceRow                                │
-│    MDS balanceHome                           │
+│    MDSBalance                                │
 │    pt=spacing/300 (24) · px: component-owned │
 │                                              │
 │ 3. balanceBreakdownRow                       │
-│    MDS BalanceBreakdown                      │
+│    MDS balanceBreakdown                      │
 │    pt=spacing/padding/lg (24)                │
 │    pb=spacing/300 (24)                       │
 │    px: component-owned                       │
@@ -107,13 +107,11 @@ Container: `pt=spacing/300` (24) · `px=spacing/margin/base` (16). Entire row is
 
 | Element | Component | Config |
 |---------|-----------|--------|
-| Balance | `MDS balanceHome` | `hasPnl=true` · `hasInfoButton=true` · `hasSaldoTotalLabel=true` · `hasEyeIcon=true` · `isBalanceVisible=true` |
-| Amount | `MDSCurrencyPrice` | `size=large` · `emphasis=high` · `currency=MXN` |
-| Visibility toggle | `MDSIconButton` | `variant=background` · eye icon |
-| Info button | `MDSIconButton` | `variant=background` · info icon |
-| PnL | `MDS PnL2` | `showTitle=false` · `showFiatAmount=true` · `state=default` |
+| Balance | `MDSBalance` | `isBalanceVisisble=true` · `hasPnl=true` · `hasInfoButton=true` · `hasSaldoTotalLabel=true` · `hasEyeIcon=true` |
 
-Container: `pt=spacing/300` (24). Horizontal padding is owned internally by `MDS balanceHome` — do not add `px` on the wrapper.
+Nested slots (do not instantiate separately): **MDS currencyPrice** (`title/base`) · **MDS IconButton** (eye + info) · **MDS PnL2** (`showTitle=false` · `showFiatAmount=true`). See [`balance.md`](../../components/balance.md).
+
+Container: `pt=spacing/300` (24). Horizontal padding is owned internally by `MDSBalance` — do not add `px` on the wrapper.
 
 ### 3 — balanceBreakdownRow
 
@@ -125,7 +123,7 @@ Three asset-class rows, always rendered (shows "0 MXN" when empty):
 | Cripto | `currency_bitcoin` |
 | Acciones | `candlestick_chart` |
 
-Each row: icon + `MDSCurrencyPrice` (xs, high emphasis) + `MDSIconButton` `chevron_forward`. Container: `pt=spacing/padding/lg` (24) · `pb=spacing/300` (24). Horizontal padding owned by `MdsBalanceBreakdown`.
+Each row: icon + `MDSCurrencyPrice` (xs, high emphasis) + `MDSIconButton` `chevron_forward`. Container: `pt=spacing/padding/lg` (24) · `pb=spacing/300` (24). Horizontal padding owned by `MDS balanceBreakdown`.
 
 ### 4 — productsContainer
 
@@ -169,14 +167,14 @@ List wrapper: `px=spacing/margin/base` (16) · `gap=spacing/inline/xs` (8). Cont
 ### When NOT to use
 
 - MUST NOT add a stack `gap` on the scroll container — all vertical spacing is owned per row via `pt`.
-- MUST NOT apply `px` on wrappers for components that already own their horizontal inset (`MDS balanceHome`, `MdsBalanceBreakdown`, `MDSHeader`).
+- MUST NOT apply `px` on wrappers for components that already own their horizontal inset (`MDSBalance`, `MDS balanceBreakdown`, `MDSHeader`).
 - MUST NOT use `screenHeader` below the `topContainer` — greeting header lives in the fixed shell, not in the scroll area.
 
 ### Edge cases
 
 - **Nudge absent:** `signalRow` is not rendered. `balanceRow`'s `pt=spacing/300` provides the same 24px gap from `topContainer` that would otherwise be the gap below the nudge card. No layout adjustment needed.
 - **Nudge present:** `signalRow` `pt=spacing/300` → nudge card → `balanceRow` `pt=spacing/300` → balance. The nudge inserts without changing downstream spacing.
-- **Balance hidden:** All amounts in `balanceRow` and `balanceBreakdownRow` mask as "••••••".
+- **Balance hidden:** All amounts in `balanceRow` and `balanceBreakdownRow` mask as `********` per [`balance.md`](../../components/balance.md); PnL percentage and period label remain visible.
 - **Zero balance (asset class):** Shows "0 MXN" — all three breakdown rows always render.
 
 ## Interactions
@@ -242,7 +240,7 @@ List wrapper: `px=spacing/margin/base` (16) · `gap=spacing/inline/xs` (8). Cont
 | Slot | Max chars | Grammar |
 |------|:---------:|---------|
 | Greeting title | 20 | "Hola, {name}" — sentence case |
-| Balance amount | — | Formatted number + currency; masked as "••••••" when hidden |
+| Balance amount | — | Formatted number + currency; masked as `********` when hidden |
 | Nudge title | 32 | Sentence case noun phrase |
 | Nudge description | 60 | Short sentence |
 | Breakdown asset label | 12 | Noun ("Efectivo", "Cripto", "Acciones") |
@@ -260,7 +258,7 @@ List wrapper: `px=spacing/margin/base` (16) · `gap=spacing/inline/xs` (8). Cont
 - [ ] `signalRow` is **not rendered** when no nudge is active — `balanceRow` becomes first scroll element with no layout change
 - [ ] `signalRow` uses `pt=spacing/300` · `px=spacing/margin/base` · **no parent stack gap**
 - [ ] `balanceRow` uses `pt=spacing/300` — same token whether above nudge or above topContainer
-- [ ] `MDS balanceHome` has `hasPnl=true` · `hasInfoButton=true` · `hasSaldoTotalLabel=true` · `hasEyeIcon=true`
+- [ ] `MDSBalance` has `isBalanceVisisble=true` · `hasPnl=true` · `hasInfoButton=true` · `hasSaldoTotalLabel=true` · `hasEyeIcon=true`
 - [ ] `balanceBreakdownRow` renders all three asset classes · `pt=spacing/padding/lg` · `pb=spacing/300` · no `px` on wrapper
 - [ ] `productsContainer` sectionHeader `hasTopBorder=true` · list `px=spacing/margin/base` · `gap=spacing/inline/xs` · 4 Product Entry Points in order
 - [ ] `topCryptoContainer` sectionHeader + Dropdown "En alza" · `leadsContainer` `px=spacing/padding/base` · `gap=spacing/inline/xs` · 3 featured assets
@@ -274,7 +272,8 @@ List wrapper: `px=spacing/margin/base` (16) · `gap=spacing/inline/xs` (8). Cont
 - [`../../components/header.md`](../../components/header.md) — `variant=screenHeader/accent` and `variant=sectionHeader`
 - [`../../components/bottom-navigation.md`](../../components/bottom-navigation.md) — `activeTab=Home` · FAB embedded
 - [`../../components/product-recommendation.md`](../../components/product-recommendation.md) — `signalRow` conditional nudge card
-- [`../../figma-catalog/mobile-components.md`](../../figma-catalog/mobile-components.md) — `MDS ProductRecommendation`, `MDS balanceHome`, `MDS PnL2`, `MDS BalanceBreakdown`, `MDS Product Entry Point`, `MDSfeaturedAsset`, `MDS Dropdown`
+- [`../../components/balance.md`](../../components/balance.md) — `MDSBalance` · show/hide · PnL rules
+- [`../../figma-catalog/mobile-components.md`](../../figma-catalog/mobile-components.md) — `MDS ProductRecommendation`, `MDSBalance`, `MDS PnL2`, `MDS balanceBreakdown`, `MDS Product Entry Point`, `MDSfeaturedAsset`, `MDS Dropdown`
 - [`../../content/index.md`](../../content/index.md)
 - [`../../tokens/token-reference.md`](../../tokens/token-reference.md)
 

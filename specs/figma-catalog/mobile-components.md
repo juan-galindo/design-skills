@@ -20,8 +20,9 @@
 | MDS Avatar | `35288:14706` |
 | MDS assetBalance | `42267:597` |
 | MDS Asset Statistics | `42097:3522` |
-| MDS balanceHome | `42086:3564` |
+| MDSBalance | `42086:3564` |
 | MDS balanceBreakdown | `46952:6883` |
+| MDS balancePortfolio | `45848:2959` |
 | MDS BottomCTAs | `20247:122042` |
 | MDS BottomNavigation | `2:115` |
 | MDS BottomSheet | `11047:24044` |
